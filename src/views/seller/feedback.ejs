@@ -1,0 +1,149 @@
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="page-title">Customer Feedback</h2>
+            <p class="text-muted mb-0">
+                View and manage customer feedback.
+            </p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <% if(feedbacks.length === 0){ %>
+
+                <div class="text-center py-5">
+                    <h4>No Feedback Available</h4>
+                    <p class="text-muted">
+                        Customers haven't submitted any feedback yet.
+                    </p>
+                </div>
+
+            <% } else { %>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <% feedbacks.forEach((feedback,index)=>{ %>
+
+                        <tr>
+
+                            <td><%= index+1 %></td>
+
+                            <td>
+                                <strong><%= feedback.name %></strong>
+                            </td>
+
+                            <td>
+                                <%= feedback.email %>
+                            </td>
+
+                            <td style="min-width:250px">
+                                <%= feedback.message %>
+                            </td>
+
+                            <td>
+
+                                <% if(feedback.status==="Pending"){ %>
+
+                                    <span class="badge bg-warning text-dark">
+                                        Pending
+                                    </span>
+
+                                <% } else if(feedback.status==="Resolved"){ %>
+
+                                    <span class="badge bg-success">
+                                        Resolved
+                                    </span>
+
+                                <% } else { %>
+
+                                    <span class="badge bg-primary">
+                                        <%= feedback.status %>
+                                    </span>
+
+                                <% } %>
+
+                            </td>
+
+                            <td>
+                                <%= new Date(feedback.createdAt).toLocaleDateString() %>
+                            </td>
+
+                            <td>
+
+                                <form action="/api/seller/feedback/update-status/<%= feedback._id %>" method="POST">
+
+                                    <div class="input-group">
+
+                                        <select
+                                            name="status"
+                                            class="form-select">
+
+                                            <option
+                                            value="Pending"
+                                            <%= feedback.status==="Pending" ? "selected" : "" %>>
+                                                Pending
+                                            </option>
+
+                                            <option
+                                            value="In Progress"
+                                            <%= feedback.status==="In Progress" ? "selected" : "" %>>
+                                                In Progress
+                                            </option>
+
+                                            <option
+                                            value="Resolved"
+                                            <%= feedback.status==="Resolved" ? "selected" : "" %>>
+                                                Resolved
+                                            </option>
+
+                                        </select>
+
+                                        <button
+                                            class="btn btn-primary"
+                                            type="submit">
+                                            Update
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <% } %>
+
+        </div>
+    </div>
+
+</div>
+

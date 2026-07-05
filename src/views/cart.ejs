@@ -1,0 +1,117 @@
+<section class="cart-page bg-light py-5">
+<div class="container">
+
+    <h2 class="fw-bold mb-4 text-center">Shopping Cart</h2>
+
+    <div class="table-responsive shadow-sm bg-white p-4 rounded">
+
+        <table class="table align-middle text-center">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% if (items && items.length > 0) { %>
+
+                    <% items.forEach(item => { %>
+
+                        <tr>
+
+                            <% if (item.product) { %>
+
+                                <!-- PRODUCT COLUMN -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <% if (item.product.images && item.product.images.length > 0) { %>
+                                            <img src="/uploads/<%= item.product.images[0] %>" width="70" height="70">
+                                        <% } else { %>
+                                            <img src="/uploads/default.png" width="70" height="70">
+                                        <% } %>
+
+                                        <span><%= item.product.name %></span>
+
+                                    </div>
+                                </td>
+
+                                <!-- PRICE -->
+                                <td>₹<%= item.product.price %></td>
+
+                                <!-- QUANTITY -->
+                                <td><%= item.quantity %></td>
+
+                                <!-- SUBTOTAL -->
+                                <td>
+                                    <div class="d-flex justify-content-center align-items-center gap-2">
+
+                                        <form action="/api/cart/decrease/<%= item._id %>" method="post">
+                                            <button class="btn btn-outline-secondary">-</button>
+                                        </form>
+
+                                        <span class="fw-bold">
+                                            ₹<%= item.product.price * item.quantity %>
+                                        </span>
+
+                                        <form action="/api/cart/increase/<%= item._id %>" method="post">
+                                            <button class="btn btn-outline-secondary">+</button>
+                                        </form>
+
+                                    </div>
+                                </td>
+
+                            <% } else { %>
+
+                                <!-- IF PRODUCT IS MISSING -->
+                                <td colspan="4" class="text-danger">
+                                    ⚠ Product no longer available
+                                </td>
+
+                            <% } %>
+
+                            <!-- REMOVE BUTTON (always show) -->
+                            <td>
+                                <form action="/api/cart/<%= item._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger btn-sm">
+                                        Remove
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <tr>
+                        <td colspan="5" class="text-muted py-4">
+                            Your cart is empty.
+                        </td>
+                    </tr>
+
+                <% } %>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- TOTAL -->
+    <div class="text-end mt-4">
+        <h4>Total: ₹ <%= total || 0 %></h4>
+
+        <a href="/api/orders/checkout" class="btn btn-warning mt-3">
+            Proceed to Checkout
+        </a>
+    </div>
+
+</div>
+</section>

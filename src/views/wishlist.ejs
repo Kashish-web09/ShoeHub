@@ -1,0 +1,89 @@
+
+<header class="text-center mt-4">
+    <h1 class="fw-bold">My Wishlist</h1>
+    <p class="text-muted">Items you've saved to your wishlist</p>
+</header>
+
+<div class="container mt-5">
+
+    <% if(items.length === 0){ %>
+
+        <div class="text-center">
+            <h4>Your wishlist is empty ❤️</h4>
+            <a href="/" class="btn btn-primary mt-3">
+                Continue Shopping
+            </a>
+        </div>
+
+    <% } else { %>
+
+        <div class="row g-4">
+
+            <% items.forEach(item=>{ %>
+
+                <div class="col-md-4">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <img
+                            src="/uploads/<%= item.product.image %>"
+                            class="card-img-top"
+                            style="height:250px; object-fit:cover;"
+                        >
+
+                        <div class="card-body d-flex flex-column">
+
+                            <h5 class="card-title">
+                                <%= item.product.name %>
+                            </h5>
+
+                            <h5 class="text-success mb-3">
+                                ₹<%= item.product.price %>
+                            </h5>
+
+                            <!-- Add To Cart -->
+                            <form action="/api/cart" method="POST">
+                                <input
+                                    type="hidden"
+                                    name="productId"
+                                    value="<%= item.product._id %>"
+                                >
+
+                                <input
+                                    type="hidden"
+                                    name="quantity"
+                                    value="1"
+                                >
+
+                                <button class="btn btn-warning w-100 btn-sm mb-2">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    Add to Cart
+                                </button>
+                            </form>
+
+                            <!-- Remove Wishlist -->
+                            <form
+                                action="/api/wishlist/delete/<%= item._id %>"
+                                method="POST"
+                            >
+                                <button class="btn btn-outline-danger w-100 btn-sm">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Remove
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</div>
+
+

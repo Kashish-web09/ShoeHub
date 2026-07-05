@@ -1,0 +1,149 @@
+
+<!-- ================= MAIN SECTION ================= -->
+<main class="container mt-5">
+    <div class="row">
+
+        <!-- ================= FILTER SIDEBAR ================= -->
+<div class="d-lg-none mb-3">
+    <button class="btn btn-dark w-100" data-bs-toggle="offcanvas" data-bs-target="#mobileFilter">
+        ☰ Filters
+    </button>
+</div>
+
+<!-- ================= DESKTOP FILTER SIDEBAR ================= -->
+<div class="col-lg-3 d-none d-lg-block">
+    <div class="filter-box" style="margin-top: 4rem;">
+
+        <h5>Filter By</h5>
+        <hr>
+
+        <!-- Category -->
+        <h6>Category</h6>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox" value="Sneakers" >
+            <label class="form-check-label " for="sneakers">Sneakers</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox" value="Running Shoes">
+            <label class="form-check-label " for="running">Running Shoes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox" value="Heels">
+            <label class="form-check-label " for="heels">Heels</label>
+        </div>
+          <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox" value="Boots">
+            <label class="form-check-label">Boots</label>
+        </div>
+
+        <hr>
+
+        <!-- Price -->
+        <h6>Price Range</h6>
+        <input type="range" class="form-range" min="20" max="200" id="price-Range">
+        <small>$20 - $200</small>
+
+
+        <button class="btn btn-warning w-100 mt-3" id="applyFilter">
+            Apply Filters
+        </button>
+
+    </div>
+</div>
+<!-- ================= MOBILE FILTER OFFCANVAS ================= -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileFilter">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Filters</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <h6>Category</h6>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox">
+            <label class="form-check-label">Sneakers</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox">
+            <label class="form-check-label">Running Shoes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox">
+            <label class="form-check-label">Heels</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input category-filter" type="checkbox">
+            <label class="form-check-label">Boots</label>
+        </div>
+
+        <hr>
+
+        <h6>Price Range</h6>
+        <input type="range" class="form-range" min="20" max="200">
+        <small>$20 - $200</small>
+
+        <hr>
+
+        <button class="btn btn-warning w-100 mt-3" id="applyFilter">
+            Apply Filters
+        </button>
+
+    </div>
+</div>
+
+
+        <!-- ================= PRODUCT SECTION ================= -->
+        <div class="col-lg-9 col-md-8">
+
+            <!-- Sort -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 id="productCount">Products Found</h5>
+                <select class="form-select w-auto" id="sort">
+                    <option selected>Sort By</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Newest</option>
+                </select>
+            </div>
+
+<div class="row">
+
+  <% products.forEach(p => { %>
+
+    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+      <div class="card h-100">
+
+        <img src="/uploads/<%= p.images %>" class="card-img-top product-img" alt="<%= p.name %>">
+
+        <div class="card-body">
+          <h6 class="card-title"><%= p.name %></h6>
+
+          <p class="price">$<%= p.price %></p>
+          <p class="rating"><%= p.rating %></p>
+          <form action="/api/cart" method="POST">
+            <input type="hidden" name="productId" value="<%= p._id %>">
+            <input type="hidden" name="quantity" value="1">
+            <button class="btn btn-warning w-100 btn-sm">
+              Add to Cart
+            </button>
+          </form>
+          <br>
+          <form action="/api/wishlist" method="POST">
+            <input type="hidden" name="productId" value="<%= p._id %>">
+            <button class="btn btn-primary w-100 btn-sm">
+              Add to Wishlist
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  <% }) %>
+
+</div>
+</div>
+    </div>
+</main>

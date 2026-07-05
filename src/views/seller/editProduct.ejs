@@ -1,0 +1,284 @@
+<div class="container-fluid py-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Edit Product</h2>
+            <p class="text-muted mb-0">
+                Update your product details.
+            </p>
+        </div>
+
+        <a href="/api/seller/product" class="btn btn-outline-dark">
+            <i class="bi bi-arrow-left me-2"></i>
+            Back to Products
+        </a>
+    </div>
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">
+                <i class="bi bi-pencil-square me-2"></i>
+                Edit Product
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            <form
+                action="/api/seller/product/edit/<%= product._id %>"
+                method="POST"
+                enctype="multipart/form-data">
+
+                <div class="row">
+
+                    <!-- Product Name -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            value="<%= product.name %>"
+                            required>
+                    </div>
+
+                    <!-- Brand -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Brand
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="brand"
+                            value="<%= product.brand %>"
+                            required>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Category
+                        </label>
+
+                        <select
+                            class="form-select"
+                            name="category"
+                            required>
+
+                            <option value="Running" <%= product.category==="Running" ? "selected" : "" %>>Running</option>
+                            <option value="Sports" <%= product.category==="Sports" ? "selected" : "" %>>Sports</option>
+                            <option value="Casual" <%= product.category==="Casual" ? "selected" : "" %>>Casual</option>
+                            <option value="Formal" <%= product.category==="Formal" ? "selected" : "" %>>Formal</option>
+                            <option value="Sneakers" <%= product.category==="Sneakers" ? "selected" : "" %>>Sneakers</option>
+                            <option value="Boots" <%= product.category==="Boots" ? "selected" : "" %>>Boots</option>
+                            <option value="Sandals" <%= product.category==="Sandals" ? "selected" : "" %>>Sandals</option>
+
+                        </select>
+                    </div>
+                                        <div class="col-md-6 mb-3">
+
+                          <label class="form-label fw-semibold">
+                            Gender
+                        </label>
+
+
+   <select
+                            class="form-select"
+                            name="gender"
+                            required>
+
+                            <option value="Mens" <%= product.gender==="Mens" ? "selected" : "" %>>Mens</option>
+                            <option value="womens" <%= product.gender==="womens" ? "selected" : "" %>>womens</option>
+
+                        </select>
+
+                                        </div>
+                    <!-- Price -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Price (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="price"
+                            min="1"
+                            value="<%= product.price %>"
+                            required>
+
+                    </div>
+
+                    <!-- Stock -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Stock
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="stock"
+                            min="0"
+                            value="<%= product.stock %>"
+                            required>
+
+                    </div>
+
+                    <!-- Colors -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Colors
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="color"
+                            value="<%= product.color %>">
+
+                        <small class="text-muted">
+                            Separate multiple colors using commas.
+                        </small>
+
+                    </div>
+
+                    <!-- Sizes -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Sizes
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="size"
+                            value="<%= product.size %>">
+
+                        <small class="text-muted">
+                            Separate multiple sizes using commas.
+                        </small>
+
+                    </div>
+
+                    <!-- Upload Images -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Change Product Images
+                        </label>
+
+                        <input
+                            type="file"
+                            class="form-control"
+                            name="images"
+                            multiple
+                            accept="image/*">
+
+                    </div>
+
+                    <!-- Current Image -->
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Current Image
+                        </label>
+
+                        <div>
+
+                            <img
+                                id="preview"
+                                src="/uploads/<%= product.images[0] %>"
+                                class="img-thumbnail"
+                                style="height:180px;width:180px;object-fit:cover;">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-md-12 mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Product Description
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="5"
+                            name="desc"
+                            required><%= product.desc %></textarea>
+
+                    </div>
+
+                    <!-- Best Seller -->
+                    <div class="col-md-12 mb-4">
+
+                        <div class="form-check form-switch">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="isBestSeller"
+                                value="true"
+                                <%= product.isBestSeller ? "checked" : "" %>>
+
+                            <label class="form-check-label">
+                                Mark as Best Seller
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+<div class="d-flex justify-content-end gap-2">
+
+    <a href="/api/seller/product" class="btn btn-secondary">
+        Cancel
+    </a>
+
+    <button type="submit" class="btn btn-success">
+        Update
+    </button>
+
+</div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const preview = document.getElementById("preview");
+
+document.querySelector("input[name='images']")
+.addEventListener("change", function () {
+
+    if (this.files.length > 0) {
+        preview.src = URL.createObjectURL(this.files[0]);
+    }
+
+});
+
+</script>

@@ -1,0 +1,116 @@
+<div class="d-flex">
+
+    <!-- Sidebar -->
+    <div class="bg-dark text-white vh-100 shadow" style="width:260px; position:sticky; top:0;">
+
+        <!-- Logo -->
+        <div class="text-center py-4 border-bottom border-secondary">
+            <h3 class="fw-bold mb-0">
+                🛍 Seller Panel
+            </h3>
+        </div>
+
+        <!-- Seller Info -->
+        <div class="text-center py-4">
+
+            <img
+                src="/uploads/<%= seller.profileImage %>"
+                alt="Seller"
+                class="rounded-circle border border-3 border-light shadow-sm"
+                width="90"
+                height="90"
+                style="object-fit:cover;">
+
+            <h5 class="mt-3 mb-1 fw-semibold">
+                <%= seller.name %>
+            </h5>
+
+            <p class="small text-light mb-1">
+                <%= seller.email %>
+            </p>
+
+            <span class="badge bg-primary">
+                Seller
+            </span>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="list-group list-group-flush">
+
+            <a href="/api/seller/dashboard"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                📊 Dashboard
+            </a>
+
+            <a href="/api/seller/product"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                📦 Products
+            </a>
+
+            <a href="/api/seller/product/add-product"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                ➕ Add Product
+            </a>
+
+            <a href="/api/seller/orders"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                🛒 Orders
+            </a>
+
+            <a href="/api/seller/feedback"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                ⭐ Feedback
+            </a>
+
+            <a href="/api/seller/profile"
+                class="list-group-item list-group-item-action bg-dark text-white border-secondary">
+                👤 Profile
+            </a>
+
+            <a href="/api/seller/logout"
+                class="list-group-item list-group-item-action bg-dark text-danger border-secondary">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Top Navbar + Page Content -->
+    <div class="flex-grow-1">
+
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm px-4">
+
+            <div class="container-fluid">
+
+                <span class="navbar-brand fw-bold">
+                    Seller Dashboard
+                </span>
+
+                <div class="ms-auto d-flex align-items-center">
+
+                    <span class="me-3 fw-semibold">
+                        Welcome, <%= seller.name %>
+                    </span>
+
+                    <img
+                        src="/uploads/<%= seller.profileImage %>"
+                        class="rounded-circle border"
+                        width="45"
+                        height="45"
+                        style="object-fit:cover;">
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="p-4">
+            <%- body %>
+        </div>
+
+    </div>
+
+</div>

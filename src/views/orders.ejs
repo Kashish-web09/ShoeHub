@@ -1,0 +1,83 @@
+<div class="container py-5">
+
+    <h2 class="mb-4">
+        My Orders
+    </h2>
+
+    <% if(orders.length===0){ %>
+
+        <div class="alert alert-info">
+            No Orders Found
+        </div>
+
+    <% } %>
+
+    <% orders.forEach(order=>{ %>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header d-flex justify-content-between">
+
+            <div>
+
+                <strong>Order ID</strong>
+
+                <br>
+
+                <%= order._id %>
+
+            </div>
+
+            <div>
+
+                <span class="badge bg-success">
+
+                    <%= order.orderStatus %>
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+
+                <strong>Total :</strong>
+
+                ₹ <%= order.totalAmount %>
+
+            </p>
+
+            <p>
+
+                <strong>Payment :</strong>
+
+                <%= order.paymentMethod %>
+
+            </p>
+
+            <p>
+
+                <strong>Date :</strong>
+
+                <%= new Date(order.createdAt).toLocaleDateString() %>
+
+            </p>
+
+            <a
+                href="/api/orders/<%= order._id %>"
+                class="btn btn-primary">
+
+                View Details
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <% }) %>
+
+</div>

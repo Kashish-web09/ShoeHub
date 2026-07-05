@@ -1,0 +1,370 @@
+<main class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Become a Seller</h1>
+        <p class="text-muted">
+            Start selling your products and grow your business with our marketplace.
+        </p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+
+        <!-- Registration Form -->
+        <div class="col-lg-7">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">
+                        <i class="fa-solid fa-store me-2"></i>
+                        Seller Registration
+                    </h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form action="/api/seller/register" method="POST" enctype="multipart/form-data">
+
+                                                <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input
+                                    type="file"
+                                    name="profileImage"
+                                    class="form-control"
+                                    placeholder="image"
+                                    >
+                            </div>
+                        </div>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="John Doe"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="example@email.com"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="+91 XXXXXXXXXX"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirm Password</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        name="confirmPassword"
+                                        class="form-control"
+                                        required>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <h5 class="mb-3">
+                            <i class="fa-solid fa-building me-2"></i>
+                            Business Information
+                        </h5>
+
+                        <!-- Store Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Store Name</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-store"></i>
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="storeName"
+                                    class="form-control"
+                                    placeholder="ABC Electronics"
+                                    required>
+                            </div>
+
+                        </div>
+
+                        <!-- Business Type -->
+                        <div class="mb-3">
+
+                            <label class="form-label">Business Type</label>
+
+                            <select
+                                name="businessType"
+                                class="form-select"
+                                required>
+
+                                <option value="">Choose Business Type</option>
+
+                                <option>Individual Seller</option>
+
+                                <option>Retail Store</option>
+
+                                <option>Wholesaler</option>
+
+                                <option>Manufacturer</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+
+                            <label class="form-label">Business Address</label>
+
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="address"
+                                placeholder="Enter your business address"
+                                required></textarea>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">City</label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="city"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">State</label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="state"
+                                    required>
+
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">Pincode</label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="pincode"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- GST -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                GST Number
+                                <span class="text-muted">(Optional)</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="gstNumber"
+                                placeholder="22AAAAA0000A1Z5">
+
+                        </div>
+
+                        <!-- Profile -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Store Logo
+                                <span class="text-muted">(Optional)</span>
+                            </label>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                name="profileImage">
+
+                        </div>
+
+                        <!-- Terms -->
+
+                        <div class="form-check mb-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                required>
+
+                            <label class="form-check-label">
+
+                                I agree to the
+
+                                <a href="#">Seller Terms</a>
+
+                                and
+
+                                <a href="#">Privacy Policy</a>
+
+                            </label>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning btn-lg w-100">
+
+                            <i class="fa-solid fa-store me-2"></i>
+
+                            Create Seller Account
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+
+        <div class="col-lg-5">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body">
+
+                    <h3 class="fw-bold mb-4">
+                        Why Sell With Us?
+                    </h3>
+
+                    <div class="list-group list-group-flush">
+
+                        <div class="list-group-item">
+                            🚀 Reach Thousands of Customers
+                        </div>
+
+                        <div class="list-group-item">
+                            📦 Easy Product Management
+                        </div>
+
+                        <div class="list-group-item">
+                            💰 Fast & Secure Payments
+                        </div>
+
+                        <div class="list-group-item">
+                            📊 Sales Analytics Dashboard
+                        </div>
+
+                        <div class="list-group-item">
+                            🛡 Secure Seller Portal
+                        </div>
+
+                        <div class="list-group-item">
+                            ⭐ Grow Your Brand Online
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="text-center">
+
+                        <p class="mb-2">
+                            Already have a seller account?
+                        </p>
+
+                        <a
+                            href="/api/seller/login"
+                            class="btn btn-outline-dark">
+
+                            Seller Login
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

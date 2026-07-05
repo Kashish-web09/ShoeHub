@@ -1,0 +1,119 @@
+<% layout('layouts/adminLayout') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2 class="fw-bold">
+
+        Users
+
+    </h2>
+
+    <form class="d-flex">
+
+        <input class="form-control me-2" placeholder="Search User">
+
+        <button class="btn btn-primary">
+
+            <i class="bi bi-search"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-body">
+
+        <table class="table align-middle table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            <% if(users.length){ %>
+
+                <% users.forEach(user=>{ %>
+
+                <tr>
+
+                    <td><%= user.name %></td>
+
+                    <td><%= user.email %></td>
+
+                    <td>
+
+                        <% if(user.isBlocked){ %>
+
+                            <span class="badge bg-danger">Blocked</span>
+
+                        <% }else{ %>
+
+                            <span class="badge bg-success">Active</span>
+
+                        <% } %>
+
+                    </td>
+
+                    <td>
+
+                        <% if(user.isBlocked){ %>
+
+                            <a href="/admin/unblock/<%= user._id %>" class="btn btn-success btn-sm">
+
+                                Unblock
+
+                            </a>
+
+                        <% }else{ %>
+
+                            <a href="/admin/block/<%= user._id %>" class="btn btn-outline-danger btn-sm">
+
+                                Block
+
+                            </a>
+
+                        <% } %>
+
+                    </td>
+
+                </tr>
+
+                <% }) %>
+
+            <% }else{ %>
+
+                <tr>
+
+                    <td colspan="4" class="text-center">
+
+                        No Users Found
+
+                    </td>
+
+                </tr>
+
+            <% } %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
