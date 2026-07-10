@@ -15,6 +15,9 @@ sellerProductroutes.post('/add-product',upload.array("images",5)
     ,(req,res,next)=>{
 sellerController.add(req,res,next)
 })
+sellerProductroutes.get('/filter',(req,res,next)=>{
+    sellerController.filterProduct(req,res,next)
+})
 sellerProductroutes.get('/edit/:id',(req,res,next)=>{
     sellerController.getEditPage(req,res,next);
 })
@@ -26,5 +29,8 @@ sellerProductroutes.get('/delete/:id',(req,res,next)=>{
 })
 sellerProductroutes.get('/out-of-stock-product',(req,res,next)=>{
     sellerController.getOutOfStock(req,res,next)
+})
+sellerProductroutes.get("/details/:id",(req,res,next)=>{
+    sellerController.getProductDetails(req,res,next)
 })
 export default sellerProductroutes;

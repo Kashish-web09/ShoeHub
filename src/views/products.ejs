@@ -1,149 +1,164 @@
+<main class="py-5 bg-light">
 
-<!-- ================= MAIN SECTION ================= -->
-<main class="container mt-5">
-    <div class="row">
-
-        <!-- ================= FILTER SIDEBAR ================= -->
-<div class="d-lg-none mb-3">
-    <button class="btn btn-dark w-100" data-bs-toggle="offcanvas" data-bs-target="#mobileFilter">
-        ☰ Filters
-    </button>
-</div>
-
-<!-- ================= DESKTOP FILTER SIDEBAR ================= -->
-<div class="col-lg-3 d-none d-lg-block">
-    <div class="filter-box" style="margin-top: 4rem;">
-
-        <h5>Filter By</h5>
-        <hr>
-
-        <!-- Category -->
-        <h6>Category</h6>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox" value="Sneakers" >
-            <label class="form-check-label " for="sneakers">Sneakers</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox" value="Running Shoes">
-            <label class="form-check-label " for="running">Running Shoes</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox" value="Heels">
-            <label class="form-check-label " for="heels">Heels</label>
-        </div>
-          <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox" value="Boots">
-            <label class="form-check-label">Boots</label>
-        </div>
-
-        <hr>
-
-        <!-- Price -->
-        <h6>Price Range</h6>
-        <input type="range" class="form-range" min="20" max="200" id="price-Range">
-        <small>$20 - $200</small>
-
-
-        <button class="btn btn-warning w-100 mt-3" id="applyFilter">
-            Apply Filters
-        </button>
-
-    </div>
-</div>
-<!-- ================= MOBILE FILTER OFFCANVAS ================= -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileFilter">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Filters</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-
-    <div class="offcanvas-body">
-
-        <h6>Category</h6>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox">
-            <label class="form-check-label">Sneakers</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox">
-            <label class="form-check-label">Running Shoes</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox">
-            <label class="form-check-label">Heels</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input category-filter" type="checkbox">
-            <label class="form-check-label">Boots</label>
-        </div>
-
-        <hr>
-
-        <h6>Price Range</h6>
-        <input type="range" class="form-range" min="20" max="200">
-        <small>$20 - $200</small>
-
-        <hr>
-
-        <button class="btn btn-warning w-100 mt-3" id="applyFilter">
-            Apply Filters
-        </button>
-
-    </div>
-</div>
-
-
-        <!-- ================= PRODUCT SECTION ================= -->
-        <div class="col-lg-9 col-md-8">
-
-            <!-- Sort -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 id="productCount">Products Found</h5>
-                <select class="form-select w-auto" id="sort">
-                    <option selected>Sort By</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                    <option>Newest</option>
-                </select>
-            </div>
+<div class="container">
 
 <div class="row">
 
-  <% products.forEach(p => { %>
 
-    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-      <div class="card h-100">
+<!-- ================= PRODUCTS ================= -->
 
-        <img src="/uploads/<%= p.images %>" class="card-img-top product-img" alt="<%= p.name %>">
+<div class="col-lg-9">
 
-        <div class="card-body">
-          <h6 class="card-title"><%= p.name %></h6>
+<div class="card shadow-sm border-0 mb-4">
 
-          <p class="price">$<%= p.price %></p>
-          <p class="rating"><%= p.rating %></p>
-          <form action="/api/cart" method="POST">
-            <input type="hidden" name="productId" value="<%= p._id %>">
-            <input type="hidden" name="quantity" value="1">
-            <button class="btn btn-warning w-100 btn-sm">
-              Add to Cart
-            </button>
-          </form>
-          <br>
-          <form action="/api/wishlist" method="POST">
-            <input type="hidden" name="productId" value="<%= p._id %>">
-            <button class="btn btn-primary w-100 btn-sm">
-              Add to Wishlist
-            </button>
-          </form>
+<div class="card-body">
 
-        </div>
+<div class="row align-items-center g-3">
 
-      </div>
-    </div>
+<div class="col-md-5">
 
-  <% }) %>
+<h2 class="fw-bold mb-0">
+
+Products
+
+</h2>
+
+<small class="text-muted">
+
+<%= products.length %> Products Found
+
+</small>
 
 </div>
+
+<div class="col-md-4">
+
+<input
+class="form-control"
+placeholder="Search products...">
+
 </div>
-    </div>
+
+<div class="col-md-3">
+
+<select class="form-select">
+
+<option>
+
+Sort By
+
+</option>
+
+<option>
+
+Price Low → High
+
+</option>
+
+<option>
+
+Price High → Low
+
+</option>
+
+<option>
+
+Newest
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row g-4">
+
+<% products.forEach(p=>{ %>
+
+<div class="col-sm-6 col-lg-4 col-xl-3">
+
+<div class="card h-100 shadow-sm border-0">
+
+<div
+class="bg-white d-flex justify-content-center align-items-center"
+style="height:220px;">
+
+<img
+src="/uploads/<%= p.thumbnail %>"
+class="img-fluid"
+style="max-height:180px;object-fit:contain;"
+alt="<%= p.name %>">
+
+</div>
+
+<div class="card-body d-flex flex-column">
+
+<span class="badge bg-light text-dark border mb-2">
+
+<%= p.category %>
+
+</span>
+
+<h6 class="fw-bold">
+
+<%= p.name %>
+
+</h6>
+
+<p class="text-success fw-bold fs-5">
+
+₹<%= p.price %>
+
+</p>
+
+<% if(p.rating){ %>
+
+<div class="mb-3">
+
+<span class="badge bg-success">
+    ★ <%= p.rating %>
+</span>
+
+</div>
+
+<% } else { %>
+
+<div class="mb-3">
+    <small class="text-muted">
+        No Ratings
+    </small>
+</div>
+
+<% } %>
+<div class="mt-auto">
+
+<a href="/api/product_details/details/<%= p._id %>"
+   class="btn btn-warning w-100">
+    <i class="bi bi-eye-fill me-2"></i>
+    View Product
+</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </main>

@@ -8,8 +8,6 @@ export default class cartRepository{
     }
     async addItem(productId,userId,quantity){
         try {
-            console.log(productId);
-            console.log(userId);
             const db=getDb();
             const collection=db.collection(this.collection);
             const qty=Number(quantity) || 1
@@ -32,40 +30,36 @@ const result= await collection.updateOne(
         upsert:true
     }
 )
-console.log(result);
 return result;
 
         } catch (err) {
-            console.log(err)
             throw new ApplicationError("Somthing went wrong with the database",500)
         }
     }
-    async getItem(userId){
-                try {
-            const db=getDb();
-            const collection=db.collection(this.collection);
-            const productCollection=db.collection("products")
-            const result=await collection.find({userId:new ObjectId(userId)}).toArray();
-            for(let item of result){
-item.product = await productCollection.findOne({
-    _id: item.productId instanceof ObjectId 
-        ? item.productId 
-        : new ObjectId(item.productId)
-        
-});
-            console.log("CART ITEM:", item);
-console.log("PRODUCT FOUND:", item.product);
+async getItem(userId) {
+    try {
+        const db = getDb();
+        const collection = db.collection(this.collection);
 
-            }
-            console.log(result);
-            return result;
-        } catch (err) {
-            console.log(err)
-            throw new ApplicationError("Somthing went wrong with the database",500)
+        // Correct collection name
+        const productCollection = db.collection("product");
+
+        const result = await collection.find({
+            userId: new ObjectId(userId)
+        }).toArray();
+
+        for (let item of result) {
+            item.product = await productCollection.findOne({
+                _id: item.productId
+            });
         }
 
+        return result;
+
+    } catch (err) {
+        throw new ApplicationError("Something went wrong with the database", 500);
     }
-async deleteCartItem(userId,cartItemId){
+}async deleteCartItem(userId,cartItemId){
             try {
             const db=getDb();
             const collection=db.collection(this.collection);

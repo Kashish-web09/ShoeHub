@@ -19,7 +19,6 @@ import cartRoutes from './features/cart/cartRoutes.js';
 import cartController from './features/cart/cartController.js';
 import wishroutes from './features/wishlist/wishlistRoutes.js';
 import orderRoutes from './features/order/orderRoutes.js';
-import checkoutRoutes from './features/checkuot/checkoutroutes.js';
 import contactRoute from './features/contact/contactRoutes.js';
 import sellerUserRoutes from './features/seller/user/sellerUserRoutes.js'
 import productController from './features/product/productController.js';
@@ -27,6 +26,9 @@ import productDetailsRoute from './features/productDetails/productDetailsRoutes.
 import { sellerAuth } from './middlewares/sellerAuthMiddleware.js';
 import sellerProductroutes from './features/seller/product/sellerProductRoutes.js';
 import feedbackRoutes from './features/seller/feedback/feedbackRoutes.js';
+import sellerOrderroutes from './features/seller/order/orderRoutes.js';
+import profileRoute from './features/seller/profile/profileRoutes.js';
+
 const cartItemController=new cartController();
 const productsController=new productController();
 const usersController = new userController();
@@ -64,12 +66,13 @@ app.use('/api/products',setAuthUser,productRoutes)
 app.use('/api/cart',setAuthUser,cartRoutes)
 app.use('/api/wishlist',setAuthUser,wishroutes);
 app.use('/api/orders',setAuthUser,orderRoutes);
-// app.use('/api/checkout',setAuthUser,checkoutRoutes)
 app.use('/api/contact',setAuthUser,contactRoute)
 app.use('/api/seller',sellerUserRoutes);
 app.use('/api/product_details',productDetailsRoute)
 app.use('/api/seller/product',sellerAuth,sellerProductroutes)
 app.use('/api/seller/feedback',sellerAuth,feedbackRoutes)
+app.use('/api/seller/orders',sellerAuth,sellerOrderroutes)
+app.use('/api/seller/profile',sellerAuth,profileRoute)
 app.use('/api-docs',swagger.serve,swagger.setup(apiDocs));
 
 

@@ -1,0 +1,529 @@
+<div class="container-fluid py-4">
+
+
+    <!-- Header -->
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+                Seller Profile
+            </h2>
+
+            <p class="text-muted mb-0">
+                Manage your seller account information.
+            </p>
+
+        </div>
+
+
+
+
+        <a href="/api/seller/profile/update"
+        class="btn btn-warning">
+
+            <i class="bi bi-pencil-square me-2"></i>
+
+            Edit Profile
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="row g-4">
+
+
+
+
+
+        <!-- Profile Card -->
+
+
+        <div class="col-12 col-lg-4">
+
+
+            <div class="card shadow-sm border-0 text-center h-100">
+
+
+                <div class="card-body p-4">
+
+
+                    <img
+                    src="/uploads/<%= seller.profileImage %>"
+                    class="rounded-circle border border-3 mb-3"
+                    width="140"
+                    height="140"
+                    style="object-fit:cover;">
+
+
+
+
+
+                    <h3 class="fw-bold">
+
+                        <%= seller.name %>
+
+                    </h3>
+
+
+
+
+                    <p class="text-muted mb-2">
+
+                        <%= seller.email %>
+
+                    </p>
+
+
+
+
+
+                    <span class="badge bg-primary">
+
+                        Seller Account
+
+                    </span>
+
+
+
+
+
+                    <hr>
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- Details -->
+
+
+        <div class="col-12 col-lg-8">
+
+
+
+            <div class="card shadow-sm border-0 mb-4">
+
+
+                <div class="card-header bg-dark text-white">
+
+
+                    <h5 class="mb-0">
+
+                        Personal Information
+
+                    </h5>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+                    <div class="row g-4">
+
+
+
+                        <div class="col-12 col-md-6">
+
+
+                            <strong>
+                                Full Name
+                            </strong>
+
+                            <p class="text-muted mb-0">
+
+                                <%= seller.name %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-12 col-md-6">
+
+
+                            <strong>
+                                Email
+                            </strong>
+
+
+                            <p class="text-muted mb-0">
+
+                                <%= seller.email %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+                        <div class="col-12 col-md-6">
+
+
+                            <strong>
+                                Phone
+                            </strong>
+
+
+                            <p class="text-muted mb-0">
+
+                                <%= seller.phone %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- Business Information -->
+
+
+            <div class="card shadow-sm border-0 mb-4">
+
+
+                <div class="card-header bg-warning">
+
+
+                    <h5 class="mb-0">
+
+                        Business Information
+
+                    </h5>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+                    <div class="row g-4">
+
+
+
+
+
+                        <div class="col-12 col-md-6">
+
+
+                            <strong>
+                                Store Name
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.storeName %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-12 col-md-6">
+
+
+                            <strong>
+                                Business Type
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.businessType %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-12">
+
+
+                            <strong>
+                                Business Address
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.address %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+                        <div class="col-12 col-md-4">
+
+
+                            <strong>
+                                City
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.city %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-12 col-md-4">
+
+
+                            <strong>
+                                State
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.state %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-12 col-md-4">
+
+
+                            <strong>
+                                Pincode
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.pincode %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+                        <div class="col-12">
+
+
+                            <strong>
+                                GST Number
+                            </strong>
+
+
+                            <p class="text-muted">
+
+                                <%= seller.gstNumber || "Not Available" %>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Quick Actions -->
+
+
+            <div class="card shadow-sm border-0">
+
+
+                <div class="card-header bg-primary text-white">
+
+                    Quick Actions
+
+                </div>
+
+
+
+                <div class="card-body">
+
+
+                    <div class="d-flex flex-column flex-md-row gap-2">
+
+
+                        <a href="/api/seller/product/add-product"
+                        class="btn btn-success">
+
+
+                            <i class="bi bi-plus-circle me-2"></i>
+
+                            Add Product
+
+
+                        </a>
+
+
+
+
+
+                        <a href="/api/seller/orders"
+                        class="btn btn-dark">
+
+
+                            <i class="bi bi-cart me-2"></i>
+
+                            View Orders
+
+
+                        </a>
+
+
+
+
+
+                        <a href="/api/seller/logout"
+                        class="btn btn-danger">
+
+
+                            <i class="bi bi-box-arrow-right me-2"></i>
+
+                            Logout
+
+
+                        </a>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+</div>

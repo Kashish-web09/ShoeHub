@@ -67,44 +67,47 @@ try {
 }
 
     }
-    async rateproduct(productId,userId,rating){
-try {
-            const db=getDb();
-            const collection=db.collection(this.collection)
-console.log("productId:", productId);
-console.log("userId:", userId);
-console.log("rating:", rating);
+async rateproduct(productId, userId, rating) {
+    try {
+console.log("REpo called")
+ console.log(productId);
+        console.log(userId);
+        console.log(rating);
+                const db = getDb();
+        const collection = db.collection(this.collection);
 
-        await collection.updateOne({
-            _id:new ObjectId(productId)
-        },
-    {
-        $pull:{
-ratings:{userId:new ObjectId(userId)} // to delte old one
-    }
-
-    })
-
-    await collection.updateOne({
-        _id:new ObjectId(productId)
-    },{
-        $push:{ //to add new 
-            ratings:{
-                userId:new ObjectId(userId),
-                rating:Number(rating)
+        // Remove previous rating
+        await collection.updateOne(
+            { _id: new ObjectId(productId) },
+            {
+                $pull: {
+                    ratings: {
+                        userId: new ObjectId(userId)
+                    }
+                }
             }
-        }
+        );
+        console.log("Old rating removed")
+
+        // Add new rating
+        await collection.updateOne(
+            { _id: new ObjectId(productId) },
+            {
+                $push: {
+                    ratings: {
+                        userId: new ObjectId(userId),
+                        rating: Number(rating)
+                    }
+                }
+            }
+        );
+                console.log("New rating added");
+
+
+    } catch (err) {
+        throw err;
     }
-);
-return true;
-
-} catch (err) {
-        console.error("Rate product error:", err); // IMPORTANT DEBUG
-
-    throw new ApplicationError("Somthing went wrong with the database",500)
 }
-
-    }
 async deleteProductById(id){
 try {
             const db=getDb();
@@ -139,7 +142,6 @@ async getBestSellerProducts(){
     }).limit(4).toArray();
 
     } catch (err) {
-        console.log(err)
             throw new ApplicationError("Somthing went wrong with the database",500)
 
     }

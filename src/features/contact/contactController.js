@@ -1,6 +1,6 @@
 import contactRepository from "./contactRepository.js"
 import contactModels from "./contactModels.js"
-
+import { sendFeedbackThankyou } from "../../config/emailService.js";
 
 export default class contactController{
     constructor(){
@@ -22,6 +22,7 @@ try {
         message    
     );
     await this.contactRepository.submitContactForm(contact);
+    await sendFeedbackThankyou(contact.email,contact.name)
     res.redirect("/api/contact");
 } catch (err) {
     next(err)

@@ -1,17 +1,37 @@
 import orderRepository from "./orderRepository.js";
 import orderModels from "./orderModels.js";
 import cartRepository from "../cart/cartRepsitory.js";
+import userRepository from "../users/userRepsitory.js";
+import { sendOrderConfirmation, sendOrderShipped } from "../../config/emailService.js";
 export default class orderController{
     constructor(){
         this.orderRepository=new orderRepository();
         this.cartRepository=new cartRepository();
+        this.userRepository=new userRepository();
     }
     async placeOrder(req,res,next){
 
         try {
             const userId=req.userId;
-            const {shippingAddress, paymentMethod}=req.body;
-            const cartItem=await this.cartRepository.getItem(userId);
+            const user=await this.userRepository.getUserById(userId);
+const {
+    fullName,
+    phone,
+    address,
+    city,
+    state,
+    pincode,
+    paymentMethod
+} = req.body;
+
+const shippingAddress = {
+    fullName,
+    phone,
+    address,
+    city,
+    state,
+    pincode
+};            const cartItem=await this.cartRepository.getItem(userId);
             if(!cartItem || cartItem.length===0){
                 return res.status(400).send("Your cart is empty")
             }
@@ -30,6 +50,7 @@ export default class orderController{
 
 const newOrder = new orderModels(
     userId,
+    user.name,
     items,
     total,
     shippingAddress,
@@ -38,8 +59,9 @@ const newOrder = new orderModels(
     "Placed"
 );
 
-await this.orderRepository.placeOrder(newOrder);
+const order=await this.orderRepository.placeOrder(newOrder);
 await this.cartRepository.clearCart(userId)
+await sendOrderConfirmation(user.email,order.insertedId)
 return res.redirect('/api/orders')
 } catch (err) {
             next(err)
@@ -131,6 +153,11 @@ if(!allowedStatus.includes(status)){
 const result= await this.orderRepository.updateOrderStatus(orderId,status);
    if(result.matchCount===0){
     return res.status(404).send("Order not found")
+   }
+   if(status==="Shipped"){
+    const order=await this.orderRepository.getOrderById(orderId);
+    const user=await this.userRepository.getUserById(order.userId);
+    await sendOrderShipped(user.email,order._id)
    }
 
 res.redirect('/admin/orders')

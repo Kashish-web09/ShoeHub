@@ -27,10 +27,8 @@ $setOnInsert:{
                     upsert:true
                 }
             );
-            console.log(result);
             return result;
         } catch (err) {
-            console.log(err)
             throw new ApplicationError("Somthing went wrong with the database",500)
         }
     }
@@ -47,7 +45,7 @@ async getItem(userId) {
             },
             {
                 $lookup: {
-                    from: "products",
+                    from: "product",
                     localField: "productId",
                     foreignField: "_id",
                     as: "product"
@@ -58,11 +56,9 @@ async getItem(userId) {
             }
         ]).toArray();
 
-        console.log(result);
         return result;
 
     } catch (err) {
-        console.log(err);
         throw new ApplicationError("Something went wrong with the database", 500);
     }
 }
@@ -75,7 +71,6 @@ async getItem(userId) {
                     _id:new ObjectId(wishlistItemId)
                 }
             );
-            console.log("Deleted")
             return result
         } catch (err) {
             throw new ApplicationError("Somthing went wrong with the database",500)

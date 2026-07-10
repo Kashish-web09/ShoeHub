@@ -1,0 +1,94 @@
+<div class="container-fluid py-3 py-md-4">
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <h2 class="fw-bold mb-0">Customer Orders</h2>
+        <span class="badge bg-primary fs-6">
+            Total Orders : <%= orders.length %>
+        </span>
+    </div>
+
+    <form action="/api/seller/orders/filter" method="GET" class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" name="customerName" class="form-control"
+                        value="<%= customerName || '' %>" placeholder="Search customer">
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Payment</label>
+                    <select name="payment" class="form-select">
+                        <option value="">All</option>
+                        <option value="Cash on Delivery" <%= payment==="Cash on Delivery"?"selected":"" %>>Cash on Delivery</option>
+                        <option value="Online" <%= payment==="Online"?"selected":"" %>>Online</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <% ["Pending","Shipped","Delivered","Cancelled"].forEach(s=>{ %>
+                        <option value="<%= s %>" <%= status===s?"selected":"" %>><%= s %></option>
+                        <% }) %>
+                        <option value="" <%= !status?"selected":"" %>>All</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 d-grid align-self-end">
+                    <button class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <% if (orders.length === 0) { %>
+    <div class="alert alert-info">No Orders Available.</div>
+    <% } else { %>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-2 p-md-4">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% orders.forEach(order=>{ %>
+                        <tr>
+                            <td><span class="small text-break"><%= order._id %></span></td>
+                            <td><%= order.customerName || "N/A" %></td>
+                            <td>₹ <%= order.totalAmount %></td>
+                            <td><%= order.paymentMethod %></td>
+                            <td>
+                                <% if(order.orderStatus==="Delivered"){ %>
+                                    <span class="badge bg-success"><%= order.orderStatus %></span>
+                                <% } else if(order.orderStatus==="Pending"){ %>
+                                    <span class="badge bg-warning text-dark"><%= order.orderStatus %></span>
+                                <% } else if(order.orderStatus==="Cancelled"){ %>
+                                    <span class="badge bg-danger"><%= order.orderStatus %></span>
+                                <% } else { %>
+                                    <span class="badge bg-secondary"><%= order.orderStatus %></span>
+                                <% } %>
+                            </td>
+                            <td><%= new Date(order.createdAt).toLocaleDateString() %></td>
+                            <td>
+                                <a href="/api/seller/orders/<%= order._id %>" class="btn btn-sm btn-primary">View</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

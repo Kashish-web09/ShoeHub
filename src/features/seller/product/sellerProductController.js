@@ -18,11 +18,14 @@ next(err)
 
     async getProducts(req,res,next){
         try {
-            const sellerId=req.body;
+            const sellerId=req.sellerId;
             const result=await this.SellerProductRepo.getAllProducts(sellerId);
             res.render("seller/products",{
                 title:"Seller Product page",
-                products:result
+                products:result,
+                gender:"",
+                category:"",
+                price:""
             })
         } catch (err) {
             next(err)
@@ -41,7 +44,8 @@ const {
     stock,
     color,
     size,
-    isBestSeller
+    isBestSeller,
+    
 } = req.body;
                 const images=req.files? req.files.map(file=>file.filename):[];
                 const thumbnail=images.length>0? images[0]:null;
@@ -62,6 +66,7 @@ colors,
 sizes,
 0,
 isBestSeller==="true",
+sellerId
 
     );
     const result=await this.SellerProductRepo.addProduct(newData);
@@ -74,7 +79,8 @@ res.redirect('/api/seller/product');
     async getEditPage(req,res,next){
 try {
     const productId=req.params.id;
-    const product=await this.SellerProductRepo.getProductById(productId);
+    const sellerId=req.sellerId
+    const product=await this.SellerProductRepo.getProductById(productId,sellerId);
     res.render("seller/editProduct",{
         title:"Edit Product",
         product
@@ -98,7 +104,6 @@ try {
         size,
         isBestSeller
     }
-    console.log(req.body)
     await this.SellerProductRepo.updateProduct(productId,updatedProduct)
     res.redirect("/api/seller/product");
 } catch (err) {
@@ -108,7 +113,8 @@ try {
     async deleteProduct(req,res,next){
 try{   
        const productId=req.params.id;
-       const product=await this.SellerProductRepo.getProductById(productId);
+       const sellerId=req.sellerId
+       const product=await this.SellerProductRepo.getProductById(productId,sellerId);
        if(!product){
         return res.status(400).send("Product not found")
        }
@@ -119,15 +125,10 @@ try{
     next(err)
 }
     }
-    // async toggleProductStatus(req,res,next){
-    //  const 
-    // }
     async getOutOfStock(req,res,next){
         try {
             const sellerId=req.sellerId;
             const product=await this.SellerProductRepo.getOutOfStockProduct(sellerId)
-            console.log(product);
-            console.log(product.length);
             res.render("seller/outOfStockProducts",{
                 products:product,
                 seller:req.seller
@@ -136,4 +137,36 @@ try{
             next(err)
         }
     }
+    async getProductDetails(req,res,next){
+        try {
+            const productId=req.params.id;
+            const sellerId=req.sellerId;
+            const product=await this.SellerProductRepo.getProductById(productId,sellerId);
+            if(!product){
+return res.status(404).send("Product not found")
+            }
+            res.render("seller/productDetails",{
+                title:"Product Details",
+                product
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
+        async filterProduct(req,res,next){
+try {
+const {gender="",category="",price=""}=req.query;
+const products=await this.SellerProductRepo.filterProduct(gender,category,price);
+return res.render("seller/products",{
+    products,
+    gender,
+    category,
+    price
+})
+} catch (err) {
+    throw new ApplicationError("Somthing went wrong with the database",500)
+}
+
+    }
+
 }

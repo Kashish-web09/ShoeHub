@@ -11,7 +11,9 @@ async getFeedbackPage(req, res, next) {
 
         res.render("seller/feedback", {
             title: "Feedbacks",
-            feedbacks: feedbacks
+            feedbacks: feedbacks,
+            name:"",
+            status:""
         });
 
     } catch (err) {
@@ -24,6 +26,19 @@ async updateStatus(req,res,next){
         const status=req.body.status;
         await this.feedbackRepo.updateStatus(feedbackId,status);
         res.redirect('/api/seller/feedback')
+    } catch (err) {
+        next(err)
+    }
+}
+async filterFeedback(req,res,next){
+    try {
+        const {name="",status=""}=req.query;
+        const feedbacks=await this.feedbackRepo.filterFeedback(name,status);
+        return res.render("seller/feedback",{
+            feedbacks,
+            name,
+            status
+        })
     } catch (err) {
         next(err)
     }

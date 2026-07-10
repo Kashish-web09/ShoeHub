@@ -22,38 +22,25 @@
 <body>
 
 <% if(isSeller){ %>
-<div class="container-fluid">
-<% if (typeof seller !== "undefined") { %>
-    <%= seller.name %>
-<% } %>
-    <div class="row">
 
+    <%- include("../partials/seller/sellernavbar") %>
 
-        <div class="col-lg-10 col-md-9 p-0">
+    <!-- Page Content -->
+    <div class="seller-content">
 
-            <%- include("../partials/seller/sellernavbar") %>
-
-            <div class="p-4">
-
-                <%- body %>
-
-            </div>
-
-        </div>
+        <%- body %>
 
     </div>
 
-</div>
-
 <% } else { %>
 
-<%- include("../partials/navbar") %>
+    <%- include("../partials/navbar") %>
 
-<main>
+    <main>
 
-    <%- body %>
+        <%- body %>
 
-</main>
+    </main>
 
 <% } %>
 

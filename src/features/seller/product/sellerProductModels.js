@@ -14,6 +14,7 @@ export default class SellerProductModel {
         size,
         rating,
         isBestSeller,
+        sellerId
     ) {
         this.name = name;
         this.brand = brand;
@@ -34,7 +35,7 @@ export default class SellerProductModel {
         this.rating = rating;
 
         this.isBestSeller = isBestSeller;
-
+this.sellerId=sellerId;
 
         this.createdAt = new Date();
         this.updatedAt = new Date();

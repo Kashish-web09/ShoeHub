@@ -5,27 +5,63 @@ export default class productDetailController{
     constructor(){
         this.productDetailRepo=new productDetailRepo();
     }
-    async addProduct(){}
 
-async showAddProduct(){}
 
-async showSellerProducts(){}
 
-async showEditProduct(){}
 
-async updateProduct(){}
 
-async deleteProduct(){}
 
-async showProductDetails(){
+async getAllProducts(req,res,next){
+try {
+    console.log(req.params);
+    const {productId}=req.params;
+    const product=await this.productDetailRepo.getAllProducts(productId);
+    return res.render("productDetails",{
+        title:"Product Details Page",
+        product
+    })
+} catch (err) {
+    next(err)
+}
+}
+async getProductById(req,res,next){
+
+    try {
+
+        const productId = req.params.id;
+
+        const product = await this.productDetailRepo.getProductById(productId);
+
+
+        if(!product){
+            return res.status(404).send("Product not found");
+        }
+
+
+        if(product.ratings && product.ratings.length > 0){
+
+            let total = 0;
+
+            product.ratings.forEach((item)=>{
+                total += item.rating;
+            });
+
+            product.rating = (total / product.ratings.length).toFixed(1);
+
+        }
+        else{
+            product.rating = 0;
+        }
+
+
+        res.render("productDetails",{
+            product
+        });
+
+
+    } catch(err){
+        next(err);
+    }
 
 }
-
-async showAllProducts(){}
-
-async searchProducts(){}
-
-async filterProducts(){}
-
-async getProductsByCategory(){}
 }

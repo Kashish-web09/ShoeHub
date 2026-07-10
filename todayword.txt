@@ -1,4 +1,0 @@
-express validator --done
-swagger
-products 
-uploads ---done

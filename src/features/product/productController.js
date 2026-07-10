@@ -13,7 +13,7 @@ try {
         parseFloat(price),
         req.file ? req.file.filename :null,
         category,
-        !req.body.isBestSeller
+        req.body.isBestSeller==="true"
     )
     const result=await this.productRepository.addProduct(newProduct);
     res.status(201).json(result);
@@ -24,13 +24,23 @@ next(err)
     async getAll(req,res,next){
 try {
         const products=await this.productRepository.getAllProduct();
+        products.forEach(p=>{
+            if(p.ratings && p.ratings.length>0){
+                let total=0;
+                p.ratings.forEach(r=>{
+                    total+=r.rating
+                });
+                p.rating=(total/p.ratings.length).toFixed(1);
+            }else{
+                p.rating=0;
+            }
+        })
     res.status(201).render("products",{
         title:products,
         products
     });
 
 } catch (err) {
-    console.log(err)
 next(err)    
     
 }
@@ -53,6 +63,9 @@ next(err)
     }
     async rateProducts(req,res,next){
 try {
+      console.log("=== RATE ROUTE HIT ===");
+        console.log(req.body);
+        console.log(req.userId);
     const userId=req.userId;
     const productId=req.body.productId;
     const rating=req.body.rating;
@@ -61,28 +74,28 @@ try {
         userId,
         rating
     );
-    res.status(200).json({
-        success:true,
-        message:"Rating added"
-    })
+res.redirect(`/api/product_details/details/${productId}`);
 } catch (err) {
 next(err)    
     
 }
 
     }
-    async filterproducts(req,res,next){
+async searchProducts(req,res,next){
 try {
-    const {minPrice,maxPrice,category}=req.query;
-    const result=await this.productRepository.filterProduct(minPrice,maxPrice,category);
-    res.status(200).json(result);
     
 } catch (err) {
-next(err)    
-    
+    next(err)
 }
-
-    }
+}
+async sortProduct(req,res,next){
+try {
+    
+} catch (err) {
+    next(err)
+}
+}
+    
     async deleteProducts(req,res,next){
         try {
     const result=await this.productRepository.deleteProductById(req.params.id);

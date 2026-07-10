@@ -1,0 +1,223 @@
+<div class="container py-5">
+
+    <div class="row g-5 align-items-start">
+
+        <!-- Product Image -->
+        <div class="col-lg-6">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <img
+                        src="/uploads/<%= product.images %>"
+                        class="img-fluid rounded"
+                        style="max-height:500px;object-fit:contain;"
+                        alt="<%= product.name %>"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-lg-6">
+
+            <span class="badge bg-warning text-dark mb-3">
+                <%= product.brand %>
+            </span>
+
+            <h2 class="fw-bold mb-3">
+                <%= product.name %>
+            </h2>
+
+            <h3 class="text-success fw-bold mb-3">
+                ₹<%= product.price %>
+            </h3>
+
+            <p class="text-muted mb-4">
+                <%= product.description %>
+            </p>
+
+            <!-- Product Information -->
+
+            <div class="card border-0 bg-light mb-4">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-6 mb-3">
+
+                            <small class="text-muted">
+                                Category
+                            </small>
+
+                            <div class="fw-semibold">
+                                <%= product.category %>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 mb-3">
+
+                            <small class="text-muted">
+                                Brand
+                            </small>
+
+                            <div class="fw-semibold">
+                                <%= product.brand %>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <small class="text-muted">
+                                Color
+                            </small>
+
+                            <div class="fw-semibold">
+                                <%= product.color %>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <small class="text-muted">
+                                Size
+                            </small>
+
+                            <div class="fw-semibold">
+                                <%= product.size %>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+
+            <!-- Stock -->
+
+            <div class="mb-4">
+
+                <% if(product.stock > 0){ %>
+
+                    <span class="badge bg-success fs-6 px-3 py-2">
+                        <i class="bi bi-check-circle-fill"></i>
+                        In Stock
+                    </span>
+
+                <% } else { %>
+
+                    <span class="badge bg-danger fs-6 px-3 py-2">
+                        <i class="bi bi-x-circle-fill"></i>
+                        Out of Stock
+                    </span>
+
+                <% } %>
+
+            </div>
+<form action="/api/products/rating" method="POST">
+
+    <input
+        type="hidden"
+        name="productId"
+        value="<%= product._id %>"
+    >
+
+    <label class="form-label">
+        Rate this product
+    </label>
+
+    <select
+        name="rating"
+        class="form-select mb-3"
+        required
+    >
+        <option value="">Select Rating</option>
+        <option value="1">★☆☆☆☆ (1)</option>
+        <option value="2">★★☆☆☆ (2)</option>
+        <option value="3">★★★☆☆ (3)</option>
+        <option value="4">★★★★☆ (4)</option>
+        <option value="5">★★★★★ (5)</option>
+    </select>
+
+    <button class="btn btn-primary">
+        Submit Rating
+    </button>
+
+</form>
+<br>
+            <!-- Buttons -->
+
+            <div class="d-grid gap-3">
+
+                <form action="/api/cart" method="POST">
+
+                    <input
+                        type="hidden"
+                        name="productId"
+                        value="<%= product._id %>"
+                    >
+
+                    <button class="btn btn-dark btn-lg w-100">
+
+                        <i class="bi bi-cart-plus-fill me-2"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </form>
+
+                <form action="/api/orders/checkout" method="GET">
+
+                    <input
+                        type="hidden"
+                        name="productId"
+                        value="<%= product._id %>"
+                    >
+
+                    <button class="btn btn-success btn-lg w-100">
+
+                        <i class="bi bi-lightning-fill me-2"></i>
+
+                        Buy Now
+
+                    </button>
+
+                </form>
+
+                <form action="/api/wishlist" method="POST">
+
+                    <input
+                        type="hidden"
+                        name="productId"
+                        value="<%= product._id %>"
+                    >
+
+                    <button class="btn btn-outline-danger btn-lg w-100">
+
+                        <i class="bi bi-heart-fill me-2"></i>
+
+                        Add to Wishlist
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

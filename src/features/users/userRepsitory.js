@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import {getDb} from '../../config/mongoDb.js'
 import { ApplicationError } from '../../errorFile/applicationError.js'
 
@@ -34,6 +35,19 @@ async findUser(email){
     } catch (error) {
 
                 throw new ApplicationError("Something went wrong with the database",500)
+
+    }
+}
+async getUserById(userId){
+    try {
+                const db=getDb();
+        const collection=db.collection(this.collection);
+        return await collection.findOne(
+            {_id:new ObjectId(userId)}
+        )
+
+    } catch (err) {
+                        throw new ApplicationError("Something went wrong with the database",500)
 
     }
 }

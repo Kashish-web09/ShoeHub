@@ -5,7 +5,7 @@ import userRepository from './userRepsitory.js'
 import userModel from "./userModels.js";
 import {jwtAuth} from '../../middlewares/jwtAuthMiddleware.js';
 import { ApplicationError } from '../../errorFile/applicationError.js';
-
+import { sendResetEmail,sendWelcomeEmail } from '../../config/emailService.js';
 export default class userController{
     constructor() {
         this.userRepository=new userRepository();
@@ -28,6 +28,7 @@ export default class userController{
                 hashpasword
             );
             await this.userRepository.signUp(newUser);
+            await sendWelcomeEmail(newUser.email,newUser.name)
           return  res.redirect('/login');
         } catch (error) {
 
@@ -130,9 +131,8 @@ async forgotPass(req,res,next){
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
 await this.userRepository.saveResettoken(email,token,expiry)
-res.render('resetPass',{
-    token
-})
+await sendResetEmail(email,token)
+        return res.send("Password reset link has been sent to your email.");
     } catch (err) {
         next(err)
     }
@@ -142,7 +142,10 @@ async resetPass(req,res,next){
         const {token}=req.params;
         const {password}=req.body;
         const hashedPassword=await bcrypt.hash(password,12);
-        await this.userRepository.resetPass(token,hashedPassword);
+     const result=   await this.userRepository.resetPass(token,hashedPassword);
+     if(!result){
+        return res.status(400).send("Invalid or expired reset token")
+     }
         res.redirect('/login')
     } catch (err) {
         next(err)

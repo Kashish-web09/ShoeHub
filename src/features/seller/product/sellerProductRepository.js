@@ -28,12 +28,13 @@ return await collection.insertOne(data);
 
 }
 }
-async getProductById(productId) {
+async getProductById(productId,sellerId) {
     const db = getDb();
     const collection = db.collection(this.collection);
 
     return await collection.findOne({
-        _id: new ObjectId(productId)
+        _id: new ObjectId(productId),
+        sellerId:sellerId
     });
 }
 // // 4. to get the update page
@@ -68,15 +69,11 @@ return await collection.deleteOne(
 
 }
 }
-async getProductCount(sellerId){
-
-}
 async getOutOfStockProduct(sellerId){
 try {
                      const db=getDb();
     const collection=db.collection(this.collection);
 const products = await collection.find({stock:0}).toArray();
-console.log(products);
 
 return products;
 } catch (err) {
@@ -84,5 +81,54 @@ return products;
 
 }
 }
+    async filterProduct(gender,category,price){
+try {
+            const db=getDb();
+        const collection=db.collection(this.collection);
+        let filter={};
+       if(gender){
+        filter.gender={
+            $regex:gender,
+            $options:"i"
+        }
+       }
+       if(category){
+        filter.category=category
+       }
+       if(price){
+        switch(price){
+            case "0-2500":
+                filter.price={$lte:2500};
+                break;
+                case "2501-6000":
+                    filter.price={
+                        $gte:2501,
+                        $lte:6000
+                    };
+                    break;
+                     case "6001-10000":
+                    filter.price = {
+                        $gte: 6001,
+                        $lte: 10000
+                    };
+                    break;
+
+                case "10000+":
+                    filter.price = {
+                        $gte: 10000
+                    };
+                    break;
+            
+        }
+       }
+
+        
+        return await collection.find(filter).toArray();
+
+} catch (err) {
+    throw new ApplicationError("Somthing went wrong with the database",500)
+}
+
+    }
 
 }

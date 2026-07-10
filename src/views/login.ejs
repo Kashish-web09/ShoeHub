@@ -1,44 +1,155 @@
+<!-- ================= LOGIN PAGE ================= -->
 
-    <!-- Login Page -->
-    <main id="login-page" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Login Form -->
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h1 class="sub-heading">Welcome Back!</h1>
-                    <p class="login-para">Login to Your Account</p>
-                    
-                    <form action="/api/users/login-browser" method="post" id="login-form">
-                        <div class="mb-3 mt-4">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="email@example.com" required>
-                        </div>
+<main class="bg-light py-5" style="min-height:90vh;">
 
-                        <div class="mb-3 mt-4">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
-                        </div>
+    <div class="container">
 
-                        <div class="d-flex justify-content-end">
-                            <a href="/api/users/forgotPass" class="forgot mb-3">Forgot Password?</a>
-                        </div>
+        <div class="row justify-content-center align-items-center g-5">
 
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-warning w-75">Login</button>
-                        </div>
-                    </form>
+            <!-- Illustration -->
+            <div class="col-lg-6 text-center order-2 order-lg-1">
 
-                    <span class="create-acc d-block text-center mt-3">
-                        Create an account; <a href="register">New here?</a>
-                    </span>
-                </div>
+                <img
+                    src="/images/icons/animated image.png"
+                    alt="Login Illustration"
+                    class="img-fluid"
+                    style="max-height:500px;"
+                >
 
-                <!-- Illustration/Image -->
-                <div class="col-lg-6 text-center">
-                    <img src="/images/icons/animated image.png" class="img-fluid" alt="animated">
-                </div>
             </div>
-        </div>
-    </main>
 
- 
+            <!-- Login Card -->
+            <div class="col-lg-5 order-1 order-lg-2">
+
+                <div class="card border-0 shadow">
+
+                    <div class="card-body p-4 p-md-5">
+
+                        <div class="text-center mb-4">
+
+                            <i class="bi bi-person-circle display-4 text-warning"></i>
+
+                            <h2 class="fw-bold mt-3">
+                                Welcome Back!
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Login to your account to continue shopping.
+                            </p>
+
+                        </div>
+
+                        <form
+                            action="/api/users/login-browser"
+                            method="POST"
+                            id="login-form"
+                        >
+
+                            <!-- Email -->
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="email"
+                                    class="form-label fw-semibold"
+                                >
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-control form-control-lg"
+                                    placeholder="email@example.com"
+                                    required
+                                >
+
+                            </div>
+
+                            <!-- Password -->
+
+                            <div class="mb-2">
+
+                                <label
+                                    for="password"
+                                    class="form-label fw-semibold"
+                                >
+                                    Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-control form-control-lg"
+                                    placeholder="Enter your password"
+                                    required
+                                >
+
+                            </div>
+
+                            <!-- Forgot Password -->
+
+                            <div class="text-end mb-4">
+
+                                <a
+                                    href="/api/users/forgotPass"
+                                    class="text-decoration-none"
+                                >
+                                    Forgot Password?
+                                </a>
+
+                            </div>
+
+                            <!-- Login Button -->
+
+                            <div class="d-grid mb-4">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-warning btn-lg"
+                                >
+
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                                    Login
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                        <hr>
+
+                        <!-- Register -->
+
+                        <div class="text-center">
+
+                            <p class="mb-0">
+
+                                Don't have an account?
+
+                                <a
+                                    href="register"
+                                    class="fw-semibold text-decoration-none"
+                                >
+                                    Create Account
+                                </a>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

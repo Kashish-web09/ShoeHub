@@ -1,105 +1,196 @@
+<section class="py-5 bg-light">
 
-
-<!-- Contact Section -->
-<section class="py-5">
     <div class="container">
 
         <!-- Heading -->
         <div class="text-center mb-5">
-            <h1 class="fw-bold">Contact Us</h1>
-            <p class="text-warning fw-medium">We're Here to Help</p>
-        </div>
 
-        <!-- Contact Info Cards -->
-        <div class="row g-4 text-center mb-5">
+            <h1 class="fw-bold">
+                Contact Us
+            </h1>
 
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 p-3 contact-card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-location-dot fs-2 text-warning mb-3"></i>
-                        <h6 class="fw-bold">Our Store</h6>
-                        <p class="mb-0">123 Market Street, Gurgaon, Haryana 120002</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 p-3 contact-card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-phone fs-2 text-warning mb-3"></i>
-                        <h6 class="fw-bold">Call Us</h6>
-                        <p class="mb-0">+91 98765 43210</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 p-3 contact-card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-envelope fs-2 text-warning mb-3"></i>
-                        <h6 class="fw-bold">Email</h6>
-                        <p class="mb-0">support@shoehub.com</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Get in Touch -->
-        <div class="text-center mb-4">
-            <h3 class="fw-bold text-warning">Get in Touch</h3>
-            <p class="text-muted">
-                Feel free to contact us through the form below. We aim to respond within 24 hours.
+            <p class="text-muted fs-5">
+                We'd love to hear from you. Reach out anytime!
             </p>
+
         </div>
 
-        <!-- Contact Form -->
-<!-- Contact Form -->
-<div class="row justify-content-center">
-    <div class="col-md-6">
+        <div class="row g-4">
 
-        <form class="contact-form" action="/api/contact" method="POST">
+            <!-- Contact Information -->
+            <div class="col-lg-5">
 
-            <div class="mb-3">
-                <input
-                    type="text"
-                    class="form-control"
-                    name="name"
-                    placeholder="Your Name"
-                    required
-                >
+                <div class="card shadow border-0 h-100">
+
+                    <div class="card-body p-4">
+
+                        <h3 class="fw-bold mb-4">
+                            Get In Touch
+                        </h3>
+
+                        <!-- Address -->
+
+                        <div class="d-flex align-items-start mb-4">
+
+                            <div class="me-3">
+                                <i class="fa-solid fa-location-dot fs-3 text-warning"></i>
+                            </div>
+
+                            <div>
+
+                                <h6 class="fw-bold mb-1">
+                                    Our Store
+                                </h6>
+
+                                <p class="text-muted mb-0">
+                                    123 Market Street,<br>
+                                    Gurgaon, Haryana 120002
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Phone -->
+
+                        <div class="d-flex align-items-start mb-4">
+
+                            <div class="me-3">
+                                <i class="fa-solid fa-phone fs-3 text-warning"></i>
+                            </div>
+
+                            <div>
+
+                                <h6 class="fw-bold mb-1">
+                                    Call Us
+                                </h6>
+
+                                <p class="text-muted mb-0">
+                                    +91 98765 43210
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Email -->
+
+                        <div class="d-flex align-items-start mb-4">
+
+                            <div class="me-3">
+                                <i class="fa-solid fa-envelope fs-3 text-warning"></i>
+                            </div>
+
+                            <div>
+
+                                <h6 class="fw-bold mb-1">
+                                    Email
+                                </h6>
+
+                                <p class="text-muted mb-0">
+                                    support@shoehub.com
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <p class="text-muted mb-0">
+                            Our support team usually replies within
+                            <strong>24 hours.</strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <input
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    placeholder="Your Email"
-                    required
-                >
+            <!-- Contact Form -->
+
+            <div class="col-lg-7">
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body p-4">
+
+                        <h3 class="fw-bold mb-4">
+                            Send us a Message
+                        </h3>
+
+                        <form action="/api/contact" method="POST">
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="name"
+                                    placeholder="Enter your name"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label">
+                                    Message
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    rows="6"
+                                    name="message"
+                                    placeholder="Write your message..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning btn-lg w-100"
+                            >
+
+                                <i class="fa-solid fa-paper-plane me-2"></i>
+
+                                Send Message
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <textarea
-                    class="form-control"
-                    rows="5"
-                    name="message"
-                    placeholder="Your Message"
-                    required
-                ></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-warning w-100">
-                Send Message
-            </button>
-
-        </form>
+        </div>
 
     </div>
-</div>
 
-    </div>
 </section>
-
-

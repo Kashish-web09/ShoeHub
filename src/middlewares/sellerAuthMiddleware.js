@@ -40,13 +40,10 @@ export const sellerAuth = async (req, res, next) => {
         res.locals.isLoggedIn = true;
         res.locals.seller = seller;
         res.locals.isSeller=true;
-console.log("sellerAuth running");
-        console.log(res.locals.seller);
 
         next();
 
     } catch (err) {
-        console.log(err);
 
         res.clearCookie("token");
         return res.redirect("/api/seller/login");

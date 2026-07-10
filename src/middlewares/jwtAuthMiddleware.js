@@ -34,7 +34,6 @@ export const setAuthUser=(req,res,next)=>{
         res.locals.email=payload.email;
         next();
     } catch (error) {
-        console.log(error)
         return res.status(401).send("Unauthorized");
     }
 }

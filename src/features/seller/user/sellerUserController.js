@@ -3,10 +3,15 @@ import jwt from 'jsonwebtoken';
 import sellerUserRepository from './sellerUserRepository.js';
 import { sellerAuth } from '../../../middlewares/sellerAuthMiddleware.js';
 import sellerUserModels from './sellerUserModels.js'
-
+import sellerOrderRepo from '../order/orderRepository.js';
+import userRepository from '../../users/userRepsitory.js';
+import SellerProductRepo from '../product/sellerProductRepository.js';
 export default class sellerUserController {
     constructor() {
     this.sellerUserRepository=new sellerUserRepository();
+    this.sellerOrderRepo=new sellerOrderRepo();
+    this.userRepository=new userRepository();
+    this.SellerProductRepo=new SellerProductRepo()
     }
 
     // ==========================
@@ -119,18 +124,23 @@ res.redirect('/api/seller/login')
 
     async getDashboard(req, res, next) {
         try {
+            const sellerId=req.sellerId
+            const orders=await this.sellerOrderRepo.getSellerOrders();
+            const userCount=await this.userRepository.getAllUsers();
+            const product=await this.SellerProductRepo.getAllProducts(sellerId);
+            const revenue=await this.sellerOrderRepo.getRevenue();
+            const recentOrder=await this.sellerOrderRepo.getRecentOrders();
 res.render("seller/dashboard", {
     title: "Seller Dashboard",
-    totalUsers: 0,
-    totalProducts: 0,
-    totalOrders: 0,
-    revenue: 0,
-    recentOrders: []
+    totalUsers: userCount.length,
+    totalProducts:product.length,
+    totalOrders:orders.length,
+    revenue: revenue,
+    recentOrders: recentOrder
 });        } catch (err) {
             next(err);
         }
     }
-
 
 
 }

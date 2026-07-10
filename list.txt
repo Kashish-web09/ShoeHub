@@ -1,16 +1,3 @@
-Order->
-
-items-> productId,name,image,price,quantity,subtotal
-shipping address-> full name,phone,addressline,city,state,pincode
-
-payment->paymentsmethod(COD,UPI,CC,DC)
-
-payment statu-> pending,paid,failed,refunded
-
-Order Status-> Placed
-Confirmed
-Packed
-Shipped
-Out for Delivery
-Delivered
-Cancelled
+View Order
+User Profile
+delete unwanted funcctions

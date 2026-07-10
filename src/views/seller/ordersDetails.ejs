@@ -1,0 +1,473 @@
+<div class="container-fluid py-3 py-md-4">
+
+
+    <!-- Header -->
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+
+        <h2 class="fw-bold mb-0">
+            Order Details
+        </h2>
+
+
+        <a href="/api/seller/orders" 
+        class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-left me-2"></i>
+            Back to Orders
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+    <!-- Order Information -->
+
+    <div class="card shadow-sm border-0 mb-4">
+
+
+        <div class="card-header bg-dark text-white">
+
+            Order Information
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <div class="row g-3">
+
+
+                <div class="col-12 col-md-6">
+
+                    <strong>
+                        Order ID
+                    </strong>
+
+                    <br>
+
+                    <span class="text-break small">
+
+                        <%= order._id %>
+
+                    </span>
+
+                </div>
+
+
+
+
+                <div class="col-12 col-md-6">
+
+                    <strong>
+                        Order Date
+                    </strong>
+
+                    <br>
+
+                    <%= new Date(order.createdAt).toLocaleString() %>
+
+                </div>
+
+
+
+
+                <div class="col-12 col-md-6">
+
+                    <strong>
+                        Payment Method
+                    </strong>
+
+                    <br>
+
+                    <%= order.paymentMethod %>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- Update Status -->
+
+
+    <div class="card shadow-sm border-0 mb-4">
+
+
+        <div class="card-header bg-secondary text-white">
+
+            Update Order Status
+
+        </div>
+
+
+
+        <div class="card-body">
+
+
+            <form 
+            action="/api/seller/orders/<%= order._id %>/status"
+            method="POST">
+
+
+
+                <div class="row g-3 align-items-end">
+
+
+
+                    <div class="col-12 col-md-8">
+
+
+                        <label class="form-label">
+                            Order Status
+                        </label>
+
+
+                        <select 
+                        class="form-select"
+                        name="status">
+
+
+                            <option value="Placed"
+                            <%= order.orderStatus==="Placed" ? "selected" : "" %>>
+                                Placed
+                            </option>
+
+
+                            <option value="Processing"
+                            <%= order.orderStatus==="Processing" ? "selected" : "" %>>
+                                Processing
+                            </option>
+
+
+                            <option value="Shipped"
+                            <%= order.orderStatus==="Shipped" ? "selected" : "" %>>
+                                Shipped
+                            </option>
+
+
+                            <option value="Delivered"
+                            <%= order.orderStatus==="Delivered" ? "selected" : "" %>>
+                                Delivered
+                            </option>
+
+
+                            <option value="Cancelled"
+                            <%= order.orderStatus==="Cancelled" ? "selected" : "" %>>
+                                Cancelled
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+                    <div class="col-12 col-md-4">
+
+
+                        <button class="btn btn-success w-100">
+
+                            Update Status
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Customer Details -->
+
+
+    <div class="card shadow-sm border-0 mb-4">
+
+
+        <div class="card-header bg-primary text-white">
+
+            Customer Details
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <p class="mb-2">
+                <strong>Name:</strong>
+                <%= order.customerName %>
+            </p>
+
+
+            <p class="mb-0">
+
+                <strong>User ID:</strong>
+
+                <span class="text-break small">
+
+                    <%= order.userId %>
+
+                </span>
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Shipping Address -->
+
+
+    <div class="card shadow-sm border-0 mb-4">
+
+
+        <div class="card-header bg-info text-white">
+
+            Shipping Address
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <p>
+                <%= order.shippingAddress.fullName %>
+            </p>
+
+
+            <p>
+                <%= order.shippingAddress.address %>
+            </p>
+
+
+            <p>
+                <%= order.shippingAddress.city %>,
+                <%= order.shippingAddress.state %>
+            </p>
+
+
+            <p>
+                <%= order.shippingAddress.pincode %>
+            </p>
+
+
+            <p>
+                Phone:
+                <%= order.shippingAddress.phone %>
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Ordered Products -->
+
+
+    <div class="card shadow-sm border-0 mb-4">
+
+
+        <div class="card-header bg-success text-white">
+
+            Ordered Products
+
+        </div>
+
+
+        <div class="card-body p-2 p-md-4">
+
+
+            <div class="table-responsive">
+
+
+                <table class="table table-bordered align-middle mb-0">
+
+
+                    <thead class="table-light">
+
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Subtotal
+                            </th>
+
+                        </tr>
+
+
+                    </thead>
+
+
+
+
+                    <tbody>
+
+
+                    <% order.items.forEach(item => { %>
+
+
+                        <tr>
+
+
+                            <td>
+                                <%= item.productName %>
+                            </td>
+
+
+                            <td>
+                                ₹<%= item.price %>
+                            </td>
+
+
+                            <td>
+                                <%= item.quantity %>
+                            </td>
+
+
+                            <td>
+                                ₹<%= item.price * item.quantity %>
+                            </td>
+
+
+                        </tr>
+
+
+                    <% }) %>
+
+
+                    </tbody>
+
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Summary -->
+
+
+    <div class="card shadow-sm border-0">
+
+
+        <div class="card-header bg-warning">
+
+            Order Summary
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <h4 class="mb-0">
+
+                Total Amount :
+
+                <span class="text-success">
+
+                    ₹<%= order.totalAmount %>
+
+                </span>
+
+
+            </h4>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+</div>

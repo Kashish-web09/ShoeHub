@@ -7,21 +7,19 @@ export default class cartController{
 this.cartRepository=new cartRepository();
     }
 
-    async addItem(req,res,next){
+    async addItem(req,res){
         try {
             const productId=req.body.productId;
             const quantity=Number(req.body.quantity) || 1
             const userId=req.userId;
-                        console.log(req.userId);
 
             const result=await this.cartRepository.addItem(productId,userId,quantity);
             res.redirect('/api/cart')
         } catch (err) {
-            console.log(err)
-            next(new ApplicationError("Somthing went wrong",500))
+           throw new ApplicationError("Somthing went wrong",500)
         }
     }
-    async getItem(req,res,next){
+    async getItem(req,res){
 
 
                 try {
@@ -36,12 +34,11 @@ const total = items.reduce((sum, item) => {
                 })
 
         } catch (err) {
-            console.log(err)
-            next(new ApplicationError("Somthing went wrong",500))
+           throw new ApplicationError("Somthing went wrong",500)
         }
 
     }
-    async deleteItem(req,res,next){
+    async deleteItem(req,res){
             try {
             const userId=req.userId;
             const cartItemId=req.params.id;
@@ -51,25 +48,26 @@ const total = items.reduce((sum, item) => {
             }
 return res.redirect('/api/cart');
 } catch (err) {
-            next(new ApplicationError("Somthing went wrong",500))
+    console.log(err)
+           throw new ApplicationError("Somthing went wrong",500)
         }
     }
-async increaseQuantity(req,res,next){
+async increaseQuantity(req,res){
     try {
         const cartId=req.params.id;
         await this.cartRepository.increaseQuantity(cartId);
         res.redirect('/api/cart')
     } catch (err) {
-        next(err)
+           throw new ApplicationError("Somthing went wrong",500)
     }
 }
-async decreaseQuantity(req,res,next){
+async decreaseQuantity(req,res){
     try {
                 const cartId=req.params.id;
 await this.cartRepository.decreaseQuantity(cartId);
 res.redirect('/api/cart') 
     } catch (err) {
-        next(err)
+           throw new ApplicationError("Somthing went wrong",500)
     }
 }
 }

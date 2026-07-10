@@ -1,0 +1,476 @@
+<div class="container-fluid py-4">
+
+
+    <!-- Header -->
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+                Update Seller Profile
+            </h2>
+
+            <p class="text-muted mb-0">
+                Update your seller account information.
+            </p>
+
+        </div>
+
+
+
+        <a href="/api/seller/profile"
+        class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-left me-2"></i>
+            Back Profile
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="card shadow border-0">
+
+
+        <div class="card-header bg-warning">
+
+
+            <h5 class="mb-0">
+
+                <i class="bi bi-person-gear me-2"></i>
+
+                Edit Profile
+
+            </h5>
+
+
+        </div>
+
+
+
+
+
+
+        <div class="card-body p-3 p-md-4">
+
+
+            <form 
+            action="/api/seller/profile/update"
+            method="POST"
+            enctype="multipart/form-data">
+
+
+
+
+
+
+
+                <!-- Profile Image -->
+
+
+                <div class="mb-4 text-center">
+
+
+                    <img
+                    src="/uploads/<%= seller.profileImage %>"
+                    width="120"
+                    height="120"
+                    class="rounded-circle border mb-3"
+                    style="object-fit:cover;">
+
+
+
+                    <input
+                    type="file"
+                    name="profileImage"
+                    class="form-control">
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="row g-3">
+
+
+
+
+
+                    <!-- Name -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            Full Name
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="<%= seller.name %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- Email -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            Email
+                        </label>
+
+
+                        <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        value="<%= seller.email %>"
+                        readonly>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- Phone -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            Phone
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="phone"
+                        class="form-control"
+                        value="<%= seller.phone %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- Store Name -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            Store Name
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="storeName"
+                        class="form-control"
+                        value="<%= seller.storeName %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- Business Type -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            Business Type
+                        </label>
+
+
+                        <select
+                        name="businessType"
+                        class="form-select">
+
+
+                            <option 
+                            <%= seller.businessType==="Individual Seller" ? "selected":"" %>>
+                                Individual Seller
+                            </option>
+
+
+                            <option
+                            <%= seller.businessType==="Retail Store" ? "selected":"" %>>
+                                Retail Store
+                            </option>
+
+
+                            <option
+                            <%= seller.businessType==="Wholesaler" ? "selected":"" %>>
+                                Wholesaler
+                            </option>
+
+
+                            <option
+                            <%= seller.businessType==="Manufacturer" ? "selected":"" %>>
+                                Manufacturer
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- GST -->
+
+
+                    <div class="col-12 col-md-6">
+
+
+                        <label class="form-label fw-semibold">
+                            GST Number
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="gstNumber"
+                        class="form-control"
+                        value="<%= seller.gstNumber || '' %>">
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- Address -->
+
+
+                    <div class="col-12">
+
+
+                        <label class="form-label fw-semibold">
+                            Business Address
+                        </label>
+
+
+                        <textarea
+                        name="address"
+                        rows="3"
+                        class="form-control"
+                        required><%= seller.address %></textarea>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- City -->
+
+
+                    <div class="col-12 col-md-4">
+
+
+                        <label class="form-label fw-semibold">
+                            City
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="city"
+                        class="form-control"
+                        value="<%= seller.city %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- State -->
+
+
+                    <div class="col-12 col-md-4">
+
+
+                        <label class="form-label fw-semibold">
+                            State
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="state"
+                        class="form-control"
+                        value="<%= seller.state %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- Pincode -->
+
+
+                    <div class="col-12 col-md-4">
+
+
+                        <label class="form-label fw-semibold">
+                            Pincode
+                        </label>
+
+
+                        <input
+                        type="text"
+                        name="pincode"
+                        class="form-control"
+                        value="<%= seller.pincode %>"
+                        required>
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <hr class="my-4">
+
+
+
+
+
+
+                <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
+
+
+                    <a href="/api/seller/profile"
+                    class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+
+
+
+
+                    <button
+                    type="submit"
+                    class="btn btn-success">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        Update Profile
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+            </form>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

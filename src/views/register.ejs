@@ -1,105 +1,338 @@
+<main class="bg-light py-5" style="min-height:100vh;">
 
-<main class="container">
+    <div class="container py-lg-4">
 
-    <h1 class="heading">Create Your Account</h1>
-    <p class="reg-para">Join us for free and start shopping today!</p>
+        <div class="row justify-content-center align-items-center g-5">
 
-    <div class="row align-items-center">
+            <!-- Registration Form -->
+            <div class="col-12 col-lg-6 order-1">
 
-        <!-- Registration Form -->
-        <div class="col-lg-6 mb-4">
-            <div class="form-container">
+                <div class="card border-0 shadow-sm rounded-4">
 
-                <form action="/api/users/register" method="post">
+                    <div class="card-body p-4 p-md-5">
 
-                    <!-- Full Name -->
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Full Name" required>
+                        <div class="text-center mb-4">
+
+                            <i class="bi bi-person-plus-fill display-4 text-warning"></i>
+
+                            <h2 class="fw-bold mt-3">
+                                Create Your Account
+                            </h2>
+
+                            <p class="text-muted">
+                                Join ShoeHub today and enjoy a faster, smarter shopping experience.
+                            </p>
+
+                        </div>
+
+                        <form action="/api/users/register" method="POST">
+
+                            <!-- Name -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Full Name
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-user"></i>
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        class="form-control"
+                                        placeholder="Enter your full name"
+                                        autocomplete="name"
+                                        required>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Email Address
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        class="form-control"
+                                        placeholder="example@email.com"
+                                        autocomplete="email"
+                                        required>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Password
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control"
+                                        placeholder="Create a password"
+                                        autocomplete="new-password"
+                                        required>
+
+                                </div>
+
+                                <small class="text-muted">
+                                    Password must contain 8–20 characters.
+                                </small>
+
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Phone Number
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </span>
+
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        class="form-control"
+                                        placeholder="+91 XXXXX XXXXX"
+                                        autocomplete="tel">
+
+                                </div>
+
+                            </div>
+
+                            <!-- Terms -->
+
+                            <div class="form-check mb-4">
+
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="terms"
+                                    required>
+
+                                <label
+                                    class="form-check-label"
+                                    for="terms">
+
+                                    I agree to the
+
+                                    <a href="#" class="text-decoration-none">
+                                        Terms & Conditions
+                                    </a>
+
+                                    and
+
+                                    <a href="#" class="text-decoration-none">
+                                        Privacy Policy
+                                    </a>
+
+                                </label>
+
+                            </div>
+
+                            <!-- Button -->
+
+                            <div class="d-grid">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-warning btn-lg py-3">
+
+                                    <i class="bi bi-person-check-fill me-2"></i>
+
+                                    Register Account
+
+                                </button>
+
+                            </div>
+
+                            <div class="text-center mt-4">
+
+                                <span class="text-muted">
+
+                                    Already have an account?
+
+                                </span>
+
+                                <a
+                                    href="login"
+                                    class="text-warning fw-semibold text-decoration-none">
+
+                                    Login
+
+                                </a>
+
+                            </div>
+
+                        </form>
+
                     </div>
 
-                    <!-- Email -->
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-envelope"></i>
-                        </span>
-                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                    </div>
+                </div>
 
-                    <!-- Password -->
-                    <div class="input-group mb-1">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-lock"></i>
-                        </span>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <small class="text-muted">Must be 8-20 characters long.</small>
-
-                    <!-- Phone -->
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-phone"></i>
-                        </span>
-                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
-                    </div>
-
-                    <!-- Terms -->
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" required>
-                        <label class="form-check-label">
-                            I agree to the 
-                            <a href="#">Terms & Conditions</a> and 
-                            <a href="#">Privacy Policy</a>
-                        </label>
-                    </div>
-
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-warning w-100">
-                        Register Account
-                    </button>
-
-                </form>
             </div>
-        </div>
 
-        <!-- Benefits Section -->
-        <div class="col-lg-6">
-            <div class="benefits-box">
-                <h3 class="mb-4">Benefits of Joining</h3>
-                <hr>
+            <!-- Benefits -->
 
-                <ul class="join-list">
-                    <li>
-                        <i class="fa-solid fa-percent" style="background:#ffce80;"></i>
-                        Exclusive Discounts
-                    </li>
+            <div class="col-12 col-lg-5 order-2">
 
-                    <li>
-                        <i class="fa-solid fa-shield" style="background:black;color:white;"></i>
-                        Fast & Secure Checkout
-                    </li>
+                <div class="card border-0 shadow-sm rounded-4 h-100">
 
-                    <li>
-                        <i class="fa-solid fa-box" style="background:#ffce80;"></i>
-                        Order Tracking
-                    </li>
+                    <div class="card-body p-4 p-md-5">
 
-                    <li>
-                        <i class="fa-solid fa-heart" style="background:red;color:white;"></i>
-                        Wishlist & Favorites
-                    </li>
-                </ul>
+                        <div class="text-center mb-4">
 
-                <hr>
+                            <i class="bi bi-stars display-5 text-warning"></i>
 
-                <p>Already have an account?</p>
-                <a href="login">Sign In</a>
+                            <h3 class="fw-bold mt-3">
+
+                                Why Join ShoeHub?
+
+                            </h3>
+
+                            <p class="text-muted">
+
+                                Become a member and unlock exclusive shopping benefits.
+
+                            </p>
+
+                        </div>
+
+                        <div class="d-flex mb-4">
+
+                            <i class="fa-solid fa-percent fs-3 text-warning me-3"></i>
+
+                            <div>
+
+                                <h6 class="fw-bold">
+                                    Exclusive Discounts
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Access member-only offers and seasonal deals.
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex mb-4">
+
+                            <i class="fa-solid fa-shield-halved fs-3 text-success me-3"></i>
+
+                            <div>
+
+                                <h6 class="fw-bold">
+                                    Secure Payments
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Safe and encrypted checkout every time.
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex mb-4">
+
+                            <i class="fa-solid fa-box fs-3 text-primary me-3"></i>
+
+                            <div>
+
+                                <h6 class="fw-bold">
+                                    Order Tracking
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Track every order from dispatch to delivery.
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex">
+
+                            <i class="fa-solid fa-heart fs-3 text-danger me-3"></i>
+
+                            <div>
+
+                                <h6 class="fw-bold">
+                                    Wishlist
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Save your favourite products for later.
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="text-center">
+
+                            <a
+                                href="login"
+                                class="btn btn-outline-dark">
+
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                                Sign In
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
 
     </div>
 
 </main>
-

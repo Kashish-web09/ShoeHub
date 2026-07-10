@@ -29,8 +29,27 @@ return await collection.updateOne(
 )
 
         } catch (err) {
-            console.log(err)
                         throw new ApplicationError("Something wrong with db",500)
+
+        }
+    }
+    async filterFeedback(name,status){
+        try {
+                                                const db=getDb();
+            const collection=db.collection(this.collection);
+            let query={};
+            if(name){
+                query.name={
+                    $regex:name,
+                    $options:"i"
+                }
+            }  
+            if(status){
+                query.status=status
+            }
+            return await collection.find(query).toArray();
+        } catch (err) {
+                                    throw new ApplicationError("Something wrong with db",500)
 
         }
     }

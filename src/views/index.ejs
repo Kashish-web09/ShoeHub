@@ -1,142 +1,250 @@
 <!-- ================= HERO SECTION ================= -->
-<section class="bg-light py-5"> 
+
+<section class="bg-light py-5">
+
     <div class="container">
-         <div class="row align-items-center">
-             <div class="col-md-6"> 
-                <h1 class="fw-bold">Find Your Perfect Pair</h1> 
-                <p>Discover the latest trends in footwear. Shop the best collection of stylish shoes.</p> 
-                <button class="btn btn-warning">Shop Now</button> </div>
-                 <div class="col-md-6 d-flex justify-content-center"> 
-                    <img src="/images/banner_img/banner_img1.jfif" class="img-fluid" style="max-height:250px;">
-                 </div> 
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6 text-center text-lg-start">
+
+                <span class="badge bg-warning text-dark mb-3 px-3 py-2">
+                    New Collection 2026
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Find Your Perfect Pair
+                </h1>
+
+                <p class="lead text-muted my-4">
+                    Discover premium footwear designed for comfort, performance,
+                    and everyday style.
+                </p>
+
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+
+                    <a
+                        href="/api/products"
+                        class="btn btn-warning btn-lg px-4">
+
+                        <i class="bi bi-bag-fill me-2"></i>
+
+                        Shop Now
+
+                    </a>
+
+                    <a
+                        href="/api/products"
+                        class="btn btn-outline-dark btn-lg px-4">
+
+                        Explore Collection
+
+                    </a>
+
                 </div>
-             </div> 
-            </section>
 
+            </div>
 
-<!-- ================= NEW ARRIVALS ================= -->
-<section class="py-5">
-    <div class="container">
+            <div class="col-lg-6 text-center">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">New Arrivals</h2>
-            <button class="btn btn-dark btn-sm px-4">View All</button>
+                <img
+                    src="/images/banner_img/banner_img1.jfif"
+                    class="img-fluid rounded-4 shadow"
+                    style="max-height:420px;"
+                    alt="Banner">
+
+            </div>
+
         </div>
 
-<div class="row g-4">
-
-<% products.forEach(p=>{ %>
-
-<div class="col-lg-3 col-md-4 col-sm-6">
-
-<div class="card product-card h-100">
-
-<div class="image-box">
-<img src="/uploads/<%= p.thumbnail %>" alt="<%= p.name %>">
-</div>
-
-<div class="card-body">
-
-<span class="category">
-<%= p.category %>
-</span>
-
-<h5 class="product-name">
-<%= p.name %>
-</h5>
-
-<div class="price">
-₹<%= p.price %>
-</div>
-
-<div class="d-grid gap-2 mt-4">
-
-<form action="/api/cart" method="POST">
-
-<input type="hidden" name="productId" value="<%= p._id %>">
-
-<button class="btn btn-cart">
-<i class="bi bi-cart-fill"></i>
-Add to Cart
-</button>
-
-</form>
-
-<form action="/api/wishlist" method="POST">
-
-<input type="hidden" name="productId" value="<%= p._id %>">
-
-<button class="btn btn-wishlist">
-<i class="bi bi-heart"></i>
-Wishlist
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<% }) %>
-
-</div>
-</div>
+    </div>
 
 </section>
 
+<!-- ================= NEW ARRIVALS ================= -->
 
-<!-- ================= BEST SELLER ================= -->
-<section class="py-5 bg-light">
+<section class="py-5">
+
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">Best Seller</h2>
-            <a href="/products" class="btn btn-dark btn-sm px-4">View All</a>
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    New Arrivals
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Fresh styles just arrived.
+                </p>
+
+            </div>
+
+            <a
+                href="/api/products"
+                class="btn btn-outline-dark">
+
+                View All
+
+            </a>
+
         </div>
 
         <div class="row g-4">
 
-            <% if(bestSeller.length > 0){ %>
+            <% products.forEach(p=>{ %>
+
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <img
+                        src="/uploads/<%= p.thumbnail %>"
+                        class="card-img-top"
+                        style="height:250px;object-fit:cover;"
+                        alt="<%= p.name %>">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <span class="badge bg-light text-dark border align-self-start mb-2">
+
+                            <%= p.category %>
+
+                        </span>
+
+                        <h5 class="fw-bold mb-3"
+                        style="height: 72px;overflow: hidden;">
+
+                            <%= p.name %>
+
+                        </h5>
+
+                        <h4 class="text-success fw-bold mv-3">
+
+                            ₹<%= p.price %>
+
+                        </h4>
+
+<a href="/api/product_details/details/<%= p._id %>"
+   class="btn btn-warning w-100 mt-auto">
+    <i class="bi bi-eye-fill me-2"></i>
+    View Product
+</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= BEST SELLER ================= -->
+
+<section class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    Best Sellers
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Customer favourites.
+                </p>
+
+            </div>
+
+            <a
+                href="/api/products"
+                class="btn btn-outline-dark">
+
+                View All
+
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            <% if(bestSeller.length>0){ %>
 
                 <% bestSeller.forEach(product=>{ %>
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card h-100 shadow-sm">
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
 
+                    <div class="card border-0 shadow-sm h-100">
 
-<img
-    src="/uploads/<%= product.thumbnail %>"
-    style="width:200px">
-                            <div class="card-body d-flex flex-column text-center">
+                        <img
+                            src="/uploads/<%= product.thumbnail %>"
+                            class="card-img-top"
+                            style="height:250px;object-fit:cover;"
+                            alt="<%= product.name %>">
 
-                                <h5 class="card-title">
-                                    <%= product.name %>
-                                </h5>
+                        <div class="card-body d-flex flex-column">
 
-                                <p class="card-price">
-                                    ₹<%= product.price %>
-                                </p>
+                            <span class="badge bg-success align-self-start mb-2">
 
-                                <a href="/products/<%= product._id %>"
-                                   class="btn btn-warning mt-auto w-100">
-                                    View Product
-                                </a>
+                                Best Seller
 
-                            </div>
+                            </span>
+
+<h5
+    class="fw-bold mb-3"
+    style="height:72px; overflow:hidden;">
+    <%=product.name %>
+</h5>
+                            <h4 class="text-success fw-bold mb-3">
+
+                                ₹<%= product.price %>
+
+                            </h4>
+
+<a href="/api/product_details/details/<%= product._id %>"
+   class="btn btn-warning w-100 mt-auto">
+    <i class="bi bi-eye-fill me-2"></i>
+    View Product
+</a>
 
                         </div>
+
                     </div>
+
+                </div>
 
                 <% }) %>
 
             <% } else { %>
 
-                <div class="col-12 text-center">
-                    <h5>No Best Seller Products Available</h5>
+                <div class="col-12">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-body text-center py-5">
+
+                            <i class="bi bi-box display-3 text-secondary"></i>
+
+                            <h4 class="mt-3">
+
+                                No Best Seller Products Available
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             <% } %>
@@ -144,42 +252,107 @@ Wishlist
         </div>
 
     </div>
+
 </section>
 
-
 <!-- ================= TOP BRANDS ================= -->
+
 <section class="py-5">
+
     <div class="container">
-        <h2 class="fw-bold mb-4">Top Brands</h2>
 
-        <div class="row g-4 text-center brand-logo">
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+
+                Shop by Brand
+
+            </h2>
+
+            <p class="text-muted">
+
+                Trusted brands loved by millions.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4 justify-content-center">
 
             <div class="col-6 col-md-3">
-                <div class="brand-box">
-                    <img src="/images/brand_logo_img/nike_logo.png" alt="Nike">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center">
+
+                        <img
+                            src="/images/brand_logo_img/nike_logo.png"
+                            class="img-fluid"
+                            style="height:70px;object-fit:contain;"
+                            alt="Nike">
+
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="col-6 col-md-3">
-                <div class="brand-box">
-                    <img src="/images/brand_logo_img/adidia_logo.png" alt="Adidas">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center">
+
+                        <img
+                            src="/images/brand_logo_img/adidia_logo.png"
+                            class="img-fluid"
+                            style="height:70px;object-fit:contain;"
+                            alt="Adidas">
+
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="col-6 col-md-3">
-                <div class="brand-box">
-                    <img src="/images/brand_logo_img/puma_logo.jfif" alt="Puma">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center">
+
+                        <img
+                            src="/images/brand_logo_img/puma_logo.jfif"
+                            class="img-fluid"
+                            style="height:70px;object-fit:contain;"
+                            alt="Puma">
+
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="col-6 col-md-3">
-                <div class="brand-box">
-                    <img src="/images/brand_logo_img/reebook_logo.jfif" alt="Reebok">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center">
+
+                        <img
+                            src="/images/brand_logo_img/reebook_logo.jfif"
+                            class="img-fluid"
+                            style="height:70px;object-fit:contain;"
+                            alt="Reebok">
+
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
+
 </section>
-
-
