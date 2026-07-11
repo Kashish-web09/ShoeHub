@@ -32,10 +32,7 @@ orderRoutes.get("/admin/all",(req,res,next)=>{
 orderRoutes.post("/admin/:id",(req,res,next)=>{
     OrderController.updateOrder(req,res,next);
 });
-orderRoutes.post('/create-razorpay-order',(req,res,next)=>{
-    OrderController.createRazorpayOrder(req,res,next)
-})
-orderRoutes.post('/verify-payment',(req,res,next)=>{
-    OrderController.verifyPayment(req,res,next)
+orderRoutes.get('/:id',(req,res,next)=>{
+    OrderController.getOrderDetails(req,res,next)
 })
 export default orderRoutes;

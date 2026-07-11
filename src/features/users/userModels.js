@@ -5,4 +5,3 @@ export default class userModel{
         this.password=password;
     }
 }
-let users=[];

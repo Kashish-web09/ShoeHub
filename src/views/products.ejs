@@ -31,46 +31,42 @@ Products
 
 </div>
 
-<div class="col-md-4">
+<form action="/api/products/filter" method="GET">
+    <div class="row">
 
-<input
-class="form-control"
-placeholder="Search products...">
+        <div class="col-md-4">
+            <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Search products...">
+        </div>
 
-</div>
+        <div class="col-md-3">
+            <input
+                type="text"
+                class="form-control"
+                name="brand"
+                placeholder="Search brand...">
+        </div>
 
-<div class="col-md-3">
+        <div class="col-md-3">
+            <select class="form-select" name="sort">
+                <option value="">Sort By</option>
+                <option value="lowToHigh">Price Low → High</option>
+                <option value="highToLow">Price High → Low</option>
+                <option value="newest">Newest</option>
+            </select>
+        </div>
 
-<select class="form-select">
+        <div class="col-md-2">
+            <button class="btn btn-dark w-100" type="submit">
+                Apply
+            </button>
+        </div>
 
-<option>
-
-Sort By
-
-</option>
-
-<option>
-
-Price Low → High
-
-</option>
-
-<option>
-
-Price High → Low
-
-</option>
-
-<option>
-
-Newest
-
-</option>
-
-</select>
-
-</div>
-
+    </div>
+</form>
 </div>
 
 </div>

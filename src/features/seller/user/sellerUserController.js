@@ -1,11 +1,14 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto'
 import sellerUserRepository from './sellerUserRepository.js';
 import { sellerAuth } from '../../../middlewares/sellerAuthMiddleware.js';
 import sellerUserModels from './sellerUserModels.js'
 import sellerOrderRepo from '../order/orderRepository.js';
 import userRepository from '../../users/userRepsitory.js';
 import SellerProductRepo from '../product/sellerProductRepository.js';
+import { sendSellerResetEmail } from '../../../config/emailService.js';
+import { title } from 'process';
 export default class sellerUserController {
     constructor() {
     this.sellerUserRepository=new sellerUserRepository();
@@ -71,7 +74,7 @@ process.env.JWT_SECRETKEY,
 res.cookie('sellerToken',token,{
     httpOnly:true,
     secure:false,
-    maxAge:2*24*60*60*1000
+    maxAge:2*60*60*1000
 });
 res.redirect('/api/seller/dashboard')
 } catch (err) {
@@ -95,7 +98,8 @@ const profileImage=req.file ? req.file.filename : "default.png";
         }=req.body;
 const exisitingSeller=await this.sellerUserRepository.findUser(email);
 if(exisitingSeller){
-                return res.render('/api/seller/register',{
+                return res.render('seller/register',{
+                    title:"Seller Register",
                     error:"User already exisits"
                 })
             }    
@@ -103,7 +107,7 @@ if(exisitingSeller){
             const hashedPassword=await bcrypt.hash(password,12);
                const newSeller=new sellerUserModels(name,email,phone,hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage);
          await this.sellerUserRepository.register(newSeller);
-         return res.redirect('/api/seller/login')
+          res.redirect('/api/seller/login')
     } catch (err) {
         next(err)
     }
@@ -117,8 +121,46 @@ res.redirect('/api/seller/login')
             next(err);
         }
     }
+async forgotPass(req,res,next){
+    try {
+        const {email}=req.body;
+        const seller=await this.sellerUserRepository.forgotPass(email);
+        if(!seller){
+            return res.status(400).send("Email not register")
+        }
+        const token=crypto.randomBytes(32).toString("hex");
+        const expiry=new Date(Date.now()+60*60*1000);
+        await this.sellerUserRepository.saveResetPass(email,token,expiry)
+        await sendSellerResetEmail(email,token);
+                return res.send("Password reset link has been sent to your email.");
 
-    // ==========================
+    } catch (err) {
+        next(err)
+    }
+}
+async resetPass(req, res, next) {
+    try {
+
+        const { token } = req.params;
+        const { password } = req.body;
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        const result = await this.sellerUserRepository.resetPass(
+            token,
+            hashedPassword
+        );
+
+        if (result.matchedCount === 0) {
+            return res.status(400).send("Invalid or expired reset token");
+        }
+
+        res.redirect("/api/seller/login");
+
+    } catch (err) {
+        next(err);
+    }
+}    // ==========================
     // Dashboard
     // ==========================
 

@@ -42,7 +42,7 @@ try {
 
  return  await collection.findOne(
         {_id:new ObjectId(orderId),
-            userId:new ObjectId(userId)
+            userId:userId
         }
     )
 } catch (err) {

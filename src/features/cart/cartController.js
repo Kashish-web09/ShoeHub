@@ -48,7 +48,6 @@ const total = items.reduce((sum, item) => {
             }
 return res.redirect('/api/cart');
 } catch (err) {
-    console.log(err)
            throw new ApplicationError("Somthing went wrong",500)
         }
     }

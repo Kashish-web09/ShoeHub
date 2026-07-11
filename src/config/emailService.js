@@ -1,5 +1,25 @@
 import transport from "./mailer.js";
 
+    export async function sendSellerResetEmail(email, token) {
+
+    const sellerResetLink=`http://localhost:4090/api/seller/resetPass/${token}`;
+
+    await transport.sendMail({
+        from: process.env.EMAIL,
+        to: email,
+        subject: "Reset Password",
+        html: `
+            <h2>Password Reset</h2>
+
+            <p>Click the link below to reset your password.</p>
+
+            <a href="${sellerResetLink}">Reset Password</a>
+        `
+    });
+
+}
+
+
 export async function sendResetEmail(email, token) {
 
     const resetLink = `http://localhost:4090/api/users/resetPass/${token}`;

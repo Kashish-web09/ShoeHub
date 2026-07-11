@@ -28,6 +28,8 @@ import sellerProductroutes from './features/seller/product/sellerProductRoutes.j
 import feedbackRoutes from './features/seller/feedback/feedbackRoutes.js';
 import sellerOrderroutes from './features/seller/order/orderRoutes.js';
 import profileRoute from './features/seller/profile/profileRoutes.js';
+import userProfileRoute from './features/profile/profileRoute.js';
+
 
 const cartItemController=new cartController();
 const productsController=new productController();
@@ -67,6 +69,7 @@ app.use('/api/cart',setAuthUser,cartRoutes)
 app.use('/api/wishlist',setAuthUser,wishroutes);
 app.use('/api/orders',setAuthUser,orderRoutes);
 app.use('/api/contact',setAuthUser,contactRoute)
+app.use('/api/profile',setAuthUser,userProfileRoute)
 app.use('/api/seller',sellerUserRoutes);
 app.use('/api/product_details',productDetailsRoute)
 app.use('/api/seller/product',sellerAuth,sellerProductroutes)

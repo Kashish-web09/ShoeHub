@@ -42,24 +42,33 @@ try {
 }
 
     }
-    async filterProduct(minPrice,maxPrice,category){
+    async filterProduct(name,brand,sort){
 try {
             const db=getDb();
         const collection=db.collection(this.collection);
         let filter={};
-        if(minPrice || maxPrice){
-            filter.price={};
-            if(minPrice){
-                filter.price={$gte:parseFloat(minPrice)}
+        if(name){
+            filter.name={
+                $regex:name,
+                $options:"i"
             }
-            if(maxPrice){
-                filter.price={$lte:parseFloat(maxPrice)}
-            }
-            if(category!=-undefined){
-                filter.category=category;
+
+        }
+        if(brand){
+            filter.brand={
+                $regex:brand,
+                $options:"i"
             }
         }
-        const result=await collection.find(filter).toArray();
+        let sortOptions={};
+        if(sort==="lowToHigh"){
+            sortOptions.price=1;
+        }else if(sort==="highToLow"){
+            sortOptions.price=-1;
+        }else if(sort==="newest"){
+            sortOptions.createdAt=-1;
+        }
+        const result=await collection.find(filter).sort(sortOptions).toArray();
         return result;
 
 } catch (err) {
@@ -69,10 +78,6 @@ try {
     }
 async rateproduct(productId, userId, rating) {
     try {
-console.log("REpo called")
- console.log(productId);
-        console.log(userId);
-        console.log(rating);
                 const db = getDb();
         const collection = db.collection(this.collection);
 
@@ -87,7 +92,6 @@ console.log("REpo called")
                 }
             }
         );
-        console.log("Old rating removed")
 
         // Add new rating
         await collection.updateOne(
@@ -101,7 +105,6 @@ console.log("REpo called")
                 }
             }
         );
-                console.log("New rating added");
 
 
     } catch (err) {

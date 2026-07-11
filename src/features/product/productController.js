@@ -63,9 +63,6 @@ next(err)
     }
     async rateProducts(req,res,next){
 try {
-      console.log("=== RATE ROUTE HIT ===");
-        console.log(req.body);
-        console.log(req.userId);
     const userId=req.userId;
     const productId=req.body.productId;
     const rating=req.body.rating;
@@ -81,20 +78,19 @@ next(err)
 }
 
     }
-async searchProducts(req,res,next){
+async filterProduct(req,res,next){
 try {
-    
+    const {name,brand,sort}=req.query;
+const products=await this.productRepository.filterProduct(name,brand,sort);
+res.render("products",{
+    title:"Products",
+    products
+})
 } catch (err) {
     next(err)
 }
 }
-async sortProduct(req,res,next){
-try {
-    
-} catch (err) {
-    next(err)
-}
-}
+
     
     async deleteProducts(req,res,next){
         try {

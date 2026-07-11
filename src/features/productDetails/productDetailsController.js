@@ -13,7 +13,6 @@ export default class productDetailController{
 
 async getAllProducts(req,res,next){
 try {
-    console.log(req.params);
     const {productId}=req.params;
     const product=await this.productDetailRepo.getAllProducts(productId);
     return res.render("productDetails",{

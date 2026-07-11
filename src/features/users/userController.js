@@ -126,7 +126,7 @@ async forgotPass(req,res,next){
         const {email}=req.body;
         const user=await this.userRepository.forgotPass(email);
         if(!user){
-            return res.status(400).send("Emial not register")
+            return res.status(400).send("Email not register")
         }
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);

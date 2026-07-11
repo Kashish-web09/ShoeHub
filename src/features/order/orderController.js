@@ -2,12 +2,15 @@ import orderRepository from "./orderRepository.js";
 import orderModels from "./orderModels.js";
 import cartRepository from "../cart/cartRepsitory.js";
 import userRepository from "../users/userRepsitory.js";
+import productRepository from "../product/productRepository.js";
 import { sendOrderConfirmation, sendOrderShipped } from "../../config/emailService.js";
 export default class orderController{
     constructor(){
         this.orderRepository=new orderRepository();
         this.cartRepository=new cartRepository();
         this.userRepository=new userRepository();
+        this.productRepository=new productRepository()
+    this
     }
     async placeOrder(req,res,next){
 
@@ -39,10 +42,10 @@ const shippingAddress = {
                                 return sum+(item.product.price*item.quantity)
 
             },0);
-            const items = cartItem.map(item => ({
+const items = cartItem.map(item => ({
     productId: item.product._id,
     productName: item.product.name,
-    image: item.product.image,
+    image: item.product.thumbnail,
     price: item.product.price,
     quantity: item.quantity,
     subtotal: item.product.price * item.quantity
@@ -67,25 +70,53 @@ return res.redirect('/api/orders')
             next(err)
         }
     }
-    async checkoutPage(req,res,next){
-        try {
-            const userId=req.userId;
-            const cartItem=await this.cartRepository.getItem(userId);
-            if(!cartItem || cartItem.length===0){
-                return res.redirect('/api/cart')
+async checkoutPage(req, res, next) {
+    try {
+        const userId = req.userId;
+        const { productId } = req.query;
+
+        // Buy Now
+        if (productId) {
+
+            const product = await this.productRepository.getOneProduct(productId);
+
+            if (!product) {
+                return res.status(404).send("Product not found");
             }
-            const total=cartItem.reduce((sum,item)=>{
-                return sum+item.product.price*item.quantity
-            },0);
-            res.render("checkout",{
+
+            const cartItem = [{
+                product,
+                quantity: 1
+            }];
+
+            const total = product.price;
+
+            return res.render("checkout", {
                 cartItem,
                 total
-            })
-        } catch (err) {
-            next(err)
+            });
         }
+
+        // Checkout from Cart
+        const cartItem = await this.cartRepository.getItem(userId);
+
+        if (!cartItem || cartItem.length === 0) {
+            return res.redirect("/api/cart");
+        }
+
+        const total = cartItem.reduce((sum, item) => {
+            return sum + item.product.price * item.quantity;
+        }, 0);
+
+        res.render("checkout", {
+            cartItem,
+            total
+        });
+
+    } catch (err) {
+        next(err);
     }
-async getAllOrders(req, res, next) {
+}async getAllOrders(req, res, next) {
     try {
         const userId = req.userId;
 
@@ -107,7 +138,7 @@ try{
     if(!order){
         return res.status(404).send("Order not found")
     }
-            res.render("orderDetails", { orders });
+            res.render("orderDetails", { order });
 
 }catch(err){
     next(err)
@@ -164,5 +195,19 @@ res.redirect('/admin/orders')
 }catch(err){
     next(err)
 }
+    }
+    async getOrderDetails(req,res,next){
+        try {
+            const userId=req.userId;
+            const orderId=req.params.id;
+
+            const order= await this.orderRepository.getOrderById(orderId,userId);
+            return res.render("orderDetails",{
+                title:"Order Details",
+                order
+            })
+        } catch (err) {
+            next(err)
+        }
     }
 }

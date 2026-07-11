@@ -17,7 +17,7 @@ productRoutes.get('/',(req,res,next)=>{
     productsController.getAll(req,res,next)
 })
 productRoutes.get('/filter',(req,res,next)=>{
-    productsController.filterproducts(req,res,next)
+    productsController.filterProduct(req,res,next)
 })
 productRoutes.get('/:id',(req,res,next)=>{
     productsController.getOne(req,res,next)

@@ -1,3 +1,0 @@
-View Order
-User Profile
-delete unwanted funcctions
