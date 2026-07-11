@@ -146,6 +146,7 @@ async getBestSellerProducts(){
     }).limit(4).toArray();
 
     } catch (err) {
+        console.log("bestseller",err)
             throw new ApplicationError("Somthing went wrong with the database",500)
 
     }
