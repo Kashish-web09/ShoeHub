@@ -7,7 +7,7 @@ import sellerUserModels from './sellerUserModels.js'
 import sellerOrderRepo from '../order/orderRepository.js';
 import userRepository from '../../users/userRepsitory.js';
 import SellerProductRepo from '../product/sellerProductRepository.js';
-import { sendSellerResetEmail } from '../../../config/emailService.js';
+import { sendSellerResetEmail, sendWelcomeEmail } from '../../../config/emailService.js';
 import { title } from 'process';
 export default class sellerUserController {
     constructor() {
@@ -107,6 +107,7 @@ if(exisitingSeller){
             const hashedPassword=await bcrypt.hash(password,12);
                const newSeller=new sellerUserModels(name,email,phone,hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage);
          await this.sellerUserRepository.register(newSeller);
+         await sendWelcomeEmail(newSeller.email,newSeller.name)
           res.redirect('/api/seller/login')
     } catch (err) {
         next(err)
