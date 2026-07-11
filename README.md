@@ -1,197 +1,531 @@
-# 👟 ShoeHub
+# 👟 ShoeHub - Full Stack E-Commerce Website
 
-ShoeHub is a full-stack e-commerce web application that allows users to browse, search, and purchase shoes while providing sellers with a dedicated dashboard to manage products and orders.
+![ShoeHub](https://img.shields.io/badge/Project-E--Commerce-blue)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
+![Bootstrap](https://img.shields.io/badge/Frontend-Bootstrap-purple)
 
----
+ShoeHub is a full-stack footwear e-commerce web application where users can browse shoes, manage carts, place orders, and manage their profiles.
 
-## 🚀 Features
+The project also includes a complete seller management system where sellers can manage products, view orders, update order status, and manage their store.
 
-### 👤 User Features
-- User Registration & Login
-- JWT Authentication
-- Browse Products
-- Search & Filter Products
-- Product Details Page
-- Add to Cart
-- Wishlist
-- Checkout
-- Order History
-- User Profile Management
-
-### 🛍️ Seller Features
-- Seller Registration & Login
-- Seller Dashboard
-- Add Products
-- Edit Products
-- Delete Products
-- Manage Inventory
-- View Orders
-- Order Status Management
-
-### 🛠 Admin Features (Optional)
-- Manage Users
-- Manage Sellers
-- Monitor Products
+The application is built using **Node.js, Express.js, MongoDB, EJS, Bootstrap, JWT Authentication, and Nodemailer**.
 
 ---
 
-# 🖼️ Screenshots
+# ✨ Features
 
-> Add screenshots of your application here.
+## 👤 User Module
 
-| Home Page | Product Page |
-|-----------|--------------|
-| ![Home](screenshots/home.png) | ![Product](screenshots/product.png) |
+### Authentication
+- User registration
+- User login
+- Secure password encryption using bcrypt
+- JWT based authentication
+- Cookie based session handling
+- Logout functionality
 
-| Cart | Seller Dashboard |
-|------|------------------|
-| ![Cart](screenshots/cart.png) | ![Dashboard](screenshots/dashboard.png) |
+### Password Management
+- Forgot password
+- Email based password reset
+- Secure reset token generation
+- Token expiry validation
+
+### Shopping Features
+- View all products
+- Product details page
+- Product search
+- Product filtering
+- Add products to cart
+- Update cart quantity
+- Remove products from cart
+- Wishlist management
+
+### Order Management
+- Checkout system
+- Place orders
+- View order history
+- View order details
+- Order confirmation emails
+- Shipping notification emails
+
+### Profile Management
+- View profile
+- Update profile details
+- Upload profile image
+
+### Feedback & Contact
+- Submit feedback
+- Contact support
+- Feedback thank you email
+
 
 ---
 
-# 🛠 Tech Stack
+# 🏪 Seller Module
 
-### Frontend
+A separate seller panel is implemented for managing store operations.
+
+
+## Seller Authentication
+
+- Seller registration
+- Seller login
+- Seller logout
+- JWT protected seller routes
+- Seller forgot password
+- Seller password reset through email
+
+
+## Seller Dashboard
+
+Seller can:
+
+- View total users
+- View total products
+- View total orders
+- Track revenue
+- View recent orders
+
+
+## Product Management
+
+Seller can:
+
+- Add new products
+- Upload product images
+- Edit products
+- Manage product stock
+- Delete products
+
+
+## Order Management
+
+Seller can:
+
+- View customer orders
+- Check order details
+- Update order status
+- Manage shipping process
+
+
+## Seller Profile
+
+- View seller profile
+- Update seller information
+- Manage store details
+
+
+---
+
+# 📧 Email Services
+
+Email functionality is implemented using **Nodemailer**.
+
+
+Available emails:
+
+✅ Welcome email after registration
+
+✅ Password reset email
+
+✅ Order confirmation email
+
+✅ Order shipped notification
+
+✅ Feedback thank you email
+
+
+---
+
+# 🛠️ Technologies Used
+
+
+## Frontend
+
 - HTML5
 - CSS3
 - Bootstrap 5
-- EJS
+- JavaScript
+- EJS Template Engine
 
-### Backend
+
+## Backend
+
 - Node.js
 - Express.js
 
-### Database
+
+## Database
+
 - MongoDB
 
-### Authentication
+
+## Authentication
+
 - JWT
+- Cookies
 - bcrypt
 
-### API Testing
-- Swagger
+
+## Packages
+
+- Nodemailer
+- Multer
+- dotenv
+- express-ejs-layouts
+- cookie-parser
+- cors
+
 
 ---
 
-# 📁 Project Structure
+# 📂 Project Structure
+
 
 ```
-shoehub
+ShoeHub
 │
 ├── src
+│   │
 │   ├── config
-│   ├── controllers
+│   │   ├── emailService.js
+│   │   ├── mailer.js
+│   │   └── mongoDb.js
+│   │
+│   ├── errorFile
+│   │   └── applicationError.js
+│   │
+│   ├── features
+│   │   │
+│   │   ├── users
+│   │   │
+│   │   ├── product
+│   │   │
+│   │   ├── productDetails
+│   │   │
+│   │   ├── cart
+│   │   │
+│   │   ├── order
+│   │   │
+│   │   ├── wishlist
+│   │   │
+│   │   ├── contact
+│   │   │
+│   │   ├── profile
+│   │   │
+│   │   └── seller
+│   │       │
+│   │       ├── user
+│   │       ├── product
+│   │       ├── order
+│   │       ├── profile
+│   │       └── feedback
+│   │
 │   ├── middlewares
-│   ├── models
-│   ├── repositories
-│   ├── routes
+│   │   ├── jwtAuthMiddleware.js
+│   │   ├── sellerAuthMiddleware.js
+│   │   ├── fileUploadsMiddleware.js
+│   │   └── validationMiddleware.js
+│   │
 │   ├── views
+│   │   │
+│   │   ├── layouts
+│   │   ├── partials
+│   │   ├── seller
+│   │   └── user pages
+│   │
 │   ├── public
+│   │
+│   ├── app.js
 │   └── server.js
 │
 ├── uploads
+│
 ├── swagger.json
 ├── package.json
+├── .env
+├── .gitignore
 └── README.md
+
 ```
+
 
 ---
 
 # ⚙️ Installation
 
-Clone the repository
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/Kashish-web09/ShoeHub.git
 ```
 
-Go to project folder
+
+## Navigate Into Project
 
 ```bash
 cd ShoeHub
 ```
 
-Install dependencies
+
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
-Create a `.env` file
+
+---
+
+# 🔐 Environment Variables
+
+
+Create a `.env` file in the root folder.
+
+
+Example:
+
 
 ```env
 PORT=4090
-MONGODB_URL=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+
+MONGO_URL=your_mongodb_connection_string
+
+JWT_SECRETKEY=your_secret_key
+
+
+EMAIL=your_email@gmail.com
+
+EMAIL_PASSWORD=your_email_password
 ```
 
-Run the application
+
+---
+
+# ▶️ Run Project
+
+
+Start server:
+
 
 ```bash
 npm start
 ```
 
-Server will run on
+
+Application will run on:
+
 
 ```
 http://localhost:4090
 ```
 
+
 ---
 
-# 📚 API Documentation
+# 🌐 Application Routes
 
-Swagger documentation is available using:
+
+## User Routes
 
 ```
-http://localhost:4090/api-docs
+/api/users
 ```
 
----
+Includes:
 
-# 📦 Main Modules
+- Register
+- Login
+- Forgot Password
+- Reset Password
 
-- Authentication
-- Product Management
-- Seller Dashboard
-- Cart
-- Wishlist
-- Orders
-- User Profile
-- Image Upload
-- JWT Authentication
 
 ---
 
-# 🔒 Security
+## Product Routes
 
-- Password Hashing using bcrypt
-- JWT Authentication
-- Protected Routes
-- Input Validation
+```
+/api/products
+```
 
----
+Includes:
 
-# 🌱 Future Improvements
+- Product listing
+- Product details
+- Product operations
 
-- Online Payment Gateway (Stripe/Razorpay)
-- Product Reviews & Ratings
-- Coupon System
-- Email Notifications
-- Admin Dashboard
-- Sales Analytics
-- Product Recommendations
 
 ---
 
-# 👨‍💻 Author
+## Cart Routes
+
+```
+/api/cart
+```
+
+Includes:
+
+- Add cart item
+- Update cart
+- Remove cart item
+
+
+---
+
+## Wishlist Routes
+
+```
+/api/wishlist
+```
+
+
+Includes:
+
+- Add wishlist item
+- Remove wishlist item
+
+
+---
+
+## Order Routes
+
+```
+/api/orders
+```
+
+
+Includes:
+
+- Checkout
+- Place order
+- Order history
+
+
+---
+
+## Seller Routes
+
+```
+/api/seller
+```
+
+
+Includes:
+
+- Seller login
+- Seller registration
+- Seller dashboard
+- Seller password reset
+
+
+---
+
+# 🔒 Security Features
+
+
+- Password hashing with bcrypt
+- JWT authentication
+- Protected routes
+- Secure cookies
+- Environment variable configuration
+- Input validation
+- Role based seller authentication
+
+
+---
+
+# 🖼️ File Upload
+
+
+Images are uploaded using:
+
+```
+Multer
+```
+
+
+Stored inside:
+
+
+```
+uploads/
+```
+
+
+Used for:
+
+- Product images
+- Seller profile images
+- User profile images
+
+
+---
+
+# 🗄️ Database Collections
+
+
+MongoDB collections:
+
+
+```
+users
+
+sellerAcc
+
+products
+
+cart
+
+orders
+
+wishlist
+
+feedback
+
+contact
+```
+
+
+---
+
+# 📸 Screenshots
+
+(Add your project screenshots here)
+
+
+---
+
+# 🚀 Future Improvements
+
+
+- Payment gateway integration
+- Admin dashboard
+- Product reviews and ratings
+- Advanced analytics
+- Deployment on cloud
+- Product recommendation system
+
+
+---
+
+# 👨‍💻 Developer
+
 
 **Kashish Narang**
 
-- GitHub: https://github.com/Kashish-web09
+Full Stack Developer
+
+
+Project:
+
+**ShoeHub E-Commerce Platform**
+
 
 ---
 
-# ⭐ Support
+# 📄 License
 
-If you like this project, consider giving it a ⭐ on GitHub!
+
+This project is developed for learning and portfolio purposes.
