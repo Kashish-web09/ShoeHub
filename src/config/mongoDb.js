@@ -16,8 +16,8 @@ export const connectDb = async () => {
     }
     const createIndex=async(db)=>{
         try {
-            await db.collection("products").createIndex({name:1,price:-1});
-            await db.collection("products").createIndex({category:"text"});
+            await db.collection("product").createIndex({name:1,price:-1});
+            await db.collection("product").createIndex({category:"text"});
         } catch (error) {
             console.log(error)
         }
