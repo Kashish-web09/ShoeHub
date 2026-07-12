@@ -30,9 +30,9 @@ export default class userController{
             await this.userRepository.signUp(newUser);
             await sendWelcomeEmail(newUser.email,newUser.name)
           return  res.redirect('/login');
-        } catch (error) {
+        } catch (err) {
 
-            next( new ApplicationError("Somthing went wrong with the database",500));
+next(err)
         }
     }
     
@@ -69,10 +69,9 @@ export default class userController{
                     });
                     res.redirect('/')
 
-        } catch (error) {
+        } catch (err) {
 
-            next( new ApplicationError("Somthing went wrong with the database",500));
-        }
+next(err)        }
         
     }
 async signIn(req, res, next) {
