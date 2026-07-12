@@ -1,24 +1,19 @@
 import { MongoClient } from "mongodb";
 
 let client;
+
 export const connectDb = async () => {
-    try {
-        console.log("DB_URL:", process.env.DB_URL); // <-- Add this
-        client = await MongoClient.connect(process.env.DB_URL);
-        console.log("MongoDB connected");
-        createIndex(client.db());
-    } catch (error) {
-        console.log(error);
+    console.log("DB_URL:", process.env.DB_URL);
+
+    client = await MongoClient.connect(process.env.DB_URL);
+
+    console.log("MongoDB connected");
+
+};
+
+export const getDb = () => {
+    if (!client) {
+        throw new Error("Database is not connected.");
     }
-}
- export const getDb=()=>{
-        return client.db();
-    }
-    const createIndex=async(db)=>{
-        try {
-            await db.collection("product").createIndex({name:1,price:-1});
-            await db.collection("product").createIndex({category:"text"});
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    return client.db();
+};
