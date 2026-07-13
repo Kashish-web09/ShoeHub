@@ -4,12 +4,12 @@ dotenv.config();
 import nodemailer from "nodemailer";
 
 const transport = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp-relay.brevo.com",
     port: 587,
     secure:false,
     auth:{
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD
+        user: process.env.BREVO_EMAIL,
+        pass: process.env.BREVO_SMTP_KEY
     }
 });
 transport.verify((err, success) => {
@@ -21,3 +21,4 @@ transport.verify((err, success) => {
 });
 
 export default transport;
+

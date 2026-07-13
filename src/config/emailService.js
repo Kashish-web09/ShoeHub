@@ -4,7 +4,7 @@ import transport from "./mailer.js";
 
 const sellerResetLink = `${process.env.BASE_URL}/api/seller/resetPass/${token}`;
     await transport.sendMail({
-        from: process.env.EMAIL,
+        from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
         to: email,
         subject: "Reset Password",
         html: `
@@ -23,7 +23,7 @@ export async function sendResetEmail(email, token) {
 
 const resetLink = `${process.env.BASE_URL}/api/users/resetPass/${token}`;
     await transport.sendMail({
-        from: process.env.EMAIL,
+        from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
         to: email,
         subject: "Reset Password",
         html: `
@@ -38,7 +38,7 @@ const resetLink = `${process.env.BASE_URL}/api/users/resetPass/${token}`;
 }
 export async function sendFeedbackThankyou(email,name){
 await transport.sendMail({
-    from:process.env.EMAIL,
+from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
     to:email,
     subject:"Thank you for your feedback",
     html:`
@@ -63,7 +63,7 @@ await transport.sendMail({
 }
 export async function sendOrderConfirmation(email,orderId){
 await transport.sendMail({
-    from:process.env.EMAIL,
+        from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
     to:email,
     subject: `Order #${orderId} Confirmed`,
     html:`
@@ -93,7 +93,7 @@ await transport.sendMail({
 }
 export async function sendOrderShipped(email,orderId){
     await transport.sendMail({
-        from:process.env.EMAIL,
+        from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
     to:email,
     subject: `Order #${orderId}  has been shipped`,
     html:`
@@ -124,7 +124,7 @@ export async function sendOrderShipped(email,orderId){
 }
 export async function sendWelcomeEmail(email, name) {
     await transport.sendMail({
-        from:process.env.EMAIL,
+        from: `"ShoeHub" <${process.env.BREVO_EMAIL}>`,
     to:email,
     subject: `Welcome to ShoeHub ${name}!`,
     html:`
