@@ -153,6 +153,7 @@ export async function sendOrderShipped(email,orderId){
 
 export async function sendWelcomeEmail(email, name) {
     try {
+        console.log("before sendMail")
         const info = await transport.sendMail({
             from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
             to: email,

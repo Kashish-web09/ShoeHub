@@ -10,7 +10,10 @@ const transport = nodemailer.createTransport({
     auth:{
         user: process.env.BREVO_EMAIL,
         pass: process.env.BREVO_SMTP_KEY
-    }
+    },
+    connectionTimeout:10000,
+    greetingTimeout:10000,
+    socketTimeout:10000
 });
 transport.verify((err, success) => {
     if (err) {

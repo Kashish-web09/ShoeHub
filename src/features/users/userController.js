@@ -28,8 +28,13 @@ export default class userController{
                 hashpasword
             );
             await this.userRepository.signUp(newUser);
-            await sendWelcomeEmail(newUser.email,newUser.name)
-          return  res.redirect('/login');
+try{
+                await sendWelcomeEmail(newUser.email,newUser.name)
+
+}   catch(err){
+console.log(err,"EMail")
+}
+       return  res.redirect('/login');
         } catch (err) {
 
 next(err)
