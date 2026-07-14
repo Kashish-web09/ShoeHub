@@ -37,9 +37,14 @@
                                     class="form-control"
                                     name="email"
                                     placeholder="seller@email.com"
-                                    required>
+                                    >
 
                             </div>
+    <% if (errors?.email) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.email.msg %>
+        </div>
+    <% } %>
 
                         </div>
 
@@ -61,10 +66,14 @@
                                     class="form-control"
                                     name="password"
                                     placeholder="Enter password"
-                                    required>
+                                    >
 
                             </div>
-
+ <% if (errors?.password) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.password.msg %>
+        </div>
+    <% } %>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center mb-4">

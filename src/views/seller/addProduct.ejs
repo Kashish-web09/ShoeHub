@@ -41,11 +41,15 @@
 
                         <input
                             type="text"
-                            class="form-control"
+    class="form-control <%= errors?.name ? 'is-invalid' : '' %>"
                             name="name"
                             placeholder="Nike Air Max 270"
-                            required>
-                    </div>
+                            >
+<% if (errors?.name) { %>
+<div class="invalid-feedback">
+    <%= errors.name.msg %>
+</div>
+<% } %>                    </div>
 
                     <!-- Brand -->
                     <div class="col-md-6 mb-3">
@@ -55,10 +59,15 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control <%= errors?.brand ? 'is-invalid': ' ' %>"
                             name="brand"
                             placeholder="Nike"
-                            required>
+                            >
+                            <% if(errors?.brand){ %>
+<div class="invalid-feedback">
+    <%= errors.brand.msg %>
+</div>
+<% } %>
                     </div>
 
                     <!-- Category -->
@@ -69,9 +78,9 @@
                         </label>
 
                         <select
-                            class="form-select"
+                            class="form-select <%= errors?.category ? 'is-invalid': ' ' %>"
                             name="category"
-                            required>
+                            >
 
                             <option value="">Select Category</option>
                             <option>Running</option>
@@ -83,6 +92,11 @@
                             <option>Sandals</option>
 
                         </select>
+                        <% if(errors?.category){ %>
+<div class="invalid-feedback">
+    <%= errors.category.msg %>
+</div>
+<% } %>
 
                     </div>
    <div class="col-md-6 mb-3">
@@ -92,16 +106,20 @@
                         </label>
 
                         <select
-                            class="form-select"
+                            class="form-select <%= errors?.gender ? 'is-invalid': ' ' %>"
                             name="gender"
-                            required>
+                            >
 
                             <option value="">Select Gender</option>
                             <option>Mens</option>
                             <option>Womens</option>
 
                         </select>
-
+<% if(errors?.gender){ %>
+<div class="invalid-feedback">
+    <%= errors.gender.msg %>
+</div>
+<% } %>
                     </div>
                     <!-- Price -->
                     <div class="col-md-6 mb-3">
@@ -112,12 +130,16 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control <%= errors?.price ? 'is-invalid': ' ' %>"
                             name="price"
                             min="1"
                             placeholder="2999"
-                            required>
-
+                            >
+<% if(errors?.price){ %>
+<div class="invalid-feedback">
+    <%= errors.price.msg %>
+</div>
+<% } %>
                     </div>
 
                     <!-- Stock -->
@@ -129,12 +151,16 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control <%= errors?.stock ? 'is-invalid': ' ' %>"
                             name="stock"
                             min="1"
                             placeholder="50"
-                            required>
-
+                            >
+<% if(errors?.stock){ %>
+<div class="invalid-feedback">
+    <%= errors.stock.msg %>
+</div>
+<% } %>
                     </div>
 
                     <!-- Colors -->
@@ -146,10 +172,14 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control <%= errors?.color ? 'is-invalid': ' ' %>"
                             name="color"
                             placeholder="Black, White, Blue">
-
+<% if(errors?.color){ %>
+<div class="invalid-feedback">
+    <%= errors.color.msg %>
+</div>
+<% } %>
                         <small class="text-muted">
                             Separate multiple colors using commas.
                         </small>
@@ -165,10 +195,14 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control <%= errors?.size ? 'is-invalid': ' ' %>"
                             name="size"
                             placeholder="6,7,8,9,10">
-
+<% if(errors?.size){ %>
+<div class="invalid-feedback">
+    <%= errors.size.msg %>
+</div>
+<% } %>
                         <small class="text-muted">
                             Separate multiple sizes using commas.
                         </small>
@@ -184,11 +218,15 @@
 
                         <input
                             type="file"
-                            class="form-control"
+                            class="form-control <%= errors?.image ? 'is-invalid': ' ' %>"
                             name="images"
                             multiple
                             accept="image/*">
-
+<% if(errors?.thumbnail){ %>
+<div class="invalid-feedback d-block">
+    <%= errors.thumbnail.msg %>
+</div>
+<% } %>
                     </div>
 
                     <!-- Thumbnail -->
@@ -216,11 +254,16 @@
                         </label>
 
                         <textarea
-                            class="form-control"
+                            class="form-control <%= errors?.desc ? 'is-invalid': ' ' %>"
                             rows="5"
                             name="desc"
                             placeholder="Write complete product description..."
-                            required></textarea>
+                            ></textarea>
+                            <% if(errors?.desc){ %>
+<div class="invalid-feedback">
+    <%= errors.desc.msg %>
+</div>
+<% } %>
 
                     </div>
 
@@ -230,7 +273,7 @@
                         <div class="form-check form-switch">
 
                             <input
-                                class="form-check-input"
+                                class="form-check-input "
                                 type="checkbox"
                                 name="isBestSeller"
                                 value="true">

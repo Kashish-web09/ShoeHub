@@ -15,6 +15,18 @@ export default class feedbackRepo{
             throw new ApplicationError("Something wrong with db",500)
         }
     }
+    async getFeedbackById(id){
+try{
+                                                const db=getDb();
+            const collection=db.collection(this.collection);
+return await collection.findOne(
+    {_id:new ObjectId(id)}
+)
+}catch(err){
+                        throw new ApplicationError("Something wrong with db",500)
+
+}
+    }
     async updateStatus(feedbackId,status){
         try {
                                     const db=getDb();

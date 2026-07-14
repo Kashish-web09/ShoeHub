@@ -9,6 +9,7 @@ export default class SellerProductController{
 try{
     res.render('seller/addProduct',{
     title:"Add Product",
+    errors:{}
     
 })
 } catch(err){
@@ -83,7 +84,8 @@ try {
     const product=await this.SellerProductRepo.getProductById(productId,sellerId);
     res.render("seller/editProduct",{
         title:"Edit Product",
-        product
+        product,
+
     })
 } catch (err) {
     next(err)

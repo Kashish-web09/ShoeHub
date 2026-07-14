@@ -30,21 +30,25 @@
                         <!-- Form -->
                         <form action="/api/users/forgotPass" method="POST">
 
-                            <div class="mb-4">
+<div class="mb-4">
+    <label class="form-label">
+        Email Address
+    </label>
 
-                                <label class="form-label">
-                                    Email Address
-                                </label>
 
-                                <input
-                                    type="email"
-                                    name="email"
-                                    class="form-control form-control-lg"
-                                    placeholder="Enter your email"
-                                    required
-                                >
+        <input
+            type="email"
+            name="email"
+            class="form-control <%= errors?.email ? 'is-invalid' : '' %>"
+            placeholder="email@example.com">
 
-                            </div>
+
+    <% if (errors?.email) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.email.msg %>
+        </div>
+    <% } %>
+</div>
 
                             <div class="d-grid">
 

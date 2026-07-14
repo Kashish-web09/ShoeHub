@@ -1,5 +1,4 @@
 import express from 'express';
-import { validationProductRequest } from '../../middlewares/validationMiddleware.js';
 import { upload } from '../../middlewares/fileUploadsMiddleware.js';
 import  productController  from './productController.js';
 
@@ -8,7 +7,7 @@ const productsController=new productController();
 
 productRoutes.post('/',
     upload.single('image'),
-    validationProductRequest,
+    
     (req,res,next)=>{
         productsController.addProduct(req,res,next)
     }

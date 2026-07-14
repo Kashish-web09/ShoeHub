@@ -49,8 +49,13 @@
                                         name="email"
                                         class="form-control form-control-lg"
                                         placeholder="seller@example.com"
-                                        required
+                                        
                                     >
+    <% if (errors?.email) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.email.msg %>
+        </div>
+    <% } %>
 
                                 </div>
 

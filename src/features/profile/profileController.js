@@ -8,6 +8,7 @@ export default class profileController{
     async getUserProfilePage(req,res,next){
 try{
     const userId=req.userId;
+
     const user=await this.profileRepo.getUserProfile(userId);
     return res.render("userProfile",{
     title:"User Profile Page",

@@ -133,8 +133,14 @@
                                     class="form-control"
                                     name="name"
                                     placeholder="Enter your name"
-                                    required
+                                    
                                 >
+                                    <% if (errors?.name) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.name.msg %>
+        </div>
+    <% } %>
+
 
                             </div>
 
@@ -149,8 +155,14 @@
                                     class="form-control"
                                     name="email"
                                     placeholder="Enter your email"
-                                    required
+                                    
                                 >
+                                    <% if (errors?.email) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.email.msg %>
+        </div>
+    <% } %>
+
 
                             </div>
 
@@ -165,8 +177,13 @@
                                     rows="6"
                                     name="message"
                                     placeholder="Write your message..."
-                                    required
+                                    
                                 ></textarea>
+    <% if (errors?.message) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.message.msg %>
+        </div>
+    <% } %>
 
                             </div>
 

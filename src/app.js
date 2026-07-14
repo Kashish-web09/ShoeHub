@@ -83,14 +83,16 @@ app.get('/',(req,res,next)=>{
     productsController.home(req,res,next)
 })
 
-app.get('/register',(req,res)=>{
-    res.render('register',{
-        title:'Register'
+app.get("/register", (req, res) => {
+    res.render("register", {
+        errors: {}
     });
 });
-app.get('/login',(req,res)=>{
-    res.render('login')
-})
+app.get("/login", (req, res) => {
+    res.render("login", {
+        errors: {}
+    });
+});
 app.get('/cart', (req, res, next) => {
     cartItemController.getItem(req, res, next);
 });

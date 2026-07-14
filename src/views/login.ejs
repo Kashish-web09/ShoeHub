@@ -46,48 +46,55 @@
                         >
 
                             <!-- Email -->
+<div class="mb-3">
+    <label class="form-label fw-semibold">
+        Email Address
+    </label>
 
-                            <div class="mb-3">
+    <div class="input-group">
+        <span class="input-group-text">
+            <i class="fa-solid fa-envelope"></i>
+        </span>
 
-                                <label
-                                    for="email"
-                                    class="form-label fw-semibold"
-                                >
-                                    Email Address
-                                </label>
+        <input
+            type="email"
+            name="email"
+            class="form-control <%= errors?.email ? 'is-invalid' : '' %>"
+            placeholder="email@example.com">
 
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    class="form-control form-control-lg"
-                                    placeholder="email@example.com"
-                                    required
-                                >
+    </div>
 
-                            </div>
-
+    <% if (errors?.email) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.email.msg %>
+        </div>
+    <% } %>
+</div>
                             <!-- Password -->
 
-                            <div class="mb-2">
+<div class="mb-3">
+    <label class="form-label fw-semibold">
+        Password
+    </label>
 
-                                <label
-                                    for="password"
-                                    class="form-label fw-semibold"
-                                >
-                                    Password
-                                </label>
+    <div class="input-group">
+        <span class="input-group-text">
+            <i class="fa-solid fa-lock"></i>
+        </span>
 
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-control form-control-lg"
-                                    placeholder="Enter your password"
-                                    required
-                                >
+        <input
+            type="password"
+            name="password"
+            class="form-control <%= errors?.password ? 'is-invalid' : '' %>"
+            placeholder="Enter your password">
+    </div>
 
-                            </div>
+    <% if (errors?.password) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.password.msg %>
+        </div>
+    <% } %>
+</div>
 
                             <!-- Forgot Password -->
 

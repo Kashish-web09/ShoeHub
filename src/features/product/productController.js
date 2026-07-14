@@ -115,7 +115,6 @@ next(err)
                 bestSeller
             })
         } catch (err) {
-            console.log(err)
             next(err)
         }
     }

@@ -2,6 +2,8 @@ import express from "express";
 import sellerUserController from "./sellerUserController.js";
 import { sellerAuth } from "../../../middlewares/sellerAuthMiddleware.js";
 import { upload } from "../../../middlewares/fileUploadsMiddleware.js";
+import { validate } from "../../../middlewares/validationMiddleware.js";
+import { forgotPassRules, loginRules, registerRule, resetPassRules } from "./sellerUserValidation.js";
 
 const sellerUserRoutes = express.Router();
 
@@ -25,7 +27,7 @@ sellerUserRoutes.get("/register", (req, res, next) => {
 
 
 // Login Submit
-sellerUserRoutes.post("/login", (req, res, next) => {
+sellerUserRoutes.post("/login",validate(loginRules,"seller/login"), (req, res, next) => {
     SellerController.postLogin(req, res, next);
 });
 
@@ -33,7 +35,9 @@ sellerUserRoutes.post("/login", (req, res, next) => {
 // Register Submit
 sellerUserRoutes.post(
     "/register",
-    upload.single("profileImage"),
+        upload.single("profileImage"),
+
+    validate(registerRule,"seller/register"),
     (req, res, next) => {
         SellerController.postRegister(req, res, next);
     }
@@ -54,12 +58,13 @@ sellerUserRoutes.get("/logout", (req, res, next) => {
 
 // Seller Forgot Password Page
 sellerUserRoutes.get("/forgotPass", (req, res) => {
-    res.render("seller/forgotPass");
+    res.render("seller/forgotPass", {
+        errors: {}
+    });
 });
 
-
 // Send Reset Email
-sellerUserRoutes.post("/forgotPass", (req, res, next) => {
+sellerUserRoutes.post("/forgotPass",validate(forgotPassRules,"seller/forgotPass"), (req, res, next) => {
     SellerController.forgotPass(req, res, next);
 });
 
@@ -73,17 +78,15 @@ sellerUserRoutes.post("/forgotPass", (req, res, next) => {
 // Seller Reset Password Page
 sellerUserRoutes.get("/resetPass/:token", (req, res) => {
 
-    console.log("Seller Reset Page");
-
     res.render("seller/resetPass", {
-        token: req.params.token
+        token: req.params.token,
+        errors: {}
     });
 
 });
 
-
 // Update Password
-sellerUserRoutes.post("/resetPass/:token", (req, res, next) => {
+sellerUserRoutes.post("/resetPass/:token",validate(resetPassRules,"seller/resetPass"), (req, res, next) => {
     SellerController.resetPass(req, res, next);
 });
 

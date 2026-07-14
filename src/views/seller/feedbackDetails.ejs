@@ -1,0 +1,194 @@
+<div class="container-fluid py-4">
+
+    <!-- Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold">
+            Feedback Details
+        </h2>
+
+        <p class="text-muted">
+            View customer feedback and send a reply.
+        </p>
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+
+                    <!-- Customer Info -->
+                    <h5 class="fw-bold mb-3">
+                        Customer Information
+                    </h5>
+
+
+                    <div class="mb-2">
+                        <strong>Name:</strong>
+                        <%= feedback.name %>
+                    </div>
+
+
+                    <div class="mb-2">
+                        <strong>Email:</strong>
+                        <%= feedback.email %>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <strong>Status:</strong>
+
+                        <% if(feedback.status === "Pending"){ %>
+
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+
+                        <% } else if(feedback.status === "Resolved"){ %>
+
+                            <span class="badge bg-success">
+                                Resolved
+                            </span>
+
+                        <% } else { %>
+
+                            <span class="badge bg-primary">
+                                <%= feedback.status %>
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+
+
+                    <hr>
+
+
+
+                    <!-- Customer Message -->
+
+                    <h5 class="fw-bold mb-3">
+                        Customer Message
+                    </h5>
+
+
+                    <div class="bg-light rounded p-3 mb-4">
+
+                        <%= feedback.message %>
+
+                    </div>
+
+
+
+                    <!-- Reply Form -->
+
+                    <h5 class="fw-bold mb-3">
+                        Send Reply
+                    </h5>
+
+
+<form 
+action="/api/seller/feedback/update-status/<%= feedback._id %>"
+method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Reply Message
+                            </label>
+
+
+                            <textarea
+                            name="message"
+                            rows="5"
+                            class="form-control"
+                            placeholder="Write your reply to customer..."
+                            required></textarea>
+
+
+                        </div>
+
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Update Status
+                            </label>
+
+
+                            <select
+                            name="status"
+                            class="form-select">
+
+
+                                <option value="Pending"
+                                <%= feedback.status==="Pending" ? "selected" : "" %>>
+                                    Pending
+                                </option>
+
+
+                                <option value="In Progress"
+                                <%= feedback.status==="In Progress" ? "selected" : "" %>>
+                                    In Progress
+                                </option>
+
+
+                                <option value="Resolved"
+                                <%= feedback.status==="Resolved" ? "selected" : "" %>>
+                                    Resolved
+                                </option>
+
+
+                            </select>
+
+                        </div>
+
+
+
+
+                        <div class="d-flex justify-content-between">
+
+
+                            <a href="/api/seller/feedback"
+                            class="btn btn-outline-secondary">
+
+                                Back
+
+                            </a>
+
+
+
+                            <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                                Send Reply
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>

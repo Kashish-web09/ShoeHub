@@ -47,8 +47,18 @@
                                         class="form-control"
                                         placeholder="Enter your full name"
                                         autocomplete="name"
-                                        required>
+                                        >
+<input
+    type="text"
+    name="name"
+    class="form-control"
+>
 
+<% if (errors && errors.name) { %>
+    <small class="text-danger">
+        <%= errors.name.msg %>
+    </small>
+<% } %>
                                 </div>
 
                             </div>
@@ -72,8 +82,18 @@
                                         class="form-control"
                                         placeholder="example@email.com"
                                         autocomplete="email"
-                                        required>
+                                        >
+<input
+    type="email"
+    name="email"
+    class="form-control"
+>
 
+<% if (errors && errors.email) { %>
+    <small class="text-danger">
+        <%= errors.email.msg %>
+    </small>
+<% } %>
                                 </div>
 
                             </div>
@@ -97,8 +117,18 @@
                                         class="form-control"
                                         placeholder="Create a password"
                                         autocomplete="new-password"
-                                        required>
+                                        >
+<input
+    type="password"
+    name="password"
+    class="form-control"
+>
 
+<% if (errors && errors.password) { %>
+    <small class="text-danger">
+        <%= errors.password.msg %>
+    </small>
+<% } %>
                                 </div>
 
                                 <small class="text-muted">
@@ -139,7 +169,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="terms"
-                                    required>
+                                    >
 
                                 <label
                                     class="form-check-label"

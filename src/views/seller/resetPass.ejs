@@ -63,11 +63,37 @@
                                         name="password"
                                         class="form-control form-control-lg"
                                         placeholder="Enter new password"
-                                        required
+                                        
                                     >
+    <% if (errors?.password) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.password.msg %>
+        </div>
+    <% } %>
 
 
                                 </div>
+                                <div class="mb-4">
+
+    <label class="form-label fw-semibold">
+        Confirm Password
+    </label>
+
+    <input
+        type="password"
+        name="confirmPassword"
+        class="form-control <%= errors?.confirmPassword ? 'is-invalid' : '' %>"
+        placeholder="Confirm your password"
+    >
+
+    <% if (errors?.confirmPassword) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.confirmPassword.msg %>
+        </div>
+    <% } %>
+
+</div>
+
 
 
                             </div>

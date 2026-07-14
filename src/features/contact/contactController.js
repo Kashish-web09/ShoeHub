@@ -8,7 +8,10 @@ this.contactRepository=new contactRepository();
     }
  async   showcontactPage(req,res,next){
 try {
-    res.render("contact")
+    res.render("contact",{
+        title:"Contact Page",
+        errors:{}
+    })
 } catch (err) {
     next(err)
 }

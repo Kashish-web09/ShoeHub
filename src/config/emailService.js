@@ -64,6 +64,14 @@ from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
     `
 })
 }
+export async function updateOnFeedback(email, message) {
+    await transport.sendMail({
+        from: `ShoeHub <${process.env.SENDER_EMAIL}>`,
+        to: email,
+        subject: "Feedback Reply",
+        html: `${message}`
+    });
+}
 export async function sendOrderConfirmation(email,orderId){
 await transport.sendMail({
         from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
@@ -125,44 +133,29 @@ export async function sendOrderShipped(email,orderId){
     })
 
 }
-// export async function sendWelcomeEmail(email, name) {
-//     await transport.sendMail({
-//         from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
-//     to:email,
-//     subject: `Welcome to ShoeHub ${name}!`,
-//     html:`
-//     <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; padding:20px; border:1px solid #ddd; border-radius:8px;">
-//             <h2 style="color:#0d6efd;">Welcome to ShoeHub 👟</h2>
-
-//             <p>Hi <strong>${name}</strong>,</p>
-
-//             <p>Thank you for creating an account with <strong>ShoeHub</strong>.</p>
-
-//             <p>We're excited to have you with us. Browse the latest collections, save your favorites, and enjoy a seamless shopping experience.</p>
-
-//             <hr>
-
-//             <p style="font-size:14px;color:#777;">
-//                 Happy Shopping!<br>
-//                 Team ShoeHub
-//             </p>
-//         </div>
-//     `
-//     })
-// }
-
 export async function sendWelcomeEmail(email, name) {
-    try {
-        console.log("before sendMail")
-        const info = await transport.sendMail({
-            from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
-            to: email,
-            subject: `Welcome to ShoeHub ${name}!`,
-            html: "<h1>Test</h1>"
-        });
+    await transport.sendMail({
+        from: `"ShoeHub" <${process.env.SENDER_EMAIL}>`,
+    to:email,
+    subject: `Welcome to ShoeHub ${name}!`,
+    html:`
+    <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; padding:20px; border:1px solid #ddd; border-radius:8px;">
+            <h2 style="color:#0d6efd;">Welcome to ShoeHub 👟</h2>
 
-        console.log("Email sent:", info);
-    } catch (err) {
-        console.error("Email failed:", err);
-    }
+            <p>Hi <strong>${name}</strong>,</p>
+
+            <p>Thank you for creating an account with <strong>ShoeHub</strong>.</p>
+
+            <p>We're excited to have you with us. Browse the latest collections, save your favorites, and enjoy a seamless shopping experience.</p>
+
+            <hr>
+
+            <p style="font-size:14px;color:#777;">
+                Happy Shopping!<br>
+                Team ShoeHub
+            </p>
+        </div>
+    `
+    })
 }
+

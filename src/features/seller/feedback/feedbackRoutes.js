@@ -10,7 +10,13 @@ feedbackRoutes.get('/',(req,res,next)=>{
 feedbackRoutes.get('/filter',(req,res,next)=>{
     FeedbackController.filterFeedback(req,res,next)
 })
+
 feedbackRoutes.post('/update-status/:id',(req,res,next)=>{
     FeedbackController.updateStatus(req,res,next)
 })
-export default feedbackRoutes;
+feedbackRoutes.get(
+    "/details/:id",
+    (req, res, next) => {
+        FeedbackController.getFeedbackDetails(req, res, next);
+    }
+);export default feedbackRoutes;

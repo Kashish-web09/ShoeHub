@@ -25,7 +25,7 @@ export default class sellerUserController {
         try {
           res.render('seller/login',{
             title:"Seller Login",
-            error:null
+            errors:{}
           })
         } catch (err) {
             next(err);
@@ -35,7 +35,8 @@ async getRegister(req,res,next){
     try {
         res.render('seller/register',{
             title:"Seller Register",
-            error:"User already exists"
+                        errors:{}
+
         })
     } catch (err) {
         next(err)

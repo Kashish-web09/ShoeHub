@@ -72,18 +72,11 @@
 
                         <input
                         type="text"
-                        class="form-control"
+    class="form-control"
                         name="name"
                         value="<%= product.name %>"
-                        required>
-
+                        >                            
                     </div>
-
-
-
-
-
-                    <!-- Brand -->
 
                     <div class="col-12 col-md-6">
 
@@ -94,19 +87,11 @@
 
                         <input
                         type="text"
-                        class="form-control"
+                            class="form-control"
                         name="brand"
                         value="<%= product.brand %>"
-                        required>
-
+                        >                            
                     </div>
-
-
-
-
-
-
-                    <!-- Category -->
 
                     <div class="col-12 col-md-6">
 
@@ -117,7 +102,7 @@
 
 
                         <select
-                        class="form-select"
+                            class="form-select"
                         name="category"
                         required>
 
@@ -158,16 +143,8 @@
 
 
                         </select>
-
-
+   
                     </div>
-
-
-
-
-
-
-                    <!-- Gender -->
 
                     <div class="col-12 col-md-6">
 
@@ -178,7 +155,7 @@
 
 
                         <select
-                        class="form-select"
+                            class="form-select"
                         name="gender"
                         required>
 
@@ -196,16 +173,8 @@
 
 
                         </select>
-
-
+    
                     </div>
-
-
-
-
-
-
-                    <!-- Price -->
 
                     <div class="col-12 col-md-6">
 
@@ -217,22 +186,12 @@
 
                         <input
                         type="number"
-                        class="form-control"
+                            class="form-control"
                         name="price"
                         min="1"
                         value="<%= product.price %>"
-                        required>
-
-
+                        >
                     </div>
-
-
-
-
-
-
-
-                    <!-- Stock -->
 
                     <div class="col-12 col-md-6">
 
@@ -244,22 +203,12 @@
 
                         <input
                         type="number"
-                        class="form-control"
+                            class="form-control"
                         name="stock"
                         min="0"
                         value="<%= product.stock %>"
-                        required>
-
-
-                    </div>
-
-
-
-
-
-
-
-                    <!-- Colors -->
+                        >
+                               </div>
 
                     <div class="col-12 col-md-6">
 
@@ -271,7 +220,7 @@
 
                         <input
                         type="text"
-                        class="form-control"
+                            class="form-control"
                         name="color"
                         value="<%= product.color %>">
 
@@ -279,17 +228,7 @@
                         <small class="text-muted">
                             Separate multiple colors using commas.
                         </small>
-
-
                     </div>
-
-
-
-
-
-
-
-                    <!-- Sizes -->
 
                     <div class="col-12 col-md-6">
 
@@ -301,7 +240,7 @@
 
                         <input
                         type="text"
-                        class="form-control"
+                            class="form-control"
                         name="size"
                         value="<%= product.size %>">
 
@@ -309,17 +248,9 @@
                         <small class="text-muted">
                             Separate multiple sizes using commas.
                         </small>
-
-
+                               
                     </div>
 
-
-
-
-
-
-
-                    <!-- Upload -->
 
                     <div class="col-12 col-md-6">
 
@@ -331,22 +262,13 @@
 
                         <input
                         type="file"
-                        class="form-control"
+                            class="form-control "
                         name="images"
                         multiple
                         accept="image/*">
 
 
                     </div>
-
-
-
-
-
-
-
-
-                    <!-- Current Image -->
 
 
                     <div class="col-12 col-md-6">
@@ -371,15 +293,6 @@
 
                     </div>
 
-
-
-
-
-
-
-
-                    <!-- Description -->
-
                     <div class="col-12">
 
 
@@ -389,23 +302,12 @@
 
 
                         <textarea
-                        class="form-control"
+                            class="form-control "
                         rows="5"
                         name="desc"
-                        required><%= product.desc %></textarea>
-
-
+                        ><%= product.desc %></textarea>
+                                                           
                     </div>
-
-
-
-
-
-
-
-
-
-                    <!-- Best Seller -->
 
 
                     <div class="col-12">

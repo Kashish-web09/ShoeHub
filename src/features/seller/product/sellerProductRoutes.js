@@ -1,7 +1,8 @@
 import express from 'express';
 import SellerProductController from './sellerProductController.js';
 import { upload } from '../../../middlewares/fileUploadsMiddleware.js';
-
+import { addProductRule } from './sellerProductValidation.js';
+import { validate } from '../../../middlewares/validationMiddleware.js';
 const sellerProductroutes=express.Router();
 const sellerController=new SellerProductController();
 
@@ -11,7 +12,7 @@ sellerProductroutes.get('/',(req,res,next)=>{
 sellerProductroutes.get('/add-product',(req,res,next)=>{
     sellerController.getAddProductPage(req,res,next);
 })
-sellerProductroutes.post('/add-product',upload.array("images",5)
+sellerProductroutes.post('/add-product',upload.array("images",5),validate(addProductRule,"seller/addProduct")
     ,(req,res,next)=>{
 sellerController.add(req,res,next)
 })

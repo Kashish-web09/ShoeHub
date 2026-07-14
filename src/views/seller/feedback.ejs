@@ -63,7 +63,6 @@
                     </option>
 
                 </select>
-
             </div>
 
             <div class="col-md-3 d-grid align-self-end">
@@ -286,73 +285,16 @@
 
 
 
-                            <td>
+<td>
 
+    <a href="/api/seller/feedback/details/<%= feedback._id %>"
+       class="btn btn-primary btn-sm">
 
+        View
 
-                                <form 
-                                action="/api/seller/feedback/update-status/<%= feedback._id %>"
-                                method="POST">
+    </a>
 
-
-                                    <div class="d-flex flex-column flex-lg-row gap-2">
-
-
-
-                                        <select
-                                        name="status"
-                                        class="form-select">
-
-
-                                            <option
-                                            value="Pending"
-                                            <%= feedback.status==="Pending" ? "selected" : "" %>>
-                                                Pending
-                                            </option>
-
-
-
-                                            <option
-                                            value="In Progress"
-                                            <%= feedback.status==="In Progress" ? "selected" : "" %>>
-                                                In Progress
-                                            </option>
-
-
-
-                                            <option
-                                            value="Resolved"
-                                            <%= feedback.status==="Resolved" ? "selected" : "" %>>
-                                                Resolved
-                                            </option>
-
-
-                                        </select>
-
-
-
-
-
-                                        <button
-                                        class="btn btn-primary"
-                                        type="submit">
-
-
-                                            Update
-
-
-                                        </button>
-
-
-
-                                    </div>
-
-
-                                </form>
-
-
-                            </td>
-
+</td>
 
 
                         </tr>

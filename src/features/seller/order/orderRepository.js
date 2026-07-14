@@ -24,7 +24,6 @@ async getOrderById(orderId){
            { _id:new ObjectId(orderId)}
         )
     } catch (err) {
-        console.log(err)
         throw new ApplicationError("Something wrong with db",500)
     }
 

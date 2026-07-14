@@ -17,7 +17,6 @@ export const jwtAuth=(req,res,next)=>{
     }
 }
 export const setAuthUser=(req,res,next)=>{
-
     const token=req.cookies.customerToken;
     if(!token){
         res.locals.isLoggedIn=false;
@@ -28,7 +27,6 @@ export const setAuthUser=(req,res,next)=>{
             token,
             process.env.JWT_SECRETKEY
         );
-
         req.userId=payload.userId;
         res.locals.isLoggedIn=true;
         res.locals.email=payload.email;

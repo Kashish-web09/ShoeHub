@@ -32,7 +32,6 @@ try{
                 await sendWelcomeEmail(newUser.email,newUser.name)
 
 }   catch(err){
-console.log(err,"EMail")
 }
        return  res.redirect('/login');
         } catch (err) {
@@ -48,13 +47,17 @@ next(err)
             // check if user exist or not
             const user=await this.userRepository.findUser(email);
             if(!user){
-                            return res.status(404).render('login');
+                            return res.status(404).render('login',{
+                                errors:{msg:"Invalid email or password"}
+                            });
 
             }
             // compare the hash pass wth user password
             const isMatch=await bcrypt.compare(password,user.password);
             if(!isMatch){
-            return res.render('login')
+            return res.render('login',{
+                errors:{msg:"Invalid email or password"}
+            })
 
             }
             const token=jwt.sign(
@@ -129,9 +132,6 @@ async forgotPass(req,res,next){
     try {
         const {email}=req.body;
         const user=await this.userRepository.forgotPass(email);
-        if(!user){
-            return res.status(400).send("Email not register")
-        }
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
 await this.userRepository.saveResettoken(email,token,expiry)

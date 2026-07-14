@@ -33,37 +33,45 @@
                             method="POST"
                         >
 
-                            <div class="mb-3">
+<div class="mb-3">
+    <label class="form-label fw-semibold">
+        Password
+    </label>
 
-                                <label class="form-label fw-semibold">
-                                    New Password
-                                </label>
+  
 
-                                <input
-                                    type="password"
-                                    name="password"
-                                    class="form-control form-control-lg"
-                                    placeholder="Enter new password"
-                                    required
-                                >
+        <input
+            type="password"
+            name="password"
+            class="form-control <%= errors?.password ? 'is-invalid' : '' %>"
+            placeholder="Enter your password">
 
-                            </div>
+    <% if (errors?.password) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.password.msg %>
+        </div>
+    <% } %>
+</div>
+<div class="mb-4">
 
-                            <div class="mb-4">
+    <label class="form-label fw-semibold">
+        Confirm Password
+    </label>
 
-                                <label class="form-label fw-semibold">
-                                    Confirm Password
-                                </label>
+    <input
+        type="password"
+        name="confirmPassword"
+        class="form-control <%= errors?.confirmPassword ? 'is-invalid' : '' %>"
+        placeholder="Confirm your password"
+    >
 
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    class="form-control form-control-lg"
-                                    placeholder="Confirm your password"
-                                    required
-                                >
+    <% if (errors?.confirmPassword) { %>
+        <div class="invalid-feedback d-block">
+            <%= errors.confirmPassword.msg %>
+        </div>
+    <% } %>
 
-                            </div>
+</div>
 
                             <div class="d-grid">
 

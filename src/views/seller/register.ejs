@@ -135,7 +135,12 @@
                                 name="name"
                                 class="form-control"
                                 placeholder="John Doe"
-                                required>
+                                >
+<% if (errors && errors.name) { %>
+    <small class="text-danger">
+        <%= errors.name.msg %>
+    </small>
+<% } %>
 
 
                             </div>
@@ -178,7 +183,12 @@
                                 name="email"
                                 class="form-control"
                                 placeholder="example@email.com"
-                                required>
+                                >
+<% if (errors && errors.email) { %>
+    <small class="text-danger">
+        <%= errors.email.msg %>
+    </small>
+<% } %>
 
 
 
@@ -222,9 +232,13 @@
                                 name="phone"
                                 class="form-control"
                                 placeholder="+91 XXXXXXXXXX"
-                                required>
+                                >
 
-
+<% if (errors && errors.phone) { %>
+    <small class="text-danger">
+        <%= errors.phone.msg %>
+    </small>
+<% } %>
 
                             </div>
 
@@ -267,8 +281,12 @@
                                     type="password"
                                     name="password"
                                     class="form-control"
-                                    required>
-
+                                    >
+<% if (errors && errors.password) { %>
+    <small class="text-danger">
+        <%= errors.password.msg %>
+    </small>
+<% } %>
 
                                 </div>
 
@@ -302,8 +320,12 @@
                                     type="password"
                                     name="confirmPassword"
                                     class="form-control"
-                                    required>
-
+                                    >
+<% if (errors && errors.confirmPassword) { %>
+    <small class="text-danger">
+        <%= errors.confirmPassword.msg %>
+    </small>
+<% } %>
 
                                 </div>
 
@@ -360,8 +382,12 @@
                             name="storeName"
                             class="form-control"
                             placeholder="ABC Store"
-                            required>
-
+                            >
+<% if (errors && errors.storeName) { %>
+    <small class="text-danger">
+        <%= errors.storeName.msg %>
+    </small>
+<% } %>
 
                         </div>
 
@@ -387,7 +413,7 @@
                             <select
                             name="businessType"
                             class="form-select"
-                            required>
+                            >
 
 
                                 <option value="">
@@ -444,8 +470,12 @@
                             class="form-control"
                             rows="3"
                             name="address"
-                            required></textarea>
-
+                            ></textarea>
+<% if (errors && errors.address) { %>
+    <small class="text-danger">
+        <%= errors.address.msg %>
+    </small>
+<% } %>
 
                         </div>
 
@@ -473,8 +503,12 @@
                                 type="text"
                                 class="form-control"
                                 name="city"
-                                required>
-
+                                >
+<% if (errors && errors.city) { %>
+    <small class="text-danger">
+        <%= errors.city.msg %>
+    </small>
+<% } %>
                             </div>
 
 
@@ -493,7 +527,12 @@
                                 type="text"
                                 class="form-control"
                                 name="state"
-                                required>
+                                >
+                                <% if (errors && errors.state) { %>
+    <small class="text-danger">
+        <%= errors.state.msg %>
+    </small>
+<% } %>
 
 
                             </div>
@@ -515,8 +554,12 @@
                                 type="text"
                                 class="form-control"
                                 name="pincode"
-                                required>
-
+                                >
+<% if (errors && errors.pincode) { %>
+    <small class="text-danger">
+        <%= errors.pincode.msg %>
+    </small>
+<% } %>
 
                             </div>
 
