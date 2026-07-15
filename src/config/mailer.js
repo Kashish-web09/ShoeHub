@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import Brevo from "@getbrevo/brevo";
+import * as Brevo from "@getbrevo/brevo";
 
 
 const apiInstance = new Brevo.TransactionalEmailsApi();
@@ -13,21 +13,18 @@ apiInstance.setApiKey(
 );
 
 
-
 const transport = {
 
-    async sendMail(options){
+    async sendMail(options) {
 
         try {
 
             const email = new Brevo.SendSmtpEmail();
 
-
             email.sender = {
                 name: "ShoeHub",
                 email: process.env.SENDER_EMAIL
             };
-
 
             email.to = [
                 {
@@ -35,22 +32,17 @@ const transport = {
                 }
             ];
 
-
             email.subject = options.subject;
-
             email.htmlContent = options.html;
 
 
             const response = await apiInstance.sendTransacEmail(email);
 
-
             console.log("Email sent successfully");
-
 
             return response;
 
-
-        } catch(error){
+        } catch (error) {
 
             console.log(
                 "Brevo API Error:",
@@ -60,7 +52,6 @@ const transport = {
             throw error;
         }
     }
-
 };
 
 
