@@ -1,58 +1,27 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import * as Brevo from "@getbrevo/brevo";
+import nodemailer from "nodemailer";
 
-
-const apiInstance = new Brevo.TransactionalEmailsApi();
-
-
-apiInstance.setApiKey(
-    Brevo.TransactionalEmailsApiApiKeys.apiKey,
-    process.env.BREVO_API_KEY
-);
-
-
-const transport = {
-
-    async sendMail(options) {
-
-        try {
-
-            const email = new Brevo.SendSmtpEmail();
-
-            email.sender = {
-                name: "ShoeHub",
-                email: process.env.SENDER_EMAIL
-            };
-
-            email.to = [
-                {
-                    email: options.to
-                }
-            ];
-
-            email.subject = options.subject;
-            email.htmlContent = options.html;
-
-
-            const response = await apiInstance.sendTransacEmail(email);
-
-            console.log("Email sent successfully");
-
-            return response;
-
-        } catch (error) {
-
-            console.log(
-                "Brevo API Error:",
-                error.response?.body || error.message
-            );
-
-            throw error;
-        }
+const transport = nodemailer.createTransport({
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    secure:false,
+    auth:{
+        user: process.env.BREVO_EMAIL,
+        pass: process.env.BREVO_SMTP_KEY
+    },
+    connectionTimeout:10000,
+    greetingTimeout:10000,
+    socketTimeout:10000
+});
+transport.verify((err, success) => {
+    if (err) {
+        console.log("Mailer Error:", err);
+    } else {
+        console.log("Mailer ready");
     }
-};
-
+});
 
 export default transport;
+
