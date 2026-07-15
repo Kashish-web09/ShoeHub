@@ -73,7 +73,11 @@ async getOutOfStockProduct(sellerId){
 try {
                      const db=getDb();
     const collection=db.collection(this.collection);
-const products = await collection.find({stock:0}).toArray();
+const products = await collection.find({
+    stock:{$lte:0}
+}
+).toArray();
+console.log(products)
 
 return products;
 } catch (err) {

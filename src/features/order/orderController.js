@@ -61,8 +61,19 @@ const newOrder = new orderModels(
     paymentMethod === "Cash on Delivery" ? "Pending" : "Paid",
     "Placed"
 );
+// check stock
+for(let i of cartItem){
+  const product=  await this.productRepository.updateStock(i.product._id,i.quantity);
+  if(!product || product.stock<i.quantity){
+            return res.status(400).send(`${item.product.name} is out of stock.`);
 
-const order=await this.orderRepository.placeOrder(newOrder);
+  }
+}
+// reduce stock
+const order = await this.orderRepository.placeOrder(newOrder);
+for (const i of cartItem) {
+    await this.productRepository.updateStock(i.product._id, i.quantity);
+}
 await this.cartRepository.clearCart(userId)
 await sendOrderConfirmation(user.email,order.insertedId)
 return res.redirect('/api/orders')
@@ -153,20 +164,43 @@ async getOrders(req,res,next){
         next(err)
     }
 }
-    async cancelOrder(req,res,next){
-try {
-    const userId=req.userId;
-    const orderId=req.params.id;
-   const result= await this.orderRepository.cancelOrder(orderId,userId);
-   if(result.matchCount===0){
-    return res.status(404).send("Order not found")
-   }
-    return res.redirect('/api/orders')
-} catch (err) {
-    next(err)
-}
+async cancelOrder(req, res, next) {
+    try {
+        const userId = req.userId;
+        const orderId = req.params.id;
+
+        // Get order details first
+        const order = await this.orderRepository.getOrderById(orderId, userId);
+
+        if (!order) {
+            return res.status(404).send("Order not found");
+        }
+        if(order.orderStatus==="Cancelled"){
+                return res.status(400).send("Order is already cancelled.");
+
+        }
+
+        // Restore stock
+        for (const item of order.items) {
+            await this.productRepository.restoreStock(
+                item.productId,
+                item.quantity
+            );
+        }
+
+        // Cancel the order
+        const result = await this.orderRepository.cancelOrder(orderId, userId);
+
+        if (result.matchedCount === 0) {
+            return res.status(404).send("Order not found");
+        }
+
+        return res.redirect("/api/products");
+
+    } catch (err) {
+        next(err);
     }
-    async updateOrder(req,res,next){
+}    async updateOrder(req,res,next){
 try{
     const orderId=req.params.id;
 const {status}=req.body;

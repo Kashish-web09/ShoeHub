@@ -19,7 +19,7 @@ orderRoutes.get('/:id',(req,res,next)=>{
     OrderController.getOrder(req,res,next)
 })
 // Cancel Order
-orderRoutes.delete("/:id/cancel",(req,res,next)=>{
+orderRoutes.post("/:id/cancel",(req,res,next)=>{
     OrderController.cancelOrder(req,res,next);
 });
 

@@ -42,6 +42,41 @@ try {
 }
 
     }
+            async updateStock(productId,quantity){
+        try {
+                        const db=getDb();
+        const collection=db.collection(this.collection);
+return await collection.updateOne(
+    {_id:new ObjectId(productId)},
+    {
+        $inc:{
+            stock:-quantity
+        }
+    },
+    
+)
+        } catch (err) {
+                throw new ApplicationError("Something went wrong with the db",500)
+
+        }
+    }
+    async restoreStock(productId,quantity){
+                try {
+                        const db=getDb();
+        const collection=db.collection(this.collection);
+return await collection.updateOne(
+    {_id:new ObjectId(productId)},
+    {
+        $inc:{
+            stock:quantity
+        }
+    },
+)
+    }catch(err){
+                throw new ApplicationError("Something went wrong with the db",500)
+
+    }
+    }
     async filterProduct(name,brand,sort){
 try {
             const db=getDb();

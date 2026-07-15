@@ -7,7 +7,7 @@ import { body } from "express-validator";
         body("category").notEmpty().withMessage("Select the category"),
                 body("gender").notEmpty().withMessage("Select the gender"),
                 body("price").notEmpty().withMessage("Price is requires").isFloat({min:1}).withMessage("Price must be greater than 0"),
-                body("stock").notEmpty().withMessage("Stock is required").isInt({min:0}).withMessage("Stock must be a valid number"),
+                body("stock").notEmpty().withMessage("Stock is required"),
 body("color")
     .trim()
     .notEmpty()

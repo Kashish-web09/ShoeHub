@@ -117,22 +117,32 @@
 
                 <!-- Button -->
 
-                <div class="col-lg-2 text-lg-end">
+<!-- Buttons -->
 
-                    <a
-                        href="/api/orders/<%= order._id %>"
-                        class="btn btn-warning w-100"
-                    >
+<div class="col-lg-2 text-lg-end">
 
-                        <i class="bi bi-eye-fill me-1"></i>
+    <a
+        href="/api/orders/<%= order._id %>"
+        class="btn btn-warning w-100 mb-2"
+    >
+        <i class="bi bi-eye-fill me-1"></i>
+        View Details
+    </a>
 
-                        View Details
+    <% if(order.orderStatus === "Placed" || order.orderStatus === "Processing"){ %>
 
-                    </a>
+        <form action="/api/orders/<%= order._id %>/cancel" method="POST">
+            <button
+                type="submit"
+                class="btn btn-danger w-100"
+                >
+                Cancel Order
+            </button>
+        </form>
 
-                </div>
+    <% } %>
 
-            </div>
+</div>            </div>
 
         </div>
 
