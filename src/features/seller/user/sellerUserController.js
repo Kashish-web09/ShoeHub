@@ -108,8 +108,9 @@ if(exisitingSeller){
             const hashedPassword=await bcrypt.hash(password,12);
                const newSeller=new sellerUserModels(name,email,phone,hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage);
          await this.sellerUserRepository.register(newSeller);
-         await sendWelcomeEmail(newSeller.email,newSeller.name)
           res.redirect('/api/seller/login')
+                   await sendWelcomeEmail(newSeller.email,newSeller.name)
+
     } catch (err) {
         next(err)
     }
@@ -133,8 +134,9 @@ async forgotPass(req,res,next){
         const token=crypto.randomBytes(32).toString("hex");
         const expiry=new Date(Date.now()+60*60*1000);
         await this.sellerUserRepository.saveResetPass(email,token,expiry)
-        await sendSellerResetEmail(email,token);
                 return res.send("Password reset link has been sent to your email.");
+                        await sendSellerResetEmail(email,token);
+
 
     } catch (err) {
         next(err)

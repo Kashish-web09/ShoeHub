@@ -75,8 +75,9 @@ for (const i of cartItem) {
     await this.productRepository.updateStock(i.product._id, i.quantity);
 }
 await this.cartRepository.clearCart(userId)
-await sendOrderConfirmation(user.email,order.insertedId)
 return res.redirect('/api/orders')
+await sendOrderConfirmation(user.email,order.insertedId)
+
 } catch (err) {
             next(err)
         }
@@ -219,13 +220,14 @@ const result= await this.orderRepository.updateOrderStatus(orderId,status);
    if(result.matchCount===0){
     return res.status(404).send("Order not found")
    }
-   if(status==="Shipped"){
+ 
+
+res.redirect('/admin/orders')
+  if(status==="Shipped"){
     const order=await this.orderRepository.getOrderById(orderId);
     const user=await this.userRepository.getUserById(order.userId);
     await sendOrderShipped(user.email,order._id)
    }
-
-res.redirect('/admin/orders')
 }catch(err){
     next(err)
 }

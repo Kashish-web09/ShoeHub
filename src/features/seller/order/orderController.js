@@ -44,12 +44,13 @@ async updateOrderStatus(req,res,next){
         const orderId=req.params.id;
         const status=req.body.status;
         await this.sellerOrderRepo.updateOrderStatus(orderId,status);
-        if(status==="Shipped"){
+        return res.redirect("/api/seller/orders");
+                if(status==="Shipped"){
             const order=await this.sellerOrderRepo.getOrderById(orderId)
             const user=await this.userRepository.getUserById(order.userId);
             await sendOrderShipped(user.email,order._id)
         }
-        return res.redirect("/api/seller/orders");
+
     } catch (err) {
         next(err)
     }
