@@ -109,7 +109,7 @@ if(exisitingSeller){
                const newSeller=new sellerUserModels(name,email,phone,hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage);
          await this.sellerUserRepository.register(newSeller);
           res.redirect('/api/seller/login')
-                   await sendWelcomeEmail(newSeller.email,newSeller.name)
+                //    await sendWelcomeEmail(newSeller.email,newSeller.name)
 
     } catch (err) {
         next(err)
@@ -135,7 +135,7 @@ async forgotPass(req,res,next){
         const expiry=new Date(Date.now()+60*60*1000);
         await this.sellerUserRepository.saveResetPass(email,token,expiry)
                 return res.send("Password reset link has been sent to your email.");
-                        await sendSellerResetEmail(email,token);
+                        // await sendSellerResetEmail(email,token);
 
 
     } catch (err) {

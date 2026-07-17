@@ -29,7 +29,7 @@ export default class userController{
             );
             await this.userRepository.signUp(newUser);
                    return  res.redirect('/login');
-                await sendWelcomeEmail(newUser.email,newUser.name)
+                // await sendWelcomeEmail(newUser.email,newUser.name)
 
          } catch (err) {
 
@@ -133,7 +133,7 @@ async forgotPass(req,res,next){
 const expiry=new Date(Date.now()+60*60*1000);
 await this.userRepository.saveResettoken(email,token,expiry)
         return res.send("Password reset link has been sent to your email.");
-        await sendResetEmail(email,token)
+        // await sendResetEmail(email,token)
 
     } catch (err) {
         next(err)

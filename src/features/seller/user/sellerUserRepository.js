@@ -63,6 +63,7 @@ async resetPass(token, hashedPassword) {
         return result;
 
     } catch (err) {
+        
         throw new ApplicationError("Something wrong with db", 500);
     }
 }

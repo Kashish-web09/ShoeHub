@@ -26,7 +26,7 @@ try {
     );
     await this.contactRepository.submitContactForm(contact);
     res.redirect("/api/contact");
-        await sendFeedbackThankyou(contact.email,contact.name)
+        // await sendFeedbackThankyou(contact.email,contact.name)
 
 } catch (err) {
     next(err)

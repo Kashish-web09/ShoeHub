@@ -76,7 +76,7 @@ for (const i of cartItem) {
 }
 await this.cartRepository.clearCart(userId)
 return res.redirect('/api/orders')
-await sendOrderConfirmation(user.email,order.insertedId)
+// await sendOrderConfirmation(user.email,order.insertedId)
 
 } catch (err) {
             next(err)
@@ -226,7 +226,7 @@ res.redirect('/admin/orders')
   if(status==="Shipped"){
     const order=await this.orderRepository.getOrderById(orderId);
     const user=await this.userRepository.getUserById(order.userId);
-    await sendOrderShipped(user.email,order._id)
+    // await sendOrderShipped(user.email,order._id)
    }
 }catch(err){
     next(err)

@@ -30,10 +30,10 @@ async updateStatus(req,res,next){
 
         await this.feedbackRepo.updateStatus(feedbackId,status);
                 res.redirect('/api/seller/feedback')
-                        await updateOnFeedback(
-            feedback.email,
-            message || `Your feedback status is ${status}`
-        );
+        //                 await updateOnFeedback(
+        //     feedback.email,
+        //     message || `Your feedback status is ${status}`
+        // );
 
 
     } catch (err) {

@@ -48,7 +48,7 @@ async updateOrderStatus(req,res,next){
                 if(status==="Shipped"){
             const order=await this.sellerOrderRepo.getOrderById(orderId)
             const user=await this.userRepository.getUserById(order.userId);
-            await sendOrderShipped(user.email,order._id)
+            // await sendOrderShipped(user.email,order._id)
         }
 
     } catch (err) {
