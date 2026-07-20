@@ -30,7 +30,7 @@ import sellerOrderroutes from './features/seller/order/orderRoutes.js';
 import profileRoute from './features/seller/profile/profileRoutes.js';
 import userProfileRoute from './features/profile/profileRoute.js';
 import { title } from 'process';
-
+import logger from './config/logger.js';
 
 const cartItemController=new cartController();
 const productsController=new productController();
@@ -118,4 +118,5 @@ app.use((err,req,res,next)=>{
         isSeller:false
     })
 })
+
 export default app;

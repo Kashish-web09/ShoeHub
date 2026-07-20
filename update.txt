@@ -1,4 +1,18 @@
-Fix bugs
-update(star rating)
-update user profile.ejs page(when user not login get the login page instead of error)
-make UI friendly error pages
+today's taks-[
+make UI friendly error pages---done
+] done
+
+
+tommorrow taks-[
+    make swaager
+    make isLastVisit middleware using winston
+    learn razorpay and try to config
+]
+
+day after tommorrow taks will be -[
+    create indexing in mongoDB
+    config razorpay and leanr
+    learn how to bulk uplod functionallity be done
+]
+
+

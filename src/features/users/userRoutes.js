@@ -2,7 +2,7 @@ import express from 'express';
 import userController from './userController.js';
 import { validate } from '../../middlewares/validationMiddleware.js';
 import { forgotPassRules, loginRules, registerRule, resetPassRules } from './userValidation.js';
-
+import logger from '../../config/logger.js';
 const userRoutes = express.Router();
 
 const usersController = new userController();
@@ -12,14 +12,18 @@ userRoutes.post('/register',validate(registerRule,"register"), (req, res, next) 
 });
 
 userRoutes.post('/login',validate(loginRules,"login"), (req, res, next) => {
+
     usersController.signIn(req, res, next);
 });
 
 userRoutes.post('/login-browser',validate(loginRules,"login") ,(req, res, next) => {
+            logger.info("Login validation successfull")
+
     usersController.signInBrowser(req, res, next);
 });
 
 userRoutes.post('/resetPass/:token',validate(resetPassRules,"resetPass"), (req, res, next) => {
+    logger.info("Password reset successfully")
     usersController.resetPass(req, res, next);
 });
 userRoutes.get('/resetPass/:token', (req, res) => {
