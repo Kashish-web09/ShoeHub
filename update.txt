@@ -1,0 +1,4 @@
+Fix bugs
+update(star rating)
+update user profile.ejs page(when user not login get the login page instead of error)
+make UI friendly error pages

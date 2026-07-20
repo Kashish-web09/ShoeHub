@@ -29,6 +29,7 @@ import feedbackRoutes from './features/seller/feedback/feedbackRoutes.js';
 import sellerOrderroutes from './features/seller/order/orderRoutes.js';
 import profileRoute from './features/seller/profile/profileRoutes.js';
 import userProfileRoute from './features/profile/profileRoute.js';
+import { title } from 'process';
 
 
 const cartItemController=new cartController();
@@ -104,5 +105,17 @@ app.get('/orders',(req,res)=>{
 })
 app.get('/aboutus',(req,res)=>{
     res.render('aboutus')
+})
+app.use((req,res)=>{
+    res.status(404).render("errors/404",{
+        title:"Page not found",
+        isSeller:false
+    })
+})
+app.use((err,req,res,next)=>{
+    res.status(500).render("errors/500",{
+        title:"Server Error",
+        isSeller:false
+    })
 })
 export default app;

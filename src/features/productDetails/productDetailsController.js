@@ -16,7 +16,7 @@ try {
     const {productId}=req.params;
     const product=await this.productDetailRepo.getAllProducts(productId);
     return res.render("productDetails",{
-        title:"Product Details Page",
+        title:"Product Details",
         product
     })
 } catch (err) {
