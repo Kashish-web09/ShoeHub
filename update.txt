@@ -1,19 +1,7 @@
-today's taks-[
 make UI friendly error pages---done
-    make isLastVisit middleware using winston--(done for login and server) rest willl be tommorrow
-
-] done
-
-
-tommorrow taks-[
-    make swaager
-    learn razorpay and try to config
-]
-
-day after tommorrow taks will be -[
-    create indexing in mongoDB
-    config razorpay and leanr
-    learn how to bulk uplod functionallity be done
-]
-
-
+make isLastVisit middleware using winston-> done
+make swaager.json file
+connect to mongoose--done
+make customer user register bettor so user can upload image at time of register
+make email working on live
+learn and config razorpay

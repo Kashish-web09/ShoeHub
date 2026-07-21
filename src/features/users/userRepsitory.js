@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb';
 import {getDb} from '../../config/mongoDb.js'
 import { ApplicationError } from '../../errorFile/applicationError.js'
-
 class userRepository{
     constructor() {
         this.collection="users";
@@ -11,13 +10,15 @@ async signUp(newUser){
         const db=getDb();
         const collection=db.collection(this.collection)
 
-      const result=   await db.collection("users").insertOne(newUser)
+      const result=   await collection.insertOne(newUser)
          return {...newUser,_id:result.insertedId};
     } catch (error) {
 
         throw new ApplicationError("Somthing went wrong with the database",500)
     }
 }
+
+
 async getAllUsers(){
     try {
         const db=getDb();

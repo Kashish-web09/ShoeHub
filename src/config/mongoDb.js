@@ -1,6 +1,5 @@
 
 import { MongoClient } from "mongodb";
-import logger from "./logger.js";
 let client;
 
 export const connectDb = async () => {
@@ -9,10 +8,9 @@ export const connectDb = async () => {
 
     await client.connect();
 
-    logger.info("✅ MongoDB connected");
 
   } catch (err) {
-logger.error(`MongoDb connection failed: ${err.message}`)
+    throw err;
   }
 };
 
