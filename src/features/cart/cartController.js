@@ -2,6 +2,7 @@
 import { ApplicationError } from "../../errorFile/applicationError.js";
 import  cartModels  from "./cartModels.js";
 import cartRepository from './cartRepsitory.js'
+import logger from "../../config/logger.js";
 export default class cartController{
     constructor(){
 this.cartRepository=new cartRepository();
@@ -14,8 +15,10 @@ this.cartRepository=new cartRepository();
             const userId=req.userId;
 
             const result=await this.cartRepository.addItem(productId,userId,quantity);
+            logger.info(`Product ${productId} added to cart by user ${userId}`)
             res.redirect('/api/cart')
         } catch (err) {
+            logger.error(`Failed to add product on cart: ${productId}`)
            throw new ApplicationError("Somthing went wrong",500)
         }
     }
@@ -46,6 +49,7 @@ const total = items.reduce((sum, item) => {
             if(result.deletedCount===0){
                 return res.status(404).send("Item not found")
             }
+            logger.info(`Product ${cartItemId} remove from cart ${userId}`)
 return res.redirect('/api/cart');
 } catch (err) {
            throw new ApplicationError("Somthing went wrong",500)

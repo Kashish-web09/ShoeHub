@@ -2,6 +2,7 @@ import sellerOrderRepo from "./orderRepository.js";
 import sellerOrderModel from "./orderModels.js";
 import userRepository from "../../users/userRepsitory.js";
 import { sendOrderShipped } from "../../../config/emailService.js";
+import logger from "../../../config/logger.js";
 
 export default class sellerOrderController{
     constructor() {
@@ -39,22 +40,38 @@ async getOrderDetails(req,res,next){
 
 }
 
-async updateOrderStatus(req,res,next){
-        try {
-        const orderId=req.params.id;
-        const status=req.body.status;
-        await this.sellerOrderRepo.updateOrderStatus(orderId,status);
+async updateOrderStatus(req, res, next) {
+    try {
+        console.log("🔥 updateOrderStatus controller called");
+
+        const orderId = req.params.id;
+        const status = req.body.status;
+
+        console.log("Order ID:", orderId);
+        console.log("Status:", status);
+
+        await this.sellerOrderRepo.updateOrderStatus(orderId, status);
+
+        console.log("🔥 Repository update completed");
+
+        logger.info(
+            `Order status updated successfully. Order ID: ${orderId}, New Status: ${status}`
+        );
+
+        console.log("🔥 Logger called");
+
         return res.redirect("/api/seller/orders");
-                if(status==="Shipped"){
-            const order=await this.sellerOrderRepo.getOrderById(orderId)
-            const user=await this.userRepository.getUserById(order.userId);
-            // await sendOrderShipped(user.email,order._id)
-        }
 
     } catch (err) {
-        next(err)
-    }
 
+        console.log("🔥 ERROR:", err);
+
+        logger.error(
+            `Failed to update order status. Order ID: ${req.params.id}, Error: ${err.message}`
+        );
+
+        next(err);
+    }
 }
 
 async filterOrder(req,res,next){

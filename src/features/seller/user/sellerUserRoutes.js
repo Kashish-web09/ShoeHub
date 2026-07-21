@@ -4,7 +4,7 @@ import { sellerAuth } from "../../../middlewares/sellerAuthMiddleware.js";
 import { upload } from "../../../middlewares/fileUploadsMiddleware.js";
 import { validate } from "../../../middlewares/validationMiddleware.js";
 import { forgotPassRules, loginRules, registerRule, resetPassRules } from "./sellerUserValidation.js";
-
+import logger from "../../../config/logger.js";
 const sellerUserRoutes = express.Router();
 
 const SellerController = new sellerUserController();
@@ -28,6 +28,7 @@ sellerUserRoutes.get("/register", (req, res, next) => {
 
 // Login Submit
 sellerUserRoutes.post("/login",validate(loginRules,"seller/login"), (req, res, next) => {
+    logger.info("Seller Login Successfully!")
     SellerController.postLogin(req, res, next);
 });
 
@@ -87,6 +88,8 @@ sellerUserRoutes.get("/resetPass/:token", (req, res) => {
 
 // Update Password
 sellerUserRoutes.post("/resetPass/:token",validate(resetPassRules,"seller/resetPass"), (req, res, next) => {
+        logger.info("Password reset successfully");
+
     SellerController.resetPass(req, res, next);
 });
 

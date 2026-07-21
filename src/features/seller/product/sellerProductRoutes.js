@@ -14,6 +14,7 @@ sellerProductroutes.get('/add-product',(req,res,next)=>{
 })
 sellerProductroutes.post('/add-product',upload.array("images",5),validate(addProductRule,"seller/addProduct")
     ,(req,res,next)=>{
+
 sellerController.add(req,res,next)
 })
 sellerProductroutes.get('/filter',(req,res,next)=>{

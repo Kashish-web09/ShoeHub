@@ -132,9 +132,9 @@ async forgotPass(req,res,next){
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
 await this.userRepository.saveResettoken(email,token,expiry)
-        return res.send("Password reset link has been sent to your email.");
+        // return res.send("Password reset link has been sent to your email.");
         // await sendResetEmail(email,token)
-
+return res.redirect(`/api/users/resetPass/${token}`);
     } catch (err) {
         next(err)
     }

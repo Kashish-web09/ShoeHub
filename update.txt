@@ -1,11 +1,12 @@
 today's taks-[
 make UI friendly error pages---done
+    make isLastVisit middleware using winston--(done for login and server) rest willl be tommorrow
+
 ] done
 
 
 tommorrow taks-[
     make swaager
-    make isLastVisit middleware using winston
     learn razorpay and try to config
 ]
 

@@ -4,6 +4,7 @@ import cartRepository from "../cart/cartRepsitory.js";
 import userRepository from "../users/userRepsitory.js";
 import productRepository from "../product/productRepository.js";
 import { sendOrderConfirmation, sendOrderShipped } from "../../config/emailService.js";
+import logger from "../../config/logger.js";
 export default class orderController{
     constructor(){
         this.orderRepository=new orderRepository();
@@ -75,10 +76,12 @@ for (const i of cartItem) {
     await this.productRepository.updateStock(i.product._id, i.quantity);
 }
 await this.cartRepository.clearCart(userId)
+logger.info(`Order created successfully. Order ID: ${order.insertedId}, Customer ID:${userId}`)
 return res.redirect('/api/orders')
 // await sendOrderConfirmation(user.email,order.insertedId)
 
 } catch (err) {
+        `Order creation failed for Customer ID: ${req.userId || "Unknown"}: ${err.message}`
             next(err)
         }
     }

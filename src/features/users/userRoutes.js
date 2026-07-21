@@ -17,13 +17,14 @@ userRoutes.post('/login',validate(loginRules,"login"), (req, res, next) => {
 });
 
 userRoutes.post('/login-browser',validate(loginRules,"login") ,(req, res, next) => {
-            logger.info("Login validation successfull")
+            logger.info("User Login successfull")
 
     usersController.signInBrowser(req, res, next);
 });
 
 userRoutes.post('/resetPass/:token',validate(resetPassRules,"resetPass"), (req, res, next) => {
-    logger.info("Password reset successfully")
+    logger.info("Password reset successfully");
+    
     usersController.resetPass(req, res, next);
 });
 userRoutes.get('/resetPass/:token', (req, res) => {

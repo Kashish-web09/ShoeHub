@@ -1,5 +1,6 @@
 import SellerProductModel from "./sellerProductModels.js";
 import SellerProductRepo from "./sellerProductRepository.js";
+import logger from "../../../config/logger.js";
 export default class SellerProductController{
     constructor(){
         this.SellerProductRepo=new SellerProductRepo();
@@ -71,8 +72,12 @@ sellerId
 
     );
     const result=await this.SellerProductRepo.addProduct(newData);
+                    logger.info(`Product created:${newData.name}`)
+
 res.redirect('/api/seller/product');
+
         } catch (err) {
+            logger.error(`Failed to create product: ${err.message}`)
             next(err)
         }
 
@@ -107,8 +112,11 @@ try {
         isBestSeller
     }
     await this.SellerProductRepo.updateProduct(productId,updatedProduct)
+    logger.info(`Product Updates: ${productId}`)
     res.redirect("/api/seller/product");
 } catch (err) {
+                logger.error(`Failed to update the product: ${err.message}`)
+
     next(err)
 }
     }
@@ -122,8 +130,11 @@ try{
        }
 
       await this.SellerProductRepo.deleteProduct(productId);
+      logger.info(`Product deleted:${productId}`)
       return res.redirect("/api/seller/product")
 }catch(err){
+                logger.error(`Failed to delete product: ${err.message}`)
+
     next(err)
 }
     }

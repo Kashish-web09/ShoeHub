@@ -1,7 +1,6 @@
 import express from 'express';
 import { upload } from '../../middlewares/fileUploadsMiddleware.js';
 import  productController  from './productController.js';
-
 const productRoutes=express.Router();
 const productsController=new productController();
 
