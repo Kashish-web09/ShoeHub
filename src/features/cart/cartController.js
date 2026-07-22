@@ -37,6 +37,7 @@ const total = items.reduce((sum, item) => {
                 })
 
         } catch (err) {
+            console.log(err)
            throw new ApplicationError("Somthing went wrong",500)
         }
 

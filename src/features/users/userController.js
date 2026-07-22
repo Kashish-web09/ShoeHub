@@ -6,6 +6,7 @@ import userModel from "./userModels.js";
 import {jwtAuth} from '../../middlewares/jwtAuthMiddleware.js';
 import { ApplicationError } from '../../errorFile/applicationError.js';
 import { sendResetEmail,sendWelcomeEmail } from '../../config/emailService.js';
+import logger from '../../config/logger.js';
 export default class userController{
     constructor() {
         this.userRepository=new userRepository();
@@ -15,6 +16,7 @@ export default class userController{
     async signUp(req,res,next){
         try {
             const {name,email,password}=req.body;
+            const image=req.file ? req.file.filename : "default.png";
             const exisitingUser=await this.userRepository.findUser(email);
             if(exisitingUser){
                 return res.render('register',{
@@ -25,7 +27,8 @@ export default class userController{
             const newUser=new userModel(
                 name,
                 email,
-                hashpasword
+                hashpasword,
+                image
             );
             await this.userRepository.signUp(newUser);
                    return  res.redirect('/login');
@@ -44,6 +47,8 @@ next(err)
             // check if user exist or not
             const user=await this.userRepository.findUser(email);
             if(!user){
+                            logger.warn(`Login failed: User not found - ${email}`);
+
                             return res.status(404).render('login',{
                                 errors:{msg:"Invalid email or password"}
                             });
@@ -52,6 +57,8 @@ next(err)
             // compare the hash pass wth user password
             const isMatch=await bcrypt.compare(password,user.password);
             if(!isMatch){
+                            logger.warn(`Login failed: User not found - ${email}`);
+
             return res.render('login',{
                 errors:{msg:"Invalid email or password"}
             })
@@ -72,11 +79,13 @@ next(err)
                         secure:false,
                         maxAge:2*24*60*60*1000
                     });
+                    logger.info(`User Login successful - ${email}`)
                     res.redirect('/')
 
         } catch (err) {
-
-next(err)        }
+        logger.error(`Sign in error: ${err.message}`);
+next(err)    
+    }
         
     }
 async signIn(req, res, next) {
@@ -131,7 +140,7 @@ async forgotPass(req,res,next){
         const user=await this.userRepository.forgotPass(email);
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
-await this.userRepository.saveResettoken(email,token,expiry)
+// await this.userRepository.saveResettoken(email,token,expiry)
         // return res.send("Password reset link has been sent to your email.");
         // await sendResetEmail(email,token)
 return res.redirect(`/api/users/resetPass/${token}`);
@@ -143,6 +152,7 @@ async resetPass(req,res,next){
     try {
         const {token}=req.params;
         const {password}=req.body;
+
         const hashedPassword=await bcrypt.hash(password,12);
      const result=   await this.userRepository.resetPass(token,hashedPassword);
      if(!result){

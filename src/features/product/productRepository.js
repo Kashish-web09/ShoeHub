@@ -167,6 +167,7 @@ try{
     return await collection.find({}).sort({_id:-1}).limit(4).toArray();
 
 }catch (err) {
+    console.log(err)
             throw new ApplicationError("Somthing went wrong with the database",500)
 
     }

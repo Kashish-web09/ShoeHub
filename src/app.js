@@ -112,11 +112,5 @@ app.use((req,res)=>{
         isSeller:false
     })
 })
-app.use((err,req,res,next)=>{
-    res.status(500).render("errors/500",{
-        title:"Server Error",
-        isSeller:false
-    })
-})
 
 export default app;

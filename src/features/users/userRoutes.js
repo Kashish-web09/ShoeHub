@@ -2,12 +2,13 @@ import express from 'express';
 import userController from './userController.js';
 import { validate } from '../../middlewares/validationMiddleware.js';
 import { forgotPassRules, loginRules, registerRule, resetPassRules } from './userValidation.js';
+import { upload } from '../../middlewares/fileUploadsMiddleware.js';
 import logger from '../../config/logger.js';
 const userRoutes = express.Router();
 
 const usersController = new userController();
 
-userRoutes.post('/register',validate(registerRule,"register"), (req, res, next) => {
+userRoutes.post('/register',upload.single("image"),validate(registerRule,"register"), (req, res, next) => {
     usersController.signUp(req, res, next);
 });
 
@@ -17,7 +18,7 @@ userRoutes.post('/login',validate(loginRules,"login"), (req, res, next) => {
 });
 
 userRoutes.post('/login-browser',validate(loginRules,"login") ,(req, res, next) => {
-            logger.info("User Login successfull")
+            // logger.info("User Login successfull")
 
     usersController.signInBrowser(req, res, next);
 });

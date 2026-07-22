@@ -8,6 +8,7 @@ import { connectMongooseDb } from './config/mongooseConfig.js';
 const PORT = process.env.PORT || 4090;
 const startServer=async()=>{
     try {
+        await connectDb();
         await connectMongooseDb();
         app.listen(PORT, () => {
 logger.info(`Server running at ${PORT}`)

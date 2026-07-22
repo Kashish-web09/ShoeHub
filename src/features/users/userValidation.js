@@ -1,6 +1,14 @@
 import { body } from "express-validator";
 
 export const registerRule = [
+        body("image")
+    .custom((value,{req})=>{
+        if(!req.file){
+            throw new Error("Profile image is required");
+        }
+        return true;
+    }),
+
     body("name")
         .trim()
         .notEmpty()

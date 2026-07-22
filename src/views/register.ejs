@@ -25,7 +25,21 @@
 
                         </div>
 
-                        <form action="/api/users/register" method="POST">
+                        <form action="/api/users/register" method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+                                <label class="form-label">
+                                Profile Image
+                            </label>
+
+
+                            <input
+                            type="file"
+                            name="image"
+                            class="form-control">
+
+
+</div>
 
                             <!-- Name -->
                             <div class="mb-3">
