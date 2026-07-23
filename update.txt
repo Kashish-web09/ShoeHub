@@ -1,10 +1,14 @@
 make UI friendly error pages---done
 make isLastVisit middleware using winston-> done
+make customer user register bettor so user can upload image at time of register--done
+
 mongoose-{
     connect to mongoDb and server --done
-    make repo with mongoose-
+    make repo with mongoose- [
+        user--done
+        product--done
+    ]
 }
 make swaager.json file
-make customer user register bettor so user can upload image at time of register--done
 make email working on live
 learn and config razorpay

@@ -1,87 +1,67 @@
-import { ObjectId } from "mongodb";
-import { getDb } from "../../../config/mongoDb.js"
-import { ApplicationError } from "../../../errorFile/applicationError.js"
+import mongoose from "mongoose";
+import { sellerUserSchema } from "./sellerUserSchema.js";
+import { ApplicationError } from "../../../errorFile/applicationError.js";
+
+const sellerModel=mongoose.model('sellerAcc',sellerUserSchema);
 
 export default class sellerUserRepository{
-constructor(){
-this.collection="sellerAcc"
-}
-
-async findUser(email){
-    try {
-        const db=getDb();
-        const collection=db.collection(this.collection);
-        const allSellers=await collection.find({}).toArray();
-
-       return await collection.findOne({email})
-    } catch (err) {
-            throw new ApplicationError("Somthing wron with db",500)
-
-    }
-}
-
-async register(seller){
+async register(sellerUser){
 try{
-    const db=getDb();
-const collection=db.collection(this.collection);
-return await collection.insertOne(seller);
+    const newUser=new sellerModel(sellerUser);
+    await newUser.save();
+    return newUser
 }catch(err){
     throw new ApplicationError("Somthing wron with db",500)
 }
 }
-async findById(id){
+async findById(sellerId){
+try {
+    return await sellerModel.findById(sellerId)
+} catch (err) {
+        throw new ApplicationError("Somthing wron with db",500)
+
+}
+}
+async findUser(email){
     try {
-            const db=getDb();
-const collection=db.collection(this.collection);
-return await collection.findOne({
-    _id:new ObjectId(id)
-})
+        return await sellerModel.findOne({email})
     } catch (err) {
             throw new ApplicationError("Something wron with db",500)
 
     }
 }
-async resetPass(token, hashedPassword) {
-    try {
-        const db = getDb();
-        const collection = db.collection(this.collection);
-
-        const result = await collection.updateOne(
-            {
-                resetToken: token,
-                resetTokenExpiry: { $gt: new Date() }
-            },
-            {
-                $set: {
-                    password: hashedPassword,
-                    resetToken: "",
-                    resetTokenExpiry: null
-                }
-            }
-        );
-
-        return result;
-
-    } catch (err) {
-        
-        throw new ApplicationError("Something wrong with db", 500);
-    }
-}
 async forgotPass(email){
 try {
-    const db=getDb();
-    const collection=db.collection(this.collection);
-    return await collection.findOne({email})
+    return await sellerModel.findOne({email})
 } catch (err) {
                 throw new ApplicationError("Something wron with db",500)
 
 }
 }
+async resetPass(token, hashedPassword) {
+    try {
+return await sellerModel.updateOne(
+    {
+        resetToken:token,
+        resetTokenExpiry:{$gt:new Date()}
+    },
+    {
+        $set:{
+            password:hashedPassword,
+            resetToken:null,
+            resetTokenExpiry:null
+        }
+    }
+)
+    } catch (err) {
+        
+        throw new ApplicationError("Something wrong with db", 500);
+    }
+}
+
 async saveResetPass(email,token,expiry){
 try {
-        const db=getDb();
-    const collection=db.collection(this.collection);
-await collection.updateOne(
+return await sellerModel.updateOne(
     {email},
     {
         $set:{
@@ -95,4 +75,5 @@ await collection.updateOne(
 
 }
 }
+
 }

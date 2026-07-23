@@ -129,7 +129,7 @@ try{
         return res.status(400).send("Product not found")
        }
 
-      await this.SellerProductRepo.deleteProduct(productId);
+      await this.SellerProductRepo.deleteProduct(productId,sellerId);
       logger.info(`Product deleted:${productId}`)
       return res.redirect("/api/seller/product")
 }catch(err){

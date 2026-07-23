@@ -1,15 +1,18 @@
-import mongoose from "mongoose";
-import { productSchema } from "./sellerProductSchema.js";
-import {ApplicationError} from '../../../errorFile/applicationError.js'
+import { ObjectId } from "mongodb";
+import { getDb } from "../../../config/mongoDb.js";
+import { ApplicationError } from "../../../errorFile/applicationError.js";
 
-const sellerProductModel =
-    mongoose.models.product ||
-    mongoose.model('product', productSchema);
-export default class sellerRepo{
+export default class SellerProductRepo{
+    constructor(){
+        this.collection="product"
+    }
     async getAllProducts(sellerId){
 try{
-    return await sellerProductModel.find({sellerId:sellerId});
+        const db=getDb();
+    const collection=db.collection(this.collection);
+    return await collection.find({sellerId:sellerId}).toArray();
 }catch(err){
+    console.log(err)
     throw new ApplicationError("Something went wrong with db",500)
 }
    }
@@ -17,37 +20,34 @@ try{
 // 3. 
 async addProduct(data){
 try {
-    const newProduct=new sellerProductModel(data);
- await newProduct.save(data);
- return newProduct;
+            const db=getDb();
+    const collection=db.collection(this.collection);
+return await collection.insertOne(data);
 } catch (err) {
-    console.log(err)
+console.log(err)
         throw new ApplicationError("Something went wrong with db",500)
 
 }
 }
 async getProductById(productId,sellerId) {
-try{    return await sellerProductModel.findOne({
-        _id: productId,
+    const db = getDb();
+    const collection = db.collection(this.collection);
+
+    return await collection.findOne({
+        _id: new ObjectId(productId),
         sellerId:sellerId
     });
-}catch(err){
-                    throw new ApplicationError("Something went wrong with db",500)
-
-}
 }
 // // 4. to get the update page
 async updateProduct(productId,updatedProduct){
 
     try {       
-return await sellerProductModel.findOneAndUpdate(
-    {_id:productId},
+             const db=getDb();
+    const collection=db.collection(this.collection);
+return await collection.updateOne(
+    {_id:new ObjectId(productId)},
     {
         $set:updatedProduct
-    },
-    {
-        new:true,
-        runValidators:true
     }
 
        
@@ -58,12 +58,12 @@ return await sellerProductModel.findOneAndUpdate(
 
     }
 }
-async deleteProduct(productId,sellerId){
+async deleteProduct(productId){
 try {
-return await sellerProductModel.findOneAndDelete(
-    {_id:productId,
-        sellerId:sellerId
-    }
+                 const db=getDb();
+    const collection=db.collection(this.collection);
+return await collection.deleteOne(
+    {_id:new ObjectId(productId)}
 )
 } catch (err) {
                     throw new ApplicationError("Something went wrong with db",500)
@@ -72,11 +72,13 @@ return await sellerProductModel.findOneAndDelete(
 }
 async getOutOfStockProduct(sellerId){
 try {
-const products = await sellerProductModel.find({
-    sellerId:sellerId,
+                     const db=getDb();
+    const collection=db.collection(this.collection);
+const products = await collection.find({
     stock:{$lte:0}
 }
-);
+).toArray();
+console.log(products)
 
 return products;
 } catch (err) {
@@ -86,6 +88,8 @@ return products;
 }
     async filterProduct(gender,category,price){
 try {
+            const db=getDb();
+        const collection=db.collection(this.collection);
         let filter={};
        if(gender){
         filter.gender={
@@ -124,11 +128,12 @@ try {
        }
 
         
-        return await sellerProductModel.find(filter);
+        return await collection.find(filter).toArray();
 
 } catch (err) {
     throw new ApplicationError("Somthing went wrong with the database",500)
 }
 
     }
+
 }

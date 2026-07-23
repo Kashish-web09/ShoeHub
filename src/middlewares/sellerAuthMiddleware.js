@@ -6,6 +6,7 @@ const sellerRepository = new sellerUserRepository();
 export const sellerAuth = async (req, res, next) => {
     const token = req.cookies.sellerToken;
 
+
     // No token
     if (!token) {
         res.locals.isLoggedIn = false;
@@ -13,39 +14,39 @@ export const sellerAuth = async (req, res, next) => {
     }
 
     try {
-        // Verify JWT
         const payload = jwt.verify(
             token,
             process.env.JWT_SECRETKEY
         );
+
 
         // Check role
         if (payload.role !== "seller") {
             return res.status(403).send("Access Denied");
         }
 
-        // Get seller from MongoDB
+        // Find seller
         const seller = await sellerRepository.findById(payload.sellerId);
 
+
         if (!seller) {
-            res.clearCookie("token");
+            res.clearCookie("sellerToken");
             return res.redirect("/api/seller/login");
         }
 
-        // Store seller info in request
         req.sellerId = seller._id;
         req.seller = seller;
 
-        // Make data available in every EJS page
         res.locals.isLoggedIn = true;
         res.locals.seller = seller;
-        res.locals.isSeller=true;
+        res.locals.isSeller = true;
 
         next();
 
     } catch (err) {
 
-        res.clearCookie("token");
+
+        res.clearCookie("sellerToken");
         return res.redirect("/api/seller/login");
     }
 };

@@ -138,9 +138,12 @@ async forgotPass(req,res,next){
     try {
         const {email}=req.body;
         const user=await this.userRepository.forgotPass(email);
+        if(!user){
+            throw new Error("User not found")
+        }
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
-// await this.userRepository.saveResettoken(email,token,expiry)
+const result=await this.userRepository.saveResettoken(email,token,expiry);
         // return res.send("Password reset link has been sent to your email.");
         // await sendResetEmail(email,token)
 return res.redirect(`/api/users/resetPass/${token}`);
@@ -155,9 +158,11 @@ async resetPass(req,res,next){
 
         const hashedPassword=await bcrypt.hash(password,12);
      const result=   await this.userRepository.resetPass(token,hashedPassword);
-     if(!result){
-        return res.status(400).send("Invalid or expired reset token")
-     }
+                 if(result.matchedCount===0){
+                    logger.error("User not found tyr again....")
+                throw new ApplicationError("User not found",404)
+            }
+
         res.redirect('/login')
     } catch (err) {
         next(err)

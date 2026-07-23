@@ -8,7 +8,7 @@ import sellerOrderRepo from '../order/orderRepository.js';
 import userRepository from '../../users/userRepsitory.js';
 import SellerProductRepo from '../product/sellerProductRepository.js';
 import { sendSellerResetEmail, sendWelcomeEmail } from '../../../config/emailService.js';
-import { title } from 'process';
+import logger from '../../../config/logger.js';
 export default class sellerUserController {
     constructor() {
     this.sellerUserRepository=new sellerUserRepository();
@@ -48,17 +48,23 @@ const {email,password}=req.body;
 const seller=await this.sellerUserRepository.findUser(email);
 
  if (!seller) {
+                                logger.warn(`Login failed: User not found - ${email}`);
+    
             return res.render("seller/login", {
                 title: "Seller Login",
-                error: "Seller not found"
+                error: "Seller not found",
+                errors:{}
             });
         }
         const isMatch=await bcrypt.compare(password,seller.password);
 
  if (!isMatch) {
+                                logger.warn(`Login failed: User not found - ${email}`);
+    
             return res.render("seller/login", {
                 title: "Seller Login",
-                error: "Invalid password"
+                error: "Invalid password",
+                errors:{}
             });
         }
         const token=jwt.sign(
@@ -77,8 +83,12 @@ res.cookie('sellerToken',token,{
     secure:false,
     maxAge:2*60*60*1000
 });
+                    logger.info(`Seller User Login successful - ${email}`)
+
 res.redirect('/api/seller/dashboard')
 } catch (err) {
+            logger.error(`Sign in error: ${err.message}`);
+    
             next(err);
         }
     }
@@ -172,14 +182,14 @@ async resetPass(req, res, next) {
         try {
             const sellerId=req.sellerId
             const orders=await this.sellerOrderRepo.getSellerOrders();
-            const userCount=await this.userRepository.getAllUsers();
-            const product=await this.SellerProductRepo.getAllProducts(sellerId);
+            const userCount=await this.userRepository.getAll();
+            // const product=await this.SellerProductRepo.getAllProducts(sellerId);
             const revenue=await this.sellerOrderRepo.getRevenue();
             const recentOrder=await this.sellerOrderRepo.getRecentOrders();
 res.render("seller/dashboard", {
     title: "Seller Dashboard",
     totalUsers: userCount.length,
-    totalProducts:product.length,
+    totalProducts:2,
     totalOrders:orders.length,
     revenue: revenue,
     recentOrders: recentOrder
@@ -187,6 +197,5 @@ res.render("seller/dashboard", {
             next(err);
         }
     }
-
 
 }
