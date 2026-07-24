@@ -35,3 +35,12 @@
 {"level":"info","message":"Product deleted:6a620c74f06bbc60c1cfc9ed","timestamp":"2026-07-23T12:45:40.610Z"}
 {"level":"info","message":"Product created:test","timestamp":"2026-07-23T12:46:21.546Z"}
 {"level":"info","message":"Product 6a620d1d93b843f99629e584 added to cart by user undefined","timestamp":"2026-07-23T12:46:45.369Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-24T12:54:41.708Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-24T12:54:41.725Z"}
+{"level":"info","message":"Seller Login Successfully!","timestamp":"2026-07-24T12:54:51.017Z"}
+{"level":"warn","message":"Login failed: User not found - knarang0909@gmail.com","timestamp":"2026-07-24T12:54:51.477Z"}
+{"level":"info","message":"Password reset successfully","timestamp":"2026-07-24T12:55:10.324Z"}
+{"level":"info","message":"Seller Login Successfully!","timestamp":"2026-07-24T12:55:14.120Z"}
+{"level":"info","message":"Seller User Login successful - knarang0909@gmail.com","timestamp":"2026-07-24T12:55:14.565Z"}
+{"level":"info","message":"Product created:test","timestamp":"2026-07-24T12:55:28.553Z"}
+{"level":"info","message":"Product deleted:6a6360c02c984e77cd9613aa","timestamp":"2026-07-24T12:58:04.460Z"}

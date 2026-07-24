@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
-import { cartSchema } from "./cartSchema.js";
 import { ApplicationError } from "../../errorFile/applicationError.js";
-
-const cartModels;
-
+import {getDb } from "../../config/mongoDb.js";
+import { ObjectId } from "mongodb";
+import cartModels from "./cartModels.js";
 export default class cartRepository{
+    constructor(){
+        this.collection="cartItems";
+    }
     async addItem(productId,userId,quantity){
         try {
             const db=getDb();

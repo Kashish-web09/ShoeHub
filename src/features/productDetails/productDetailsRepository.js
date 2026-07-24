@@ -1,35 +1,29 @@
-import { ObjectId } from "mongodb";
-import { getDb } from "../../config/mongoDb.js";
+import mongoose from "mongoose";
+import { productDetailSchema } from "./productDetailsSchema.js";
 import { ApplicationError } from "../../errorFile/applicationError.js";
-export default class productDetailRepo{
-    constructor(){
-        this.collection="product";
-    }
+const productDetailModel=    mongoose.models.product ||
+    mongoose.model('product', productDetailSchema);
 
-   async addProduct(product) {
-try{    const db=getDb();
-    const collection=db.collection(this.collection);
-    return await collection.insertOne(product)
-}catch(err){
-    throw new ApplicationError("Something wrong with db",500)
-}
-   }
-
-
-   async getProductById(productId) {
-        try {
-        const db=getDb();
-        const collection=db.collection(this.collection)
-        return await collection.findOne(
-            {_id:new ObjectId(productId)}
-        )
-    } catch (err) {
+    export default class productDetailRepo{
+           async addProduct(product) {
+        try{ 
+            const newProduct=mongoose.productDetailModel(product);
+            await newProduct.save();
+            return newProduct
+        }catch(err){
             throw new ApplicationError("Something wrong with db",500)
-
+        }
+           }
+        
+        
+           async getProductById(productId) {
+                try {
+                    return await productDetailModel.findById({_id:productId})
+            } catch (err) {
+                    throw new ApplicationError("Something wrong with db",500)
+        
+            }
+        
+           }
+        
     }
-
-   }
-
-
-
-}
