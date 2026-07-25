@@ -2,129 +2,152 @@ import mongoose from "mongoose";
 import { cartSchema } from "./cartSchema.js";
 import { ApplicationError } from "../../errorFile/applicationError.js";
 
-const cartModels;
+const cartModels = mongoose.model("cartItems", cartSchema);
 
-export default class cartRepository{
-    async addItem(productId,userId,quantity){
+export default class cartRepository {
+
+    // Add item or increase quantity if item already exists
+    async addItem(productId, userId, quantity) {
         try {
-            const db=getDb();
-            const collection=db.collection(this.collection);
-            const qty=Number(quantity) || 1
-const result= await collection.updateOne(
-    {
-        productId:new ObjectId(productId),
-        userId:new ObjectId(userId)
-    },
-    {
-        $inc:
-        {
-            quantity:qty
-        },$setOnInsert:{
-    productId:new ObjectId(productId),
-    userId:new ObjectId(userId)
-}
+            const qty = Number(quantity) || 1;
 
-    },
-    {
-        upsert:true
-    }
-)
-return result;
-
-        } catch (err) {
-            throw new ApplicationError("Somthing went wrong with the database",500)
-        }
-    }
-async getItem(userId) {
-    try {
-        const db = getDb();
-        const collection = db.collection(this.collection);
-
-        // Correct collection name
-        const productCollection = db.collection("product");
-
-        const result = await collection.find({
-            userId: new ObjectId(userId)
-        }).toArray();
-
-        for (let item of result) {
-            item.product = await productCollection.findOne({
-                _id: item.productId
-            });
-        }
-
-        return result;
-
-    } catch (err) {
-        throw new ApplicationError("Something went wrong with the database", 500);
-    }
-}async deleteCartItem(userId,cartItemId){
-            try {
-            const db=getDb();
-            const collection=db.collection(this.collection);
-            const result= await collection.deleteOne(
-                {_id:new ObjectId(cartItemId),userId:new ObjectId(userId)}
+            const result = await cartModels.findOneAndUpdate(
+                {
+                    productId,
+                    userId
+                },
+                {
+                    $inc: {
+                        quantity: qty
+                    }
+                },
+                {
+                    returnDocument: "after",
+                    upsert: true
+                }
             );
+
             return result;
-        } catch (err) {
-            throw new ApplicationError("Somthing went wrong with the database",500)
-        }
 
-}
-    async clearCart(userId){
+        } catch (err) {
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
+        }
+    }
+
+
+    // Get all cart items for user
+    async getItem(userId) {
         try {
-            const db=getDb();
-            const collection=db.collection(this.collection);
-            return await collection.deleteMany(
-                {userId:new ObjectId(userId)}
-            )
+            return await cartModels
+                .find({ userId })
+                .populate("productId");
+
         } catch (err) {
-                throw new ApplicationError("Something went wrong with the db",500)
-
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
         }
     }
-async increaseQuantity(cartId){
-    try {
-        const db=getDb();
-        const collection=db.collection(this.collection);
-        return await collection.updateOne(
-            {_id:new ObjectId(cartId)},
-          {
-            $inc:{
-                quantity:1
+
+
+    // Delete one cart item
+    async deleteCartItem(userId, cartItemId) {
+        try {
+            return await cartModels.findOneAndDelete({
+                _id: cartItemId,
+                userId
+            });
+
+        } catch (err) {
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
+        }
+    }
+
+
+    // Clear complete cart
+    async clearCart(userId) {
+        try {
+            return await cartModels.deleteMany({
+                userId
+            });
+
+        } catch (err) {
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
+        }
+    }
+
+
+    // Increase quantity
+    async increaseQuantity(cartId) {
+        try {
+            return await cartModels.findByIdAndUpdate(
+                cartId,
+                {
+                    $inc: {
+                        quantity: 1
+                    }
+                },
+                {
+                    returnDocument: "after"
+                }
+            );
+
+        } catch (err) {
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
+        }
+    }
+
+
+    // Decrease quantity
+    async decreaseQuantity(cartId) {
+        try {
+            const cartItem = await cartModels.findById(cartId);
+
+            if (!cartItem) {
+                throw new ApplicationError(
+                    "Cart item not found",
+                    404
+                );
             }
-          }
-        )
-    } catch (err) {
-                        throw new ApplicationError("Something went wrong with the db",500)
 
-    }
-}
-async decreaseQuantity(cartId){
-    try {
-                const db=getDb();
-        const collection=db.collection(this.collection);
-const cartItems=await collection.findOne({_id:new ObjectId(cartId)});
-if(!cartItems){
-    throw new ApplicationError("cart item not found",500);
-}
-if(cartItems.quantity>1){
-    await collection.updateOne(
-        {_id:new ObjectId(cartId)},
-        {
-                $inc:{
-        quantity:-1
-    }
+            if (cartItem.quantity > 1) {
 
+                return await cartModels.findByIdAndUpdate(
+                    cartId,
+                    {
+                        $inc: {
+                            quantity: -1
+                        }
+                    },
+                    {
+                        returnDocument: "after"
+                    }
+                );
+
+            } else {
+
+                return await cartModels.findByIdAndDelete(cartId);
+
+            }
+
+        } catch (err) {
+            throw new ApplicationError(
+                "Something went wrong with the database",
+                500
+            );
         }
-    );
-}else{
-    await collection.deleteOne({_id:new ObjectId(cartId)})
-}
-    } catch (err) {
-                        throw new ApplicationError("Something went wrong with the db",500)
-
     }
-}
-
 }

@@ -44,3 +44,64 @@
 {"level":"info","message":"Seller User Login successful - knarang0909@gmail.com","timestamp":"2026-07-24T12:55:14.565Z"}
 {"level":"info","message":"Product created:test","timestamp":"2026-07-24T12:55:28.553Z"}
 {"level":"info","message":"Product deleted:6a6360c02c984e77cd9613aa","timestamp":"2026-07-24T12:58:04.460Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:02:32.055Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:02:32.075Z"}
+{"level":"warn","message":"Login failed: User not found - knarang0909@gmail.com","timestamp":"2026-07-25T11:02:39.759Z"}
+{"level":"info","message":"Password reset successfully","timestamp":"2026-07-25T11:02:55.671Z"}
+{"level":"info","message":"User Login successful - knarang0909@gmail.com","timestamp":"2026-07-25T11:02:59.148Z"}
+{"level":"info","message":"Seller Login Successfully!","timestamp":"2026-07-25T11:03:05.033Z"}
+{"level":"warn","message":"Login failed: User not found - knarang0909@gmail.com","timestamp":"2026-07-25T11:03:05.481Z"}
+{"level":"info","message":"Password reset successfully","timestamp":"2026-07-25T11:03:18.950Z"}
+{"level":"info","message":"Seller Login Successfully!","timestamp":"2026-07-25T11:03:21.135Z"}
+{"level":"info","message":"Seller User Login successful - knarang0909@gmail.com","timestamp":"2026-07-25T11:03:21.612Z"}
+{"level":"info","message":"Product created:test","timestamp":"2026-07-25T11:03:41.224Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:03:58.655Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:05:33.198Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:05:33.217Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:05:41.301Z"}
+{"level":"info","message":"Product 6a64981ec78e7e235c834546 remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:05:58.096Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:06:03.980Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:06:43.470Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:06:43.487Z"}
+{"level":"info","message":"Product 6a64989bc78e7e235c834548 remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:06:43.673Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:06:51.873Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:07:13.418Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:07:13.435Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:07:16.199Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:07:35.716Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:07:35.733Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:09:43.598Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:09:43.619Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:09:47.676Z"}
+{"level":"info","message":"Product 6a64997bc78e7e235c83454d remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:10:17.172Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:13:54.389Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:13:54.412Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:14:04.344Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:14:37.373Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:14:37.390Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:14:38.169Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:15:06.844Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:15:06.864Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:15:08.875Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:15:32.419Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:15:32.440Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:15:34.265Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:16:08.499Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:16:08.515Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:16:09.458Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:16:22.893Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:16:22.907Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:16:26.709Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:17:19.428Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:17:19.444Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:17:22.851Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:17:42.896Z"}
+{"level":"info","message":"Product 6a649b56c78e7e235c834558 remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:17:46.107Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:18:19.930Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:18:19.942Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:18:29.203Z"}
+{"level":"info","message":"✅ MongoDB connected with mongoose","timestamp":"2026-07-25T11:19:29.276Z"}
+{"level":"info","message":"Server running at 4090","timestamp":"2026-07-25T11:19:29.292Z"}
+{"level":"info","message":"Product 6a649b85c78e7e235c834559 remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:19:29.566Z"}
+{"level":"info","message":"Product 6a64980d62862473d8977268 added to cart by user 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:19:36.945Z"}
+{"level":"info","message":"Product 6a649bc8c78e7e235c83455e remove from cart 6a61a552696314ae84d00092","timestamp":"2026-07-25T11:19:42.138Z"}
