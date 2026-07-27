@@ -1,274 +1,349 @@
-# 👟 ShoeHub - Full Stack E-Commerce Website
+# 👟 ShoeHub - Full Stack E-Commerce Platform
 
-![ShoeHub](https://img.shields.io/badge/Project-E--Commerce-blue)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
+![Express.js](https://img.shields.io/badge/Framework-Express.js-lightgrey)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
+![Mongoose](https://img.shields.io/badge/ODM-Mongoose-red)
 ![Bootstrap](https://img.shields.io/badge/Frontend-Bootstrap-purple)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange)
+![License](https://img.shields.io/badge/License-Learning-blue)
 
-ShoeHub is a full-stack footwear e-commerce web application where users can browse shoes, manage carts, place orders, and manage their profiles.
+ShoeHub is a **full-stack e-commerce platform** built for buying and selling footwear. The application provides a seamless shopping experience for customers while offering a dedicated seller dashboard for managing products, orders, customers, and business analytics.
 
-The project also includes a complete seller management system where sellers can manage products, view orders, update order status, and manage their store.
-
-The application is built using **Node.js, Express.js, MongoDB, EJS, Bootstrap, JWT Authentication, and Nodemailer**.
+The project is developed using **Node.js, Express.js, MongoDB, Mongoose, EJS, Bootstrap, JWT Authentication, Nodemailer, and Winston Logger**. It follows the **MVC Architecture** and **Repository Pattern** to keep the codebase modular, scalable, and maintainable.
 
 ---
 
-# ✨ Features
+# 🚀 Features
 
 ## 👤 User Module
 
 ### Authentication
-- User registration
-- User login
-- Secure password encryption using bcrypt
-- JWT based authentication
-- Cookie based session handling
-- Logout functionality
+
+* User Registration
+* User Login
+* JWT Authentication
+* Cookie-based Authentication
+* Secure Password Hashing (bcrypt)
+* Logout
 
 ### Password Management
-- Forgot password
-- Email based password reset
-- Secure reset token generation
-- Token expiry validation
+
+* Forgot Password
+* Password Reset via Email
+* Secure Reset Tokens
+* Token Expiry Validation
 
 ### Shopping Features
-- View all products
-- Product details page
-- Product search
-- Product filtering
-- Add products to cart
-- Update cart quantity
-- Remove products from cart
-- Wishlist management
 
-### Order Management
-- Checkout system
-- Place orders
-- View order history
-- View order details
-- Order confirmation emails
-- Shipping notification emails
+* Browse Products
+* Product Details
+* Product Search
+* Product Filtering
+* Add to Cart
+* Update Cart Quantity
+* Remove Cart Items
+* Wishlist Management
 
-### Profile Management
-- View profile
-- Update profile details
-- Upload profile image
+### Checkout & Orders
 
-### Feedback & Contact
-- Submit feedback
-- Contact support
-- Feedback thank you email
+* Checkout Page
+* Shipping Address Management
+* Place Orders
+* Order History
+* Order Details
+* Order Confirmation Email
+* Shipping Notification Email
 
+### User Profile
+
+* View Profile
+* Edit Profile
+* Upload Profile Image
+
+### Contact & Feedback
+
+* Contact Form
+* Customer Feedback
+* Feedback Thank You Email
 
 ---
 
 # 🏪 Seller Module
 
-A separate seller panel is implemented for managing store operations.
-
+A dedicated seller dashboard is available for store management.
 
 ## Seller Authentication
 
-- Seller registration
-- Seller login
-- Seller logout
-- JWT protected seller routes
-- Seller forgot password
-- Seller password reset through email
+* Seller Registration
+* Seller Login
+* Seller Logout
+* JWT Protected Routes
+* Forgot Password
+* Password Reset via Email
 
+## Dashboard Analytics
 
-## Seller Dashboard
+Seller Dashboard displays:
 
-Seller can:
-
-- View total users
-- View total products
-- View total orders
-- Track revenue
-- View recent orders
-
+* Total Users
+* Total Products
+* Total Orders
+* Total Revenue
+* Recent Orders
+* Revenue Analytics using MongoDB Aggregation
 
 ## Product Management
 
 Seller can:
 
-- Add new products
-- Upload product images
-- Edit products
-- Manage product stock
-- Delete products
-
+* Add Products
+* Upload Product Images
+* Edit Products
+* Delete Products
+* Update Product Stock
+* Manage Inventory
 
 ## Order Management
 
 Seller can:
 
-- View customer orders
-- Check order details
-- Update order status
-- Manage shipping process
-
+* View Orders
+* View Order Details
+* Update Order Status
+* Manage Shipping Process
 
 ## Seller Profile
 
-- View seller profile
-- Update seller information
-- Manage store details
+* View Seller Profile
+* Update Seller Details
+* Store Information Management
 
+---
+
+# 📊 Analytics
+
+MongoDB Aggregation Pipelines are used for generating dashboard statistics.
+
+Analytics include:
+
+* Total Revenue
+* Total Orders
+* Total Products
+* Total Users
+* Recent Orders
 
 ---
 
 # 📧 Email Services
 
-Email functionality is implemented using **Nodemailer**.
-
+Email notifications are implemented using **Nodemailer**.
 
 Available emails:
 
-✅ Welcome email after registration
+* Welcome Email
+* Password Reset Email
+* Order Confirmation Email
+* Order Shipped Email
+* Feedback Thank You Email
 
-✅ Password reset email
+---
 
-✅ Order confirmation email
+# 🏗️ Architecture
 
-✅ Order shipped notification
+The project follows the **MVC (Model-View-Controller)** Architecture along with the **Repository Pattern**.
 
-✅ Feedback thank you email
+### Controller
 
+* Handles incoming requests
+* Processes business logic
+* Returns responses
+
+### Repository
+
+* Handles all database operations
+* Uses Mongoose models
+* Keeps controllers clean
+
+### Models
+
+* Mongoose Schemas
+* Data Validation
+* Collection Structure
+
+### Middlewares
+
+* JWT Authentication
+* Seller Authentication
+* File Upload
+* Validation
+* Error Handling
 
 ---
 
 # 🛠️ Technologies Used
 
-
 ## Frontend
 
-- HTML5
-- CSS3
-- Bootstrap 5
-- JavaScript
-- EJS Template Engine
-
+* HTML5
+* CSS3
+* Bootstrap 5
+* JavaScript (ES6)
+* EJS
 
 ## Backend
 
-- Node.js
-- Express.js
-
+* Node.js
+* Express.js
+* REST APIs
+* MVC Architecture
+* Repository Pattern
 
 ## Database
 
-- MongoDB
-
+* MongoDB
+* Mongoose ODM
 
 ## Authentication
 
-- JWT
-- Cookies
-- bcrypt
-
+* JWT
+* Cookies
+* bcrypt
 
 ## Packages
 
-- Nodemailer
-- Multer
-- dotenv
-- express-ejs-layouts
-- cookie-parser
-- cors
+* mongoose
+* express
+* bcrypt
+* jsonwebtoken
+* multer
+* nodemailer
+* dotenv
+* express-ejs-layouts
+* cookie-parser
+* cors
+* express-validator
+* winston
 
+---
+
+# 🗄️ Database Features
+
+* MongoDB Collections
+* Mongoose Schemas
+* Schema Validation
+* Population using `populate()`
+* Aggregation Pipelines
+* Atomic Updates
+* Efficient CRUD Operations
+
+---
+
+# 📋 Logging
+
+Application logging is implemented using **Winston Logger**.
+
+Logs include:
+
+* User Login
+* User Registration
+* Seller Activities
+* Product Operations
+* Cart Operations
+* Order Operations
+* Server Errors
+* Database Errors
+
+---
+
+# ✅ Validation
+
+Input validation is implemented using middleware.
+
+Validation includes:
+
+* User Registration
+* Login
+* Product Creation
+* Checkout
+* Password Reset
+* Contact Forms
+
+---
+
+# ⚠️ Error Handling
+
+Centralized error handling is implemented using a custom `ApplicationError` class.
+
+Features include:
+
+* Custom HTTP Status Codes
+* Consistent Error Responses
+* Graceful Database Error Handling
+* Global Error Middleware
 
 ---
 
 # 📂 Project Structure
 
-
-```
+```text
 ShoeHub
 │
 ├── src
-│   │
 │   ├── config
-│   │   ├── emailService.js
+│   │   ├── db.js
+│   │   ├── logger.js
 │   │   ├── mailer.js
-│   │   └── mongoDb.js
+│   │   └── emailService.js
 │   │
 │   ├── errorFile
 │   │   └── applicationError.js
 │   │
 │   ├── features
-│   │   │
 │   │   ├── users
-│   │   │
+│   │   ├── seller
 │   │   ├── product
-│   │   │
 │   │   ├── productDetails
-│   │   │
 │   │   ├── cart
-│   │   │
-│   │   ├── order
-│   │   │
 │   │   ├── wishlist
-│   │   │
+│   │   ├── order
 │   │   ├── contact
-│   │   │
-│   │   ├── profile
-│   │   │
-│   │   └── seller
-│   │       │
-│   │       ├── user
-│   │       ├── product
-│   │       ├── order
-│   │       ├── profile
-│   │       └── feedback
+│   │   └── profile
 │   │
 │   ├── middlewares
 │   │   ├── jwtAuthMiddleware.js
 │   │   ├── sellerAuthMiddleware.js
-│   │   ├── fileUploadsMiddleware.js
-│   │   └── validationMiddleware.js
+│   │   ├── validationMiddleware.js
+│   │   ├── fileUploadMiddleware.js
+│   │   └── errorHandler.js
 │   │
 │   ├── views
-│   │   │
-│   │   ├── layouts
-│   │   ├── partials
-│   │   ├── seller
-│   │   └── user pages
-│   │
 │   ├── public
-│   │
 │   ├── app.js
 │   └── server.js
 │
 ├── uploads
-│
 ├── swagger.json
 ├── package.json
 ├── .env
-├── .gitignore
 └── README.md
-
 ```
-
 
 ---
 
 # ⚙️ Installation
 
-
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Kashish-web09/ShoeHub
+git clone https://github.com/Kashish-web09/ShoeHub.git
 ```
 
-
-## Navigate Into Project
+## Navigate to Project
 
 ```bash
 cd ShoeHub
 ```
-
 
 ## Install Dependencies
 
@@ -276,17 +351,11 @@ cd ShoeHub
 npm install
 ```
 
-
 ---
 
 # 🔐 Environment Variables
 
-
-Create a `.env` file in the root folder.
-
-
-Example:
-
+Create a `.env` file in the root directory.
 
 ```env
 PORT=4090
@@ -295,229 +364,219 @@ MONGO_URL=your_mongodb_connection_string
 
 JWT_SECRETKEY=your_secret_key
 
-
 EMAIL=your_email@gmail.com
 
 EMAIL_PASSWORD=your_email_password
 ```
 
-
 ---
 
-# ▶️ Run Project
-
-
-Start server:
-
+# ▶️ Run the Application
 
 ```bash
 npm start
 ```
 
+Server runs on:
 
-Application will run on:
-
-
-```
+```text
 http://localhost:4090
 ```
 
+---
+
+# 📑 API Documentation
+
+Swagger documentation is included.
+
+Example endpoint:
+
+```text
+/api-docs
+```
 
 ---
 
 # 🌐 Application Routes
 
+## User
 
-## User Routes
-
-```
+```text
 /api/users
 ```
 
-Includes:
+Features:
 
-- Register
-- Login
-- Forgot Password
-- Reset Password
-
+* Register
+* Login
+* Forgot Password
+* Reset Password
+* Profile
 
 ---
 
-## Product Routes
+## Products
 
-```
+```text
 /api/products
 ```
 
-Includes:
+Features:
 
-- Product listing
-- Product details
-- Product operations
-
+* View Products
+* Search Products
+* Filter Products
+* Product Details
 
 ---
 
-## Cart Routes
+## Cart
 
-```
+```text
 /api/cart
 ```
 
-Includes:
+Features:
 
-- Add cart item
-- Update cart
-- Remove cart item
-
+* Add Item
+* Increase Quantity
+* Decrease Quantity
+* Remove Item
 
 ---
 
-## Wishlist Routes
+## Wishlist
 
-```
+```text
 /api/wishlist
 ```
 
+Features:
 
-Includes:
-
-- Add wishlist item
-- Remove wishlist item
-
+* Add Product
+* Remove Product
+* View Wishlist
 
 ---
 
-## Order Routes
+## Orders
 
-```
+```text
 /api/orders
 ```
 
+Features:
 
-Includes:
-
-- Checkout
-- Place order
-- Order history
-
+* Checkout
+* Place Order
+* Order History
+* Order Details
 
 ---
 
-## Seller Routes
+## Seller
 
-```
+```text
 /api/seller
 ```
 
+Features:
 
-Includes:
-
-- Seller login
-- Seller registration
-- Seller dashboard
-- Seller password reset
-
+* Dashboard
+* Product Management
+* Order Management
+* Seller Profile
 
 ---
 
 # 🔒 Security Features
 
-
-- Password hashing with bcrypt
-- JWT authentication
-- Protected routes
-- Secure cookies
-- Environment variable configuration
-- Input validation
-- Role based seller authentication
-
+* JWT Authentication
+* bcrypt Password Hashing
+* Cookie-based Authentication
+* Protected Routes
+* Role-Based Authorization
+* Environment Variables
+* Request Validation
+* Secure Password Reset Tokens
 
 ---
 
-# 🖼️ File Upload
+# 📤 File Uploads
 
-
-Images are uploaded using:
-
-```
-Multer
-```
-
-
-Stored inside:
-
-
-```
-uploads/
-```
-
+File uploads are handled using **Multer**.
 
 Used for:
 
-- Product images
-- Seller profile images
-- User profile images
+* Product Images
+* User Profile Images
+* Seller Profile Images
 
+Files are stored inside:
+
+```text
+uploads/
+```
 
 ---
 
-# 🗄️ Database Collections
+# 🗂️ Database Collections
 
-
-MongoDB collections:
-
-
-```
+```text
 users
-
 sellerAcc
-
 products
-
-cart
-
+cartItems
 orders
-
 wishlist
-
 feedback
-
 contact
 ```
 
+---
 
+# ⭐ Project Highlights
+
+* Full Stack E-Commerce Platform
+* MVC Architecture
+* Repository Pattern
+* REST API Development
+* MongoDB Aggregation Pipeline
+* Mongoose ODM
+* JWT Authentication
+* Seller Dashboard
+* Revenue Analytics
+* Winston Logging
+* Nodemailer Integration
+* Swagger API Documentation
+* Responsive Bootstrap UI
+* Image Upload with Multer
+
+---
 
 # 🚀 Future Improvements
 
-
-- Payment gateway integration
-- Admin dashboard
-- Product reviews and ratings
-- Advanced analytics
-- Deployment on cloud
-- Product recommendation system
-
+* Online Payment Gateway Integration
+* Product Reviews & Ratings
+* Admin Dashboard
+* Coupons & Discounts
+* Product Recommendation System
+* Sales Reports & Charts
+* Cloud Deployment (Render/AWS)
+* Real-Time Order Tracking
 
 ---
 
 # 👨‍💻 Developer
 
-
 **Kashish Narang**
 
 Full Stack Developer
 
-
-Project:
-
-**ShoeHub E-Commerce Platform**
-
+GitHub: **https://github.com/Kashish-web09**
 
 ---
 
 # 📄 License
 
-
-This project is developed for learning and portfolio purposes.
+This project is developed for **learning, portfolio, and educational purposes**.
