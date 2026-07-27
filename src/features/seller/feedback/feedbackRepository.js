@@ -1,68 +1,63 @@
-import { ObjectId } from "mongodb";
-import { getDb } from "../../../config/mongoDb.js";
+import mongoose from "mongoose";
 import { ApplicationError } from "../../../errorFile/applicationError.js";
+import { feedbackSchema } from "./feedbackScehma.js";
 
+const feedbackModel=mongoose.models.feedback || mongoose.model('feedback',feedbackSchema)
 export default class feedbackRepo{
-    constructor() {
-        this.collection="feedback"
-    }
-    async getFeedback(){
-        try {
-            const db=getDb();
-            const collection=db.collection(this.collection);
-            return await collection.find().toArray();
-        } catch (err) {
-            throw new ApplicationError("Something wrong with db",500)
-        }
-    }
-    async getFeedbackById(id){
-try{
-                                                const db=getDb();
-            const collection=db.collection(this.collection);
-return await collection.findOne(
-    {_id:new ObjectId(id)}
-)
-}catch(err){
-                        throw new ApplicationError("Something wrong with db",500)
-
-}
-    }
-    async updateStatus(feedbackId,status){
-        try {
-                                    const db=getDb();
-            const collection=db.collection(this.collection);
-return await collection.updateOne(
-    {_id:new ObjectId(feedbackId)},
-    {
-        $set:{
-            status:status
-        }
-    }
-)
-
-        } catch (err) {
-                        throw new ApplicationError("Something wrong with db",500)
-
-        }
-    }
-    async filterFeedback(name,status){
-        try {
-                                                const db=getDb();
-            const collection=db.collection(this.collection);
-            let query={};
-            if(name){
-                query.name={
-                    $regex:name,
-                    $options:"i"
-                }
-            }  
-            if(status){
-                query.status=status
+        async getFeedback(){
+            try {
+                return await feedbackModel.find().sort({createdAt:-1});
+            } catch (err) {
+                throw new ApplicationError("Something wrong with db",500)
             }
-            return await collection.find(query).toArray();
-        } catch (err) {
-                                    throw new ApplicationError("Something wrong with db",500)
-
         }
+        async getFeedbackById(id){
+    try{
+    return await feedbackModel.findById(
+        id
+    ) 
+
+}catch(err){
+                            throw new ApplicationError("Something wrong with db",500)
+    
     }
+        }
+        async updateStatus(feedbackId,status){
+            try {
+    return await feedbackModel.findOneAndUpdate(
+        {_id:feedbackId},{
+            $set:{
+                status:status
+            }
+        },
+        {
+            returnDocument:"after",
+            runValidators:true
+        }
+    )
+    
+            } catch (err) {
+                            throw new ApplicationError("Something wrong with db",500)
+    
+            }
+        }
+        async filterFeedback(name,status){
+            try {
+              
+                let query={};
+                if(name){
+                    query.name={
+                        $regex:name,
+                        $options:"i"
+                    }
+                }  
+                if(status){
+                    query.status=status
+                }
+                return await feedbackModel.find(query).sort({createdAt:-1});
+            } catch (err) {
+                                        throw new ApplicationError("Something wrong with db",500)
+    
+            }
+        }
 }

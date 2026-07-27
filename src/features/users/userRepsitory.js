@@ -14,7 +14,14 @@ await newUser.save();
         }
     }
     
+async getUserById(userId){
+try {
+    return await userModel.find({userId})
+} catch (err) {
+                throw new ApplicationError("Somthing went wrong with the database",500)
 
+}
+}
     async findUser(email){
         try {
             return await userModel.findOne({email})

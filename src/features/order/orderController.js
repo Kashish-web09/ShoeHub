@@ -40,31 +40,32 @@ const shippingAddress = {
                 return res.status(400).send("Your cart is empty")
             }
             const total=cartItem.reduce((sum,item)=>{
-                                return sum+(item.product.price*item.quantity)
+                                return sum+(item.productId.price*item.quantity)
 
             },0);
 const items = cartItem.map(item => ({
-    productId: item.product._id,
-    productName: item.product.name,
-    image: item.product.thumbnail,
-    price: item.product.price,
+    productId: item.productId._id,
+    productName: item.productId.name,
+    image: item.productId.thumbnail,
+    price: item.productId.price,
     quantity: item.quantity,
-    subtotal: item.product.price * item.quantity
+    subtotal: item.productId.price * item.quantity
 }));
-
-const newOrder = new orderModels(
+const newOrder = {
     userId,
-    user.name,
+    customerName:fullName,
     items,
-    total,
+    totalAmount:total,
     shippingAddress,
     paymentMethod,
-    paymentMethod === "Cash on Delivery" ? "Pending" : "Paid",
-    "Placed"
-);
+    paymentStatus:paymentMethod==="Cash on Delivery" ? "Pending" :"Done",
+    orderStatus:"Processed"
+}
+console.log("req.body =", req.body);
+console.log("paymentMethod =", paymentMethod);
 // check stock
 for(let i of cartItem){
-  const product=  await this.productRepository.updateStock(i.product._id,i.quantity);
+  const product=  await this.productRepository.updateStock(i.productId._id,i.quantity);
   if(!product || product.stock<i.quantity){
             return res.status(400).send(`${item.product.name} is out of stock.`);
 
@@ -73,7 +74,7 @@ for(let i of cartItem){
 // reduce stock
 const order = await this.orderRepository.placeOrder(newOrder);
 for (const i of cartItem) {
-    await this.productRepository.updateStock(i.product._id, i.quantity);
+    await this.productRepository.updateStock(i.productId._id, i.quantity);
 }
 await this.cartRepository.clearCart(userId)
 logger.info(`Order created successfully. Order ID: ${order.insertedId}, Customer ID:${userId}`)
@@ -118,9 +119,8 @@ async checkoutPage(req, res, next) {
         if (!cartItem || cartItem.length === 0) {
             return res.redirect("/api/cart");
         }
-
         const total = cartItem.reduce((sum, item) => {
-            return sum + item.product.price * item.quantity;
+            return sum + item.productId.price * item.quantity;
         }, 0);
 
         res.render("checkout", {

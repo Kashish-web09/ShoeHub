@@ -1,18 +1,19 @@
-import { getDb } from "../../config/mongoDb.js";
+import mongoose from "mongoose";
+import { feedbackSchema } from "../seller/feedback/feedbackScehma.js";
 import { ApplicationError } from "../../errorFile/applicationError.js";
 
-export default class contactRepository{
-    constructor() {
-        this.collection="feedback"
-    }
-    async submitContactForm(contact){
-                try {
-            const db=getDb();
-            const collection=db.collection(this.collection)
-            await collection.insertOne(contact)
-        } catch (err) {
-            throw new ApplicationError("Something went wrong with db",500)
-        }
+const contactModel= mongoose.models.feedback ||  mongoose.model('feedback',feedbackSchema);
 
-    }
+export default class contactRepository{
+        async submitContactForm(feedback){
+                    try {
+const newFeedbak=new contactModel(feedback);
+await newFeedbak.save();
+return newFeedbak;
+            } catch (err) {
+                throw new ApplicationError("Something went wrong with db",500)
+            }
+    
+        }
+    
 }

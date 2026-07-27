@@ -29,8 +29,8 @@ this.cartRepository=new cartRepository();
             const userId=req.userId;
             const items=await this.cartRepository.getItem(userId)
 const total = items.reduce((sum, item) => {
-    if (!item.product) return sum;
-    return sum + item.product.price * item.quantity;
+    if (!item.productId) return sum;
+    return sum + item.productId.price * item.quantity;
 }, 0);                 res.render('cart',{
                     items,
                     total

@@ -183,13 +183,13 @@ async resetPass(req, res, next) {
             const sellerId=req.sellerId
             const orders=await this.sellerOrderRepo.getSellerOrders();
             const userCount=await this.userRepository.getAll();
-            // const product=await this.SellerProductRepo.getAllProducts(sellerId);
+            const product=await this.SellerProductRepo.getAllProducts(sellerId);
             const revenue=await this.sellerOrderRepo.getRevenue();
             const recentOrder=await this.sellerOrderRepo.getRecentOrders();
 res.render("seller/dashboard", {
     title: "Seller Dashboard",
     totalUsers: userCount.length,
-    totalProducts:2,
+    totalProducts:product.length,
     totalOrders:orders.length,
     revenue: revenue,
     recentOrders: recentOrder
