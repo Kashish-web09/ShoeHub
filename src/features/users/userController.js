@@ -2,11 +2,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 import userRepository from './userRepsitory.js'
-import userModel from "./userModels.js";
 import {jwtAuth} from '../../middlewares/jwtAuthMiddleware.js';
 import { ApplicationError } from '../../errorFile/applicationError.js';
 import { sendResetEmail,sendWelcomeEmail } from '../../config/emailService.js';
 import logger from '../../config/logger.js';
+
 export default class userController{
     constructor() {
         this.userRepository=new userRepository();
@@ -24,12 +24,12 @@ export default class userController{
                 })
             }
             const hashpasword=await bcrypt.hash(password,12);
-            const newUser=new userModel(
+            const newUser={
                 name,
                 email,
-                hashpasword,
+               password: hashpasword,
                 image
-            );
+            };
             await this.userRepository.signUp(newUser);
                    return  res.redirect('/login');
                 // await sendWelcomeEmail(newUser.email,newUser.name)

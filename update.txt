@@ -4,11 +4,8 @@ make customer user register bettor so user can upload image at time of register-
 
 mongoose-{
     connect to mongoDb and server --done
-    make repo with mongoose- [
-        user--done
-        product--done
-        cart-done
-    ]
+    make repo with mongoose-done
+    apply API level validation
 }
 make swaager.json file
 make email working on live

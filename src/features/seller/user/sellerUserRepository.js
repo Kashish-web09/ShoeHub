@@ -11,6 +11,7 @@ try{
     await newUser.save();
     return newUser
 }catch(err){
+    console.log(err)
     throw new ApplicationError("Somthing wron with db",500)
 }
 }

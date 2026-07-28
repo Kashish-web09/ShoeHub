@@ -1,4 +1,4 @@
-import SellerProductModel from "./sellerProductModels.js";
+// import SellerProductModel from "./sellerProductModels.js";
 import SellerProductRepo from "./sellerProductRepository.js";
 import logger from "../../../config/logger.js";
 export default class SellerProductController{
@@ -54,23 +54,21 @@ const {
                 const colors=color ? color.split(",").map(s=>s.trim()):[];
                 const sizes=size?size.split(",").map(s=>s.trim()):[];
                 const sellerId=req.sellerId;
-    const newData=new SellerProductModel(
+    const newData={
         name,
         brand,
         category,
         gender,
         desc,
-        Number(price),
-        Number(stock),
+      price,
+      stock,
 images,
 thumbnail,
 colors,
 sizes,
-0,
-isBestSeller==="true",
-sellerId
-
-    );
+rating:0,
+isBestSeller:"true",
+sellerId };
     const result=await this.SellerProductRepo.addProduct(newData);
                     logger.info(`Product created:${newData.name}`)
 

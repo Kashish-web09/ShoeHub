@@ -1,5 +1,5 @@
 import sellerOrderRepo from "./orderRepository.js";
-import sellerOrderModel from "./orderModels.js";
+// import sellerOrderModel from "./orderModels.js";
 import userRepository from "../../users/userRepsitory.js";
 import { sendOrderShipped } from "../../../config/emailService.js";
 import logger from "../../../config/logger.js";

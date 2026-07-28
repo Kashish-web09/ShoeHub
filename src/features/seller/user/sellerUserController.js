@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto'
 import sellerUserRepository from './sellerUserRepository.js';
 import { sellerAuth } from '../../../middlewares/sellerAuthMiddleware.js';
-import sellerUserModels from './sellerUserModels.js'
+// import sellerUserModels from './sellerUserModels.js'
 import sellerOrderRepo from '../order/orderRepository.js';
 import userRepository from '../../users/userRepsitory.js';
 import SellerProductRepo from '../product/sellerProductRepository.js';
@@ -116,7 +116,7 @@ if(exisitingSeller){
             }    
             
             const hashedPassword=await bcrypt.hash(password,12);
-               const newSeller=new sellerUserModels(name,email,phone,hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage);
+               const newSeller={name,email,phone,password:hashedPassword,storeName,address,state,city,pincode,gstNumber,profileImage};
          await this.sellerUserRepository.register(newSeller);
           res.redirect('/api/seller/login')
                 //    await sendWelcomeEmail(newSeller.email,newSeller.name)

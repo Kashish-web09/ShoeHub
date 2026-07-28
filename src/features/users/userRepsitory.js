@@ -10,6 +10,7 @@ export default class userRepository{
 await newUser.save();
             return newUser;
         } catch (err) {
+            
             throw new ApplicationError("Somthing went wrong with the database",500)
         }
     }

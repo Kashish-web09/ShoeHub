@@ -1,5 +1,5 @@
 import contactRepository from "./contactRepository.js"
-import contactModels from "./contactModels.js"
+// import contactModels from "./contactModels.js"
 import { sendFeedbackThankyou } from "../../config/emailService.js";
 
 export default class contactController{
@@ -19,16 +19,17 @@ try {
   async  submitContactForm(req,res,next){
         try {
     const {name,email,message}=req.body;
-    const contact=new contactModels(
+    const contact={
         name,
         email,
         message    
-    );
+    };
     await this.contactRepository.submitContactForm(contact);
     res.redirect("/api/contact");
         // await sendFeedbackThankyou(contact.email,contact.name)
 
 } catch (err) {
+    console.log(err)
     next(err)
 }
 

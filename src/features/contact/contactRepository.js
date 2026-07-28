@@ -11,6 +11,7 @@ const newFeedbak=new contactModel(feedback);
 await newFeedbak.save();
 return newFeedbak;
             } catch (err) {
+                console.log(err)
                 throw new ApplicationError("Something went wrong with db",500)
             }
     
