@@ -3,11 +3,10 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto'
 import sellerUserRepository from './sellerUserRepository.js';
 import { sellerAuth } from '../../../middlewares/sellerAuthMiddleware.js';
-// import sellerUserModels from './sellerUserModels.js'
 import sellerOrderRepo from '../order/orderRepository.js';
 import userRepository from '../../users/userRepsitory.js';
 import SellerProductRepo from '../product/sellerProductRepository.js';
-import { sendSellerResetEmail, sendWelcomeEmail } from '../../../config/emailService.js';
+// import { sendSellerResetEmail, sendWelcomeEmail } from '../../../config/emailService.js';
 import logger from '../../../config/logger.js';
 export default class sellerUserController {
     constructor() {
@@ -144,9 +143,10 @@ async forgotPass(req,res,next){
         const token=crypto.randomBytes(32).toString("hex");
         const expiry=new Date(Date.now()+60*60*1000);
         await this.sellerUserRepository.saveResetPass(email,token,expiry)
-                // return res.send("Password reset link has been sent to your email.");
-                        // await sendSellerResetEmail(email,token);
  res.redirect(`/api/seller/resetPass/${token}`)
+                //  return res.send("Password reset link has been sent to your email.");
+                        // await sendSellerResetEmail(email,token);
+
 
     } catch (err) {
         next(err)

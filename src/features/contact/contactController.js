@@ -1,6 +1,5 @@
 import contactRepository from "./contactRepository.js"
-// import contactModels from "./contactModels.js"
-import { sendFeedbackThankyou } from "../../config/emailService.js";
+// import { sendFeedbackThankyou } from "../../config/emailService.js";
 
 export default class contactController{
     constructor(){

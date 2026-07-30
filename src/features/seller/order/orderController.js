@@ -1,5 +1,4 @@
 import sellerOrderRepo from "./orderRepository.js";
-// import sellerOrderModel from "./orderModels.js";
 import userRepository from "../../users/userRepsitory.js";
 import { sendOrderShipped } from "../../../config/emailService.js";
 import logger from "../../../config/logger.js";
@@ -47,20 +46,17 @@ async updateOrderStatus(req, res, next) {
         const orderId = req.params.id;
         const status = req.body.status;
 
-        console.log("Order ID:", orderId);
-        console.log("Status:", status);
 
         await this.sellerOrderRepo.updateOrderStatus(orderId, status);
 
-        console.log("🔥 Repository update completed");
 
         logger.info(
             `Order status updated successfully. Order ID: ${orderId}, New Status: ${status}`
         );
 
-        console.log("🔥 Logger called");
 
         return res.redirect("/api/seller/orders");
+// await sendOrderShipped(order.user.email, orderId);
 
     } catch (err) {
 

@@ -1,4 +1,3 @@
-// import SellerProductModel from "./sellerProductModels.js";
 import SellerProductRepo from "./sellerProductRepository.js";
 import logger from "../../../config/logger.js";
 export default class SellerProductController{

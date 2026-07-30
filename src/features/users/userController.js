@@ -30,10 +30,15 @@ export default class userController{
                password: hashpasword,
                 image
             };
-            await this.userRepository.signUp(newUser);
-                   return  res.redirect('/login');
-                // await sendWelcomeEmail(newUser.email,newUser.name)
+await this.userRepository.signUp(newUser);
 
+// try {
+//     await sendWelcomeEmail(newUser.email, newUser.name);
+// } catch (err) {
+//     logger.error("Welcome email failed:", err);
+// }
+
+return res.redirect("/login");
          } catch (err) {
 
 next(err)
@@ -144,9 +149,10 @@ async forgotPass(req,res,next){
         const token=crypto.randomBytes(32).toString("hex");
 const expiry=new Date(Date.now()+60*60*1000);
 const result=await this.userRepository.saveResettoken(email,token,expiry);
+return res.redirect(`/api/users/resetPass/${token}`);
         // return res.send("Password reset link has been sent to your email.");
         // await sendResetEmail(email,token)
-return res.redirect(`/api/users/resetPass/${token}`);
+
     } catch (err) {
         next(err)
     }
