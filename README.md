@@ -283,7 +283,7 @@ ShoeHub
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Kashish-web09/ShoeHub.git
+git clone https://github.com/Kashish-web09/ShoeHub
 ```
 
 ## Navigate to Project
