@@ -1,11 +1,3 @@
-# 👟 ShoeHub - Full Stack E-Commerce Platform
-
-![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
-![Express.js](https://img.shields.io/badge/Framework-Express.js-lightgrey)
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
-![Mongoose](https://img.shields.io/badge/ODM-Mongoose-red)
-![Bootstrap](https://img.shields.io/badge/Frontend-Bootstrap-purple)
-![JWT](https://img.shields.io/badge/Auth-JWT-orange)
 
 
 # 👟 ShoeHub - Full Stack E-Commerce Platform
