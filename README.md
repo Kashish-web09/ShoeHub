@@ -331,7 +331,9 @@ Application URL:
 ```
 http://localhost:4090
 ```
-
+Live URL:
+```
+https://shoehub-ecommerce.up.railway.app/
 ---
 
 # 📑 API Documentation
